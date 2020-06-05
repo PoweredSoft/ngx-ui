@@ -1,5 +1,36 @@
+<p>some content is showing up here!</p>
+
 <table>
-    <tr>
-        <th>some header</th>
-    </tr>
+    <thead>
+        <tr>
+            <th *ngFor="let column of columns">
+                <p *ngIf="hasHeaderTemplate(column)">
+                    <ng-container
+                      [ngTemplateOutlet]="getColumnHeaderTemplate(column)"
+                    ></ng-container>
+                </p>
+            </th>
+        </tr>
+    </thead>
+
+    <tbody *ngIf="latestResult">
+        <tr *ngFor="let rowModel of latestResult.data; let i = index;">
+          <td *ngFor="let column of columns">
+            <ng-container *ngIf="hasCellTemplate(column)">
+              <ng-container
+                [ngTemplateOutlet]="getColumnCellTemplate(column)"
+                [ngTemplateOutletContext]="{
+                  $implicit: rowModel,
+                  column: column,
+                  rowIndex: i
+                }"
+              ></ng-container>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
 </table>
+
+
+
+<!-- test content !!! -->

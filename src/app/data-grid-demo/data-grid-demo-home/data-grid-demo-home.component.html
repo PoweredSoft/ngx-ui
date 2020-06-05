@@ -2,4 +2,24 @@
     This is a demo for a grid.
 </h1>
 
-<ps-data-grid></ps-data-grid>
+<ps-data-grid [dataSource]="merchantDataSource" [columns]="columns">
+    <ng-container psDataGridCol="id">
+        <div *psDataGridColHeader>ID</div>
+        <div *psDataGridCell="let model">{{model.id}}</div>
+    </ng-container>
+    <ng-container psDataGridCol="name">
+        <div *psDataGridColHeader>Name</div>
+        <div *psDataGridCell="let model">{{model.name}}</div>
+    </ng-container>
+    <ng-container psDataGridCol="address">
+        <div *psDataGridColHeader>Address</div>
+        <div *psDataGridCell="let model">{{model.address}}</div>
+    </ng-container>
+
+    <ng-container psDataGridCol="commands">
+        <p *psDataGridColHeader>Actions</p>
+        <ng-container *psDataGridCell="let model">
+            <button class="btn btn-primary mr-2">{{model.name}}</button>
+        </ng-container>
+    </ng-container>
+</ps-data-grid>

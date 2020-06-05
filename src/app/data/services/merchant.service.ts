@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { GraphQLDataSourceService } from '@poweredsoft/ngx-data-apollo';
 import { IDataSource, DataSource } from '@poweredsoft/data';
 import { Apollo } from 'apollo-angular';
-import { gql } from 'graphql-tag';
+import  gql  from 'graphql-tag';
 import { of } from 'rxjs';
 import { IChangeMerchantNameCommand } from './IChangeMerchantNameCommand';
 import { IMerchant } from './IMerchant';
@@ -16,11 +16,53 @@ export class MerchantService {
     private apollo: Apollo
   ) {}
 
-  createMerchantDataSource(): IDataSource<IMerchant> {
-    const builder = this.dataSourceGenericService.createDataSourceOptionsBuilder<
-      IMerchant,
-      string
-    >(
+//   createMerchantDataSource(): IDataSource<IMerchant> {
+//     const builder = this.dataSourceGenericService.createDataSourceOptionsBuilder<
+//       IMerchant,
+//       string
+//     >(
+//       'merchants',
+//       'GraphQLAdvanceQueryOfMerchantInput',
+//       'id, name, address',
+//       (model) => model.id,
+//       {
+//         page: 3,
+//         pageSize: 10,
+//       },
+//       true
+//     );
+
+//     builder.addMutation<IChangeMerchantNameCommand, string>(
+//       'changeMerchantName', //<-- command name
+//       'changeMerchantName', //<-- graph ql mutation name
+      
+//       // implementation of the command.
+//       command => {
+//         return this.apollo.use('command').mutate<string>({
+//           mutation: gql`
+//             mutation executeChangeName($command: changeMerchantNameInput) {
+//               changeMerchantName(params: $command)
+//             }
+//           `,
+//           variables: {
+//             command: command,
+//           },
+//         });
+//       },
+      
+//       // viewModel -> transform to the form model for that command -> IChangeMerchantName
+//       e => of(<IChangeMerchantNameCommand>{
+//         merchantId: e.model.id,
+//         newName: e.model.name,
+//       })
+//     );
+
+//     const options = builder.create();
+//     return new DataSource<IMerchant>(options);
+//   }
+
+  createDataSource(): DataSource<IMerchant> {
+    const builder = this.dataSourceGenericService.createDataSourceOptionsBuilder<IMerchant, string>(
       'merchants',
       'GraphQLAdvanceQueryOfMerchantInput',
       'id, name, address',
@@ -28,36 +70,16 @@ export class MerchantService {
       {
         page: 1,
         pageSize: 4,
-      },
+        sorts: [
+          {
+            path: 'name',
+            ascending: true
+          }
+        ]
+      }, 
       true
     );
 
-    builder.addMutation<IChangeMerchantNameCommand, string>(
-      'changeMerchantName', //<-- command name
-      'changeMerchantName', //<-- graph ql mutation name
-      
-      // implementation of the command.
-      command => {
-        return this.apollo.use('command').mutate<string>({
-          mutation: gql`
-            mutation executeChangeName($command: changeMerchantNameInput) {
-              changeMerchantName(params: $command)
-            }
-          `,
-          variables: {
-            command: command,
-          },
-        });
-      },
-      
-      // viewModel -> transform to the form model for that command -> IChangeMerchantName
-      e => of(<IChangeMerchantNameCommand>{
-        merchantId: e.model.id,
-        newName: e.model.name,
-      })
-    );
-
-    const options = builder.create();
-    return new DataSource<IMerchant>(options);
+    return new DataSource<IMerchant>(builder.create());
   }
 }
