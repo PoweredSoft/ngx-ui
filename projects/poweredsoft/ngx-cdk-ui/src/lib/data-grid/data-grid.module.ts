@@ -12,6 +12,6 @@ import { DataGridCellDirective } from './directives/DataGridCell.directive';
   imports: [
     CommonModule
   ],
-  exports: [DataGridComponent,DataGridColDirective,DataGridColHeaderDirective,DataGridCellDirective]
+  exports: [DataGridComponent]
 })
 export class DataGridModule { }
