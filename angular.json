@@ -168,7 +168,7 @@
       "projectType": "library",
       "root": "projects/poweredsoft/ngx-bootstrap",
       "sourceRoot": "projects/poweredsoft/ngx-bootstrap/src",
-      "prefix": "ps",
+      "prefix": "psbx",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",

@@ -3,4 +3,4 @@
  */
 
 export * from './lib/command-modal/command-modal.module';
-export * from './lib/command-modal/command-modal/command-modal.component';
+export * from './lib/command-modal/directives/command-modal.directive';
