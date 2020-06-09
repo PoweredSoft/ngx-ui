@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'list-view',
     loadChildren: () => import('./list-view-demo/list-view-demo.module').then(m => m.ListViewDemoModule)
+  },
+  {
+    path: 'command-modal',
+    loadChildren: () => import('./command-modal-demo/command-modal-demo.module').then(m => m.CommandModalDemoModule)
   }
 ];
 
