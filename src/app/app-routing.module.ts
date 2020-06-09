@@ -19,6 +19,10 @@ const routes: Routes = [
   {
     path: 'command-modal',
     loadChildren: () => import('./command-modal-demo/command-modal-demo.module').then(m => m.CommandModalDemoModule)
+  },
+  {
+    path: 'form-group',
+    loadChildren: () => import('./form-group-modal-demo/form-group-modal-demo.module').then(m => m.FormGroupModalDemoModule)
   }
 ];
 
