@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataSource } from '@poweredsoft/data';
+import { DataSource, IDataSource, IQueryExecutionResult, IQueryExecutionGroupResult } from '@poweredsoft/data';
 import { IMerchant } from 'src/app/data/services/IMerchant';
-import { GraphQLDataSourceService } from '@poweredsoft/ngx-data-apollo';
-import { of } from 'rxjs';
 import { MerchantService } from 'src/app/data/services/merchant.service';
 
 @Component({
@@ -14,13 +12,31 @@ export class DataGridDemoHomeComponent implements OnInit {
 
   title = 'cdkDemo';
   columns = ['id','name', 'address', 'commands']
-  merchantDataSource: DataSource<IMerchant>;
+  merchantDataSource: IDataSource<IMerchant>;  
   constructor(private  merchantService: MerchantService){
     this.merchantDataSource = this.createDataSource();
 
   }
 
-  createDataSource(): DataSource<IMerchant> {
+  
+
+
+  newMerchant(name: string) {
+    this.merchantDataSource.executeCommandByName('addMerchant', {
+      name: name
+    }).subscribe(
+      res => {
+        alert('it worked!');
+        this.merchantDataSource.refresh();
+      },
+      err => {
+        console.log(err);
+        alert('failed');
+      }
+    );
+  }
+
+  createDataSource(): IDataSource<IMerchant> {
     return this.merchantService.createDataSource();
   }
 
@@ -32,7 +48,6 @@ export class DataGridDemoHomeComponent implements OnInit {
     this.merchantDataSource.data$.subscribe(receivedData => {
       console.log('new data is coming from the server', receivedData);
     });
-
     this.merchantDataSource.refresh();
   }
  

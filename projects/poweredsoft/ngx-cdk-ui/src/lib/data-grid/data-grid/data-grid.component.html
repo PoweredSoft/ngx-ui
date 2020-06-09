@@ -1,30 +1,42 @@
-<table>
-    <thead>
-        <tr>
-            <th *ngFor="let column of columns">
-                <p *ngIf="hasHeaderTemplate(column)">
-                    <ng-container
-                      [ngTemplateOutlet]="getColumnHeaderTemplate(column)"
-                    ></ng-container>
-                </p>
-            </th>
-        </tr>
-    </thead>
+<table [ngClass]="tableClasses">
+  <thead>
+    <tr>
+      <th *ngFor="let header of gridHeaders" [attr.colspan]="columns.length">
+        <ng-container [ngTemplateOutlet]="header.template"></ng-container>
+      </th>
+    </tr>
+    <tr>
+      <th *ngFor="let column of columns">
+        <ng-container *ngIf="hasHeaderTemplate(column)">
+          <ng-container
+            [ngTemplateOutlet]="getColumnHeaderTemplate(column)"
+          ></ng-container>
+        </ng-container>
+      </th>
+    </tr>
+  </thead>
 
-    <tbody *ngIf="latestResult">
-        <tr *ngFor="let rowModel of latestResult.data; let i = index;">
-          <td *ngFor="let column of columns">
-            <ng-container *ngIf="hasCellTemplate(column)">
-              <ng-container
-                [ngTemplateOutlet]="getColumnCellTemplate(column)"
-                [ngTemplateOutletContext]="{
-                  $implicit: rowModel,
-                  column: column,
-                  rowIndex: i
-                }"
-              ></ng-container>
-            </ng-container>
-          </td>
-        </tr>
-      </tbody>
+  <tbody *ngIf="latestResult">
+    <tr *ngFor="let rowModel of latestResult.data; let i = index">
+      <td *ngFor="let column of columns">
+        <ng-container *ngIf="hasCellTemplate(column)">
+          <ng-container
+            [ngTemplateOutlet]="getColumnCellTemplate(column)"
+            [ngTemplateOutletContext]="{
+              $implicit: rowModel,
+              column: column,
+              rowIndex: i
+            }"
+          ></ng-container>
+        </ng-container>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td *ngFor="let footer of gridFooters" [attr.colspan]="columns.length">
+        <ng-container [ngTemplateOutlet]="footer.template"></ng-container>
+      </td>
+    </tr>
+  </tfoot>
 </table>

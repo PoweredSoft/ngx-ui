@@ -2,24 +2,36 @@
     This is a demo for a grid.
 </h1>
 
-<ps-data-grid [dataSource]="merchantDataSource" [columns]="columns">
-    <ng-container psDataGridCol="id">
-        <div *psDataGridColHeader>ID</div>
-        <div *psDataGridCell="let model">{{model.id}}</div>
-    </ng-container>
-    <ng-container psDataGridCol="name">
-        <div *psDataGridColHeader>Name</div>
-        <div *psDataGridCell="let model">{{model.name}}</div>
-    </ng-container>
-    <ng-container psDataGridCol="address">
-        <div *psDataGridColHeader>Address</div>
-        <div *psDataGridCell="let model">{{model.address}}</div>
-    </ng-container>
-
-    <ng-container psDataGridCol="commands">
-        <p *psDataGridColHeader>Actions</p>
-        <ng-container *psDataGridCell="let model">
-            <button class="btn btn-primary mr-2">{{model.name}}</button>
+    <ps-data-grid [dataSource]="merchantDataSource" [(columns)]="columns" tableClasses="table table-sm table-bordered" >
+        
+        <ng-container *psDataGridHeader>
+            <h1>Hey! </h1>
+            <p>Welcome to my Grid!</p>
+            <label>New merchant name</label>
+            <input class="form-control" #newMerchantName/>
+            <button class="btn btn-primary btn-sm" (click)="newMerchant(newMerchantName.value)">Add</button>
         </ng-container>
-    </ng-container>
-</ps-data-grid>
+        <ng-container psDataGridCol="id">
+            <div *psDataGridColHeader>ID</div>
+            <div *psDataGridCell="let model">{{model.id}}</div>
+        </ng-container>
+        <ng-container psDataGridCol="name">
+            <div *psDataGridColHeader>Name</div>
+            <div *psDataGridCell="let model">{{model.name}}</div>
+        </ng-container>
+        <ng-container psDataGridCol="address">
+            <div *psDataGridColHeader>Address</div>
+            <div *psDataGridCell="let model">{{model.address}}</div>
+        </ng-container>
+
+        <ng-container psDataGridCol="commands">
+            <ng-container *psDataGridColHeader>Actions</ng-container>
+            <ng-container *psDataGridCell="let model">
+                <button class="btn btn-primary mr-2">{{model.name}}</button>
+            </ng-container>
+        </ng-container>
+        <ng-container *psDataGridFooter>
+            
+            <strong>Footer works!</strong>
+        </ng-container>
+    </ps-data-grid>
