@@ -1,5 +1,5 @@
 {
-  "name": "ngx-cdk-ui",
+  "name": "ngx-ui",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -9,8 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "clean": "rimraf dist",
-    "start:app": "wait-on dist/poweredsoft/ngx-cdk-ui/fesm5 && ng serve --poll 2000",
-    "watch:lib": "ng build @poweredsoft/ngx-cdk-ui --watch",
+    "start:app": "wait-on dist/poweredsoft/ngx-cdk-ui/fesm5 && dist/poweredsoft/ngx-bootstrap/fesm5 && ng serve --poll 2000",
+    "watch:lib": "ng build @poweredsoft/ngx-cdk-ui --watch && ng build @poweredsoft/ngx-bootstrap --watch",
     "watch:all": "npm run clean && run-p watch:lib start:app"
   },
   "private": true,
