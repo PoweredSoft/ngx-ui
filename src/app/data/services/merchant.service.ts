@@ -27,7 +27,7 @@ export class MerchantService {
       (model) => model.id,
       {
         page: 1,
-        pageSize: 50,
+        pageSize: 150,
       },
       true
     );

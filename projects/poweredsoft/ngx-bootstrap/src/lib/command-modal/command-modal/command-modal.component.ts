@@ -42,6 +42,7 @@ export class CommandModalComponent implements OnInit, OnDestroy {
   }
 
   attemptSave() {
+    debugger;
     this.loading = true;
     this.dataSource.executeCommandByName(this.command, this.commandModel)
       .pipe(
