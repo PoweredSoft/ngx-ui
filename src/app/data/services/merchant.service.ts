@@ -27,7 +27,7 @@ export class MerchantService {
       (model) => model.id,
       {
         page: 1,
-        pageSize: 50,
+        pageSize: 150,
       },
       true
     );
@@ -78,7 +78,7 @@ export class MerchantService {
       
       // viewModel -> transform to the form model for that command -> IChangeMerchantName
       e => of(<IAddMerchantCommand>{
-        name: '',
+        name: 'A New merchant',
         address: ''
       })
     );

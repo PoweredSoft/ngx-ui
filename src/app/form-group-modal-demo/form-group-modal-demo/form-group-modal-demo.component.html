@@ -1,0 +1,36 @@
+<h3>This is the demo for form-group modal!</h3>
+<ps-data-grid [dataSource]="merchantDataSource" [(columns)]="columns" tableClasses="table table-dark table-striped table-sm table-bordered">
+    <ng-container *psDataGridHeader>
+            <button class="btn-success btn" psbxFormGroupCommandModal commandTitle="Adding a new merchant" commandText="Add"
+            [dataSource]="merchantDataSource" command="addMerchant" (formCreate)="onFormCreate($event)" [template]="theModal">Create a new</button>   
+    </ng-container>
+    <ng-container psDataGridCol="id">
+        <div *psDataGridColHeader>ID</div>
+        <div *psDataGridCell="let model">{{model.id}}</div>
+    </ng-container>
+    <ng-container psDataGridCol="name">
+        <div *psDataGridColHeader>Name</div>
+        <div *psDataGridCell="let model">{{model.name}}</div>
+    </ng-container>
+    <ng-container psDataGridCol="address">
+        <div *psDataGridColHeader>Address</div>
+        <div *psDataGridCell="let model">{{model.address}}</div>
+    </ng-container>
+    <ng-container psDataGridCol="actions">
+        <ng-container *psDataGridColHeader>Actions</ng-container>
+        <ng-container *psDataGridCell="let model">
+            <button class="btn btn-primary mr-2">{{model.name}}</button>
+        </ng-container>
+    </ng-container>
+</ps-data-grid>
+
+<ng-template #theModal let-form let-loading="loading">
+    <form [formGroup]="form">
+        <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">Name</label>
+            <div class="col-sm-8">
+                <input id="name" type="text" class="form-control" formControlName="name">
+            </div>
+        </div>
+    </form>
+</ng-template>

@@ -1,0 +1,47 @@
+<h1>
+    This is a demo for a command modal.
+</h1>
+<ps-data-grid [dataSource]="merchantDataSource" [(columns)]="columns"
+    tableClasses="table table-sm table-dark table-striped table-bordered">
+    <ng-container *psDataGridHeader>
+        <button class="btn-primary btn" psbxCommandModal commandTitle="Adding a new merchant" commandText="Add"
+            [dataSource]="merchantDataSource" command="addMerchant" [template]="theModal">Create a new record</button>
+
+    </ng-container>
+    <ng-container psDataGridCol="id">
+        <div *psDataGridColHeader>ID</div>
+        <div *psDataGridCell="let model">{{model.id}}</div>
+    </ng-container>
+    <ng-container psDataGridCol="name">
+        <div *psDataGridColHeader>Name</div>
+        <div *psDataGridCell="let model">{{model.name}}</div>
+    </ng-container>
+    <ng-container psDataGridCol="address">
+        <div *psDataGridColHeader>Address</div>
+        <div *psDataGridCell="let model">{{model.address}}</div>
+    </ng-container>
+
+    <ng-container psDataGridCol="commands">
+        <ng-container *psDataGridColHeader>Actions</ng-container>
+        <ng-container *psDataGridCell="let model">
+            <button class="btn-primary btn" psbxCommandModal [commandTitle]="'Change ' + model.name + ' name'" commandText="Update"
+            [dataSource]="merchantDataSource" command="changeMerchantName" [model]="model" [template]="changeName">Change name</button>
+        </ng-container>
+    </ng-container>
+    <ng-container *psDataGridFooter>
+        <button class="btn-primary btn" psbxCommandModal commandTitle="Adding a new merchant" commandText="Add"
+            [dataSource]="merchantDataSource" command="addMerchant" [template]="theModal">Create a new record</button>
+    </ng-container>
+</ps-data-grid>
+
+<ng-template #changeName let-command let-loading="loading">
+    New Name
+    <input type="text" [attr.disabled]="loading" [(ngModel)]="command.newName" placeholder="Entermerchant new name" class="form-control">
+</ng-template>
+
+<ng-template #theModal let-command let-loading="loading">
+    Name
+    <input type="text" [attr.disabled]="loading" [(ngModel)]="command.name" placeholder="Enter a merchant name" class="form-control">
+    Address
+    <input type="text" [attr.disabled]="loading" [(ngModel)]="command.address" placeholder="Enter the merchant's address" class="form-control">
+</ng-template>

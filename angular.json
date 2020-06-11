@@ -163,6 +163,46 @@
           }
         }
       }
+    },
+    "@poweredsoft/ngx-bootstrap": {
+      "projectType": "library",
+      "root": "projects/poweredsoft/ngx-bootstrap",
+      "sourceRoot": "projects/poweredsoft/ngx-bootstrap/src",
+      "prefix": "psbx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/poweredsoft/ngx-bootstrap/tsconfig.lib.json",
+            "project": "projects/poweredsoft/ngx-bootstrap/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/poweredsoft/ngx-bootstrap/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/poweredsoft/ngx-bootstrap/src/test.ts",
+            "tsConfig": "projects/poweredsoft/ngx-bootstrap/tsconfig.spec.json",
+            "karmaConfig": "projects/poweredsoft/ngx-bootstrap/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/poweredsoft/ngx-bootstrap/tsconfig.lib.json",
+              "projects/poweredsoft/ngx-bootstrap/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "ngx-cdk-ui"
 }

@@ -19,6 +19,10 @@
       "@poweredsoft/ngx-cdk-ui": [
         "dist/poweredsoft/ngx-cdk-ui/poweredsoft-ngx-cdk-ui",
         "dist/poweredsoft/ngx-cdk-ui"
+      ],
+      "@poweredsoft/ngx-bootstrap": [
+        "dist/poweredsoft/ngx-bootstrap/poweredsoft-ngx-bootstrap",
+        "dist/poweredsoft/ngx-bootstrap"
       ]
     }
   },
