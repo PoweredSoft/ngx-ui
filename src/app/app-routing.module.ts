@@ -23,6 +23,10 @@ const routes: Routes = [
   {
     path: 'form-group',
     loadChildren: () => import('./form-group-modal-demo/form-group-modal-demo.module').then(m => m.FormGroupModalDemoModule)
+  },
+  {
+    path: 'pagination-demo',
+    loadChildren: ()=> import('./pagination-demo/pagination-demo.module').then(m => m.PaginationDemoModule)
   }
 ];
 
