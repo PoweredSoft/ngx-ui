@@ -22,13 +22,11 @@ export class CommandModalDirective {
   @Input() animated: boolean;
 
   @HostListener('click')
-  wasClicked() { 
-    debugger;       
+  wasClicked() {            
     this.dataSource.resolveCommandModelByName({
       command: this.command,
       model: this.model
-    }).subscribe(commandModel => {
-      debugger;              
+    }).subscribe(commandModel => {                    
       const initialState = {
         dataSource: this.dataSource,
         command: this.command,
