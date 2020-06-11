@@ -4,7 +4,7 @@ import { IDataSource, DataSource } from '@poweredsoft/data';
 import { Apollo } from 'apollo-angular';
 import  gql  from 'graphql-tag';
 import { of } from 'rxjs';
-import { IChangeMerchantNameCommand, IAddMerchantCommand } from './IChangeMerchantNameCommand';
+import { IChangeMerchantNameCommand, IAddMerchantCommand, IRemoveMerchantCommand } from './IChangeMerchantNameCommand';
 import { IMerchant } from './IMerchant';
 
 @Injectable({
@@ -27,7 +27,7 @@ export class MerchantService {
       (model) => model.id,
       {
         page: 1,
-        pageSize: 150,
+        pageSize: 15,
       },
       true
     );
@@ -80,6 +80,31 @@ export class MerchantService {
       e => of(<IAddMerchantCommand>{
         name: 'A New merchant',
         address: ''
+      })
+    );
+
+    builder.addMutation<IRemoveMerchantCommand, string>(
+      'removeMerchant', //<-- command name
+      'removeMerchant', //<-- graph ql mutation name
+      
+      // implementation of the command.
+      command => {
+        
+        return this.apollo.use('command').mutate<string>({
+          mutation: gql`
+            mutation executeAddMerchant($command: RemoveMerchantCommandInput) {
+              removeMerchant(params: $command)
+            }
+          `,
+          variables: {
+            command: command,
+          },
+        });
+      },
+      
+      // viewModel -> transform to the form model for that command -> IChangeMerchantName
+      e => of(<IRemoveMerchantCommand>{
+        merchantId: e.model.id,
       })
     );
 

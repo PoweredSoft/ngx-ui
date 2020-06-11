@@ -39,9 +39,7 @@ export class FormGroupCommandModalDirective {
       command: this.command,
       model: this.model
     }).subscribe(commandModel => {
-
-      
-
+      debugger;
       const event = <IModelFormCreateEvent>{
         commandName: this.command,
         viewModel: this.model,

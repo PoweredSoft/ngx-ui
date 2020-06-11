@@ -19,10 +19,14 @@
     <ng-container psDataGridCol="actions">
         <ng-container *psDataGridColHeader>Actions</ng-container>
         <ng-container *psDataGridCell="let model">
-            <button class="btn btn-primary mr-2">{{model.name}}</button>
+            <button class="btn-primary btn" psbxFormGroupCommandModal [commandTitle]="'remove ' + model.name + ' name'" commandText="delete"
+            [dataSource]="merchantDataSource" command="removeMerchant" [model]="model" (formCreate)="onFormCreate($event)">Remove Merchant</button>
         </ng-container>
     </ng-container>
 </ps-data-grid>
+
+
+
 
 <ng-template #theModal let-form let-loading="loading">
     <form [formGroup]="form">

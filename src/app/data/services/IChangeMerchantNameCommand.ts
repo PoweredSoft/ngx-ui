@@ -6,3 +6,7 @@ export interface IAddMerchantCommand {
   name: string;
   address: string;
 }
+
+export interface IRemoveMerchantCommand {
+  merchantId: string;
+}

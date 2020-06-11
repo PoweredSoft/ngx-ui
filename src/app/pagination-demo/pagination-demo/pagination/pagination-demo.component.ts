@@ -20,12 +20,12 @@ export class PaginationDemoComponent implements OnInit {
 
   pages:any;
 
-  newMerchant(name: string) {
-    this.merchantDataSource.executeCommandByName('addMerchant', {
-      name: name
-    }).subscribe(
+  removeMerchant(id: string) {    
+    this.merchantDataSource.executeCommandByName('removeMerchant', {
+      id: id
+    }).subscribe(      
       res => {
-        alert('it worked!');
+        alert('removed!');
         this.merchantDataSource.refresh();
       },
       err => {

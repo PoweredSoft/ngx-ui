@@ -1,4 +1,3 @@
-
 <ps-data-grid [dataSource]="merchantDataSource" [(columns)]="columns"
     tableClasses="table table-sm table-dark table-striped table-bordered">
     <ng-container *psDataGridHeader>
@@ -21,8 +20,9 @@
     <ng-container psDataGridCol="commands">
         <ng-container *psDataGridColHeader>Actions</ng-container>
         <ng-container *psDataGridCell="let model">
-            <button class="btn-warning btn" psbxCommandModal [commandTitle]="'Change ' + model.name + ' name'" commandText="Update"
-            [dataSource]="merchantDataSource" command="changeMerchantName" [model]="model" [template]="changeName">Change name</button>
+            <!-- <button class="btn-warning btn" psbxCommandModal [commandTitle]="'Remove ' + model.name + ' ?'" commandText="Remove"
+            [dataSource]="merchantDataSource" command="removeMerchant" [model]="model" [template]="confirm">Remove Merchant</button> -->
+            <button class="btn-warning btn" (click)="removeMerchant(model.id)">Delete</button>
         </ng-container>
     </ng-container>
     <ng-container *psDataGridFooter>
@@ -30,10 +30,15 @@
     </ng-container>
 </ps-data-grid>
 
-<ng-template #changeName let-command let-loading="loading">
-    New Name
-    <input type="text" [attr.disabled]="loading" [(ngModel)]="command.newName" placeholder="Entermerchant new name" class="form-control">
-</ng-template>
+<ng-template #confirm>
+    <div class="modal-body text-center">
+      <p>Do you want to confirm?</p>
+      <button type="button" class="btn btn-default"  >Yes</button>
+      <button type="button" class="btn btn-primary"  >No</button>
+    </div>
+  </ng-template>
+
+
 
 <ng-template #theModal let-command let-loading="loading">
     Name
