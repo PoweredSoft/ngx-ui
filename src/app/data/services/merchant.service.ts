@@ -33,15 +33,15 @@ export class MerchantService {
     );
 
     builder.addMutation<IChangeMerchantNameCommand, string>(
-      'changeMerchantName', //<-- command name
-      'changeMerchantName', //<-- graph ql mutation name
+      'changeMerchant', //<-- command name
+      'changeMerchant', //<-- graph ql mutation name
       
       // implementation of the command.
       command => {
         return this.apollo.use('command').mutate<string>({
           mutation: gql`
-            mutation executeChangeName($command: changeMerchantNameInput) {
-              changeMerchantName(params: $command)
+            mutation executeChangeName($command: ChangeMerchantCommandInput) {
+              changeMerchant(params: $command)
             }
           `,
           variables: {
@@ -52,8 +52,9 @@ export class MerchantService {
       
       // viewModel -> transform to the form model for that command -> IChangeMerchantName
       e => of(<IChangeMerchantNameCommand>{
-        merchantId: e.model.id,
-        newName: e.model.name,
+        id: e.model.id,
+        name: e.model.name,
+        address: e.model.address
       })
     );
 
@@ -104,7 +105,7 @@ export class MerchantService {
       
       // viewModel -> transform to the form model for that command -> IChangeMerchantName
       e => of(<IRemoveMerchantCommand>{
-        merchantId: e.model.id,
+        id: e.model.id, //should be id?
       })
     );
 

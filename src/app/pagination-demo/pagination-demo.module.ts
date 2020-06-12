@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { PaginationDemoRoutingModule } from './pagination-demo-routing.module';
 import { PaginationDemoComponent } from './pagination-demo/pagination/pagination-demo.component';
 import { DataGridModule } from '@poweredsoft/ngx-cdk-ui';
-import { FormGroupCommandModalModule,psbxPaginationModule, CommandModalModule } from '@poweredsoft/ngx-bootstrap';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { psbxPaginationModule, CommandModalModule } from '@poweredsoft/ngx-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({

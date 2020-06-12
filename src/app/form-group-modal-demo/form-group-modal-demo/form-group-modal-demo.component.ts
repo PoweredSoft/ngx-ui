@@ -16,7 +16,7 @@ export class FormGroupModalDemoComponent implements OnInit {
     return this.merchantService.createDataSource();
   }
 
-  
+  pages:any;
   merchantDataSource: IDataSource<IMerchant>;
   columns = ['id','name', 'address', 'actions'];
   constructor(private merchantService: MerchantService, private fb: FormBuilder) {
@@ -25,12 +25,18 @@ export class FormGroupModalDemoComponent implements OnInit {
 
   ngOnInit(): void {
     this.merchantDataSource.refresh();
+    this.merchantDataSource.data$.subscribe(newData => {     
+      if (newData)
+        this.pages = new Array(newData.numberOfPages);
+    });
   }
 
   onFormCreate(event: IModelFormCreateEvent) {
+    debugger;
     event.shouldSetCommandModel = false;
     event.formGroup = this.fb.group({
-      'name': [event.commandModel.name, Validators.required]
+      'name': [event.commandModel.name, Validators.required],
+      'address': [event.commandModel.address, Validators.required]
     });
   }
 

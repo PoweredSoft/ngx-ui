@@ -48,7 +48,6 @@ export class FormGroupCommandModalComponent implements OnInit {
   }
 
   attemptSave() {
-
     this.errorMessage = null;
     if (!this.modelForm.valid)
     {

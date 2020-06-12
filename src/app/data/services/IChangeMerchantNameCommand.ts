@@ -1,6 +1,7 @@
 export interface IChangeMerchantNameCommand {
-  merchantId: string;
-  newName: string;
+  id: string;
+  name: string;
+  address: string;
 }
 export interface IAddMerchantCommand {
   name: string;
@@ -8,5 +9,5 @@ export interface IAddMerchantCommand {
 }
 
 export interface IRemoveMerchantCommand {
-  merchantId: string;
+  id: string;
 }

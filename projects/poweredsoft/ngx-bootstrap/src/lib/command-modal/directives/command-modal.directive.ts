@@ -20,13 +20,14 @@ export class CommandModalDirective {
   @Input() commandText: string;
   @Input() cancelText: string;
   @Input() animated: boolean;
+  @Input() isConfirmModal: boolean;
 
   @HostListener('click')
   wasClicked() {            
     this.dataSource.resolveCommandModelByName({
       command: this.command,
       model: this.model
-    }).subscribe(commandModel => {                    
+    }).subscribe(commandModel => {         
       const initialState = {
         dataSource: this.dataSource,
         command: this.command,
@@ -37,6 +38,12 @@ export class CommandModalDirective {
         commandText: this.commandText || 'OK',
         cancelText: this.cancelText || 'Cancel'
       };
+      if(this.isConfirmModal){
+        this.modalService.show(CommandModalComponent, {
+          animated: this.animated === undefined ? true : this.animated,
+          initialState
+        });
+      }
       this.modalService.show(CommandModalComponent, {
         animated: this.animated === undefined ? true : this.animated,
         initialState
