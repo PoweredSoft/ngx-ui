@@ -21,7 +21,7 @@ export class DataGridComponent implements OnInit {
   @Input() dataSource: IDataSource<any>;
   @Input() tableClasses: any;
   private _columns: string[];
-  
+  loading:boolean;
   @Input() set columns(value: string[]) {
     this._columns = value;
     this.columnsChange.emit(value);
@@ -35,8 +35,10 @@ export class DataGridComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.loading = true;
     console.log(this.columnDefinitions);
     this.dataSource.data$.subscribe(newData => {
+      this.loading=false;
       this.latestResult = newData;
     });
   }

@@ -11,7 +11,7 @@ import { ConfirmModalService } from '@poweredsoft/ngx-bootstrap';
   styleUrls: ['./pagination-demo.component.scss']
 })
 export class PaginationDemoComponent implements OnInit {
-  columns = ['id','name', 'address']
+  columns = ['id','name', 'address','commands']
   merchantDataSource: IDataSource<IMerchant>;  
   constructor(private  merchantService: MerchantService, private confirmModalService: ConfirmModalService){
     this.merchantDataSource = this.createDataSource();
@@ -20,7 +20,7 @@ export class PaginationDemoComponent implements OnInit {
 
   pages:any;
 
-  testService() {
+  removeMerchant(id:string) {
     this.confirmModalService.confirm({
       message: 'Do you want to delete this merchant?',
       yesText: 'yes delete this merchant',
@@ -28,25 +28,23 @@ export class PaginationDemoComponent implements OnInit {
       noText: 'no please dont',
       noClass: 'light'
     }).subscribe(result => {
-      console.log(result);
+      if(result){
+        this.merchantDataSource.executeCommandByName('removeMerchant', {
+          id: id
+        }).subscribe(      
+          res => {
+            this.merchantDataSource.refresh();
+          },
+          err => {
+            console.log(err);
+            alert('failed');
+          }
+        );
+      }
     })
   }
 
-  removeMerchant(id: string) {    
-    this.merchantDataSource.executeCommandByName('removeMerchant', {
-      id: id
-    }).subscribe(      
-      res => {
-        alert('removed!');
-        this.merchantDataSource.refresh();
-      },
-      err => {
-        console.log(err);
-        alert('failed');
-      }
-    );
-  }
-
+  
   createDataSource(): IDataSource<IMerchant> {
     return this.merchantService.createDataSource();
   }

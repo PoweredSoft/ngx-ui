@@ -15,8 +15,12 @@
       </th>
     </tr>
   </thead>
-
-  <tbody *ngIf="latestResult">
+  <tbody *ngIf="loading">
+    <tr>
+      <td [attr.colspan]="columns.length"><ng-content select="psDataGridLoader"></ng-content></td>
+    </tr>
+  </tbody>
+  <tbody *ngIf="latestResult&&!loading">
     <tr *ngFor="let rowModel of latestResult.data; let i = index">
       <td *ngFor="let column of columns">
         <ng-container *ngIf="hasCellTemplate(column)">

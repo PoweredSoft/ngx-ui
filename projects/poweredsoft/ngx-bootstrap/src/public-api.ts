@@ -10,3 +10,5 @@ export * from './lib/pagination/psbxPagination.module';
 export * from './lib/pagination/data-source-pagination/data-source-pagination.component';
 export * from './lib/confirm-modal/confirm-modal.module';
 export * from './lib/confirm-modal/confirm-modal.service';
+export * from './lib/spinner/spinner.module';
+export * from './lib/spinner/spinner/spinner.component';
