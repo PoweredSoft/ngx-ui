@@ -32,7 +32,7 @@
         </ng-container>
     </ng-container>
         <ng-container *psDataGridFooter>
-            <psbx-ds-pagination [dataSource]="merchantDataSource" [pages]="pages"></psbx-ds-pagination> 
+            <psbx-ds-pagination [dataSource]="merchantDataSource"></psbx-ds-pagination> 
         </ng-container>
 </ps-data-grid>
 
@@ -42,12 +42,12 @@
     New Name
     <input type="text" [attr.disabled]="loading" [(ngModel)]="command.name" placeholder="Entermerchant new name" class="form-control">
     New Address
-    <input type="text" [attr.disabled]="loading" [(ngModel)]="command.address" placeholder="Entermerchant new Address" class="form-control">
+    <input type="text" required [attr.disabled]="loading" [(ngModel)]="command.address" placeholder="Entermerchant new Address" class="form-control">
 </ng-template>
 
 <ng-template #theModal let-command let-loading="loading">
     Name
     <input type="text" [attr.disabled]="loading" [(ngModel)]="command.name" placeholder="Enter a merchant name" class="form-control">
     Address
-    <input type="text" [attr.disabled]="loading" [(ngModel)]="command.address" placeholder="Enter the merchant's address" class="form-control">
+    <input type="text" required [attr.disabled]="loading" [(ngModel)]="command.address" placeholder="Enter the merchant's address" class="form-control">
 </ng-template>

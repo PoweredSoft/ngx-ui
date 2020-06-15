@@ -12,7 +12,6 @@ import { DataGridFooterDirective } from '../directives/data-grid-footer.directiv
 export class DataGridComponent implements OnInit {
 
   latestResult: IQueryExecutionResult<any> & IQueryExecutionGroupResult<any>;
-  pages: any[];
 
   @ContentChildren(DataGridColDirective) columnDefinitions: QueryList<DataGridColDirective>;
   @ContentChildren(DataGridHeaderDirective) gridHeaders: QueryList<DataGridHeaderDirective>;
@@ -39,8 +38,6 @@ export class DataGridComponent implements OnInit {
     console.log(this.columnDefinitions);
     this.dataSource.data$.subscribe(newData => {
       this.latestResult = newData;
-      if (newData)
-        this.pages = new Array(newData.numberOfPages);
     });
   }
 

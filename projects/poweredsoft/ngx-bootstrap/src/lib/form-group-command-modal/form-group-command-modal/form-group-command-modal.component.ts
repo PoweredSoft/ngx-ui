@@ -23,7 +23,7 @@ export class FormGroupCommandModalComponent implements OnInit {
   commandText: string;
   cancelText: string;
   errorMessage: string;
-
+  commandModel:any;
   private _notifyMessage: Subscription;
   private _validationError: Subscription;
 
@@ -56,7 +56,10 @@ export class FormGroupCommandModalComponent implements OnInit {
     }
 
     const finalModel = this.modelForm.value;  
-    //this.modelForm.setValue(this.commandModel)
+    if(this.commandModel.id)
+    {
+      finalModel.id = this.commandModel.id;
+    }
     this.loading = true;
     this.dataSource.executeCommandByName(this.command, finalModel)
       .pipe(

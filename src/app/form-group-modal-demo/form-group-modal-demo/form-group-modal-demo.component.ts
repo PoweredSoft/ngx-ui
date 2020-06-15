@@ -31,8 +31,7 @@ export class FormGroupModalDemoComponent implements OnInit {
     });
   }
 
-  onFormCreate(event: IModelFormCreateEvent) {
-    debugger;
+  onFormCreate(event: IModelFormCreateEvent) {    
     event.shouldSetCommandModel = false;
     event.formGroup = this.fb.group({
       'name': [event.commandModel.name, Validators.required],
@@ -41,18 +40,5 @@ export class FormGroupModalDemoComponent implements OnInit {
   }
 
 
-  newMerchant(name: string) {
-    this.merchantDataSource.executeCommandByName('addMerchant', {
-      name: name
-    }).subscribe(
-      res => {
-        alert('it worked!');
-        this.merchantDataSource.refresh();
-      },
-      err => {
-        console.log(err);
-        alert('failed');
-      }
-    );
-  }
+
 }

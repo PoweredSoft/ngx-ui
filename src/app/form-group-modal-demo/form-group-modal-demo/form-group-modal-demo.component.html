@@ -21,17 +21,22 @@
     <ng-container psDataGridCol="actions">
         <ng-container *psDataGridColHeader>Actions</ng-container>
         <ng-container *psDataGridCell="let model">
-            <button class="btn-success btn" psbxFormGroupCommandModal 
+            <button class="btn-success btn" psbxFormGroupCommandModal [commandTitle]="'Change ' + model.name + ' name'" commandText="Update"
+            [dataSource]="merchantDataSource" command="changeMerchant" (formCreate)="onFormCreate($event)" [model]="model" [template]="theModal">Change</button>
+
+            <button class="btn-danger btn" psbxFormGroupCommandModal 
             [commandTitle]="'remove ' + model.name + ' name'" commandText="delete"
             [dataSource]="merchantDataSource" command="removeMerchant" 
-            [model]="model" (formCreate)="onFormCreate($event)">Remove Merchant</button>
+            [model]="model"  (formCreate)="onFormCreate($event)">Remove</button>
+
+            <!-- <button class="btn-danger btn" psbxExecuteCommand [dataSource]="merchantDataSource" [command]="removeMerchant"
+             [model]="model" [confirm]="true" [confirmMessage]="do you wish to delete the merchant `' + model.name + '`" [refresh]="false">Delete</button> -->
         </ng-container>
     </ng-container>
     <ng-container *psDataGridFooter>
-        <psbx-ds-pagination [dataSource]="merchantDataSource" [pages]="pages"></psbx-ds-pagination> 
+        <psbx-ds-pagination [dataSource]="merchantDataSource"></psbx-ds-pagination> 
     </ng-container>
 </ps-data-grid>
-
 
 
 

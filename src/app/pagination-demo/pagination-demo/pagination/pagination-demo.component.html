@@ -17,18 +17,13 @@
         <div *psDataGridCell="let model">{{model.address}}</div>
     </ng-container>
 
-    <ng-container psDataGridCol="commands">
-        <ng-container *psDataGridColHeader>Actions</ng-container>
-        <ng-container *psDataGridCell="let model">
-            <!-- <button class="btn-warning btn" psbxCommandModal [commandTitle]="'Remove ' + model.name + ' ?'" commandText="Remove"
-            [dataSource]="merchantDataSource" command="removeMerchant" [model]="model" [template]="confirm">Remove Merchant</button> -->
-            <button class="btn-warning btn" (click)="removeMerchant(model.id)">Delete</button>
-        </ng-container>
-    </ng-container>
+
     <ng-container *psDataGridFooter>
-        <psbx-ds-pagination [dataSource]="merchantDataSource" [pages]="pages"></psbx-ds-pagination> 
+        <psbx-ds-pagination [dataSource]="merchantDataSource"></psbx-ds-pagination> 
     </ng-container>
 </ps-data-grid>
+
+<button (click)="testService()">Test confirm</button>
 
 <ng-template #confirm>
     <div class="modal-body text-center">

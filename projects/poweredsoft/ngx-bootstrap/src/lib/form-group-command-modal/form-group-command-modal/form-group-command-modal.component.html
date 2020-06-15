@@ -21,7 +21,7 @@
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modalRef.hide()"
             [attr.disabled]="loading">{{ cancelText }}</button>
-        <button type="button" class="btn btn-primary" (click)="attemptSave()" [attr.disabled]="loading">Create</button>
+        <button type="button" class="btn btn-primary" (click)="attemptSave()" [attr.disabled]="loading">{{commandText}}</button>
         <br>
     
         <div class="progress" style="width: 100%" *ngIf="loading">
