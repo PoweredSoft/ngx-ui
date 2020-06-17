@@ -27,6 +27,10 @@ const routes: Routes = [
   {
     path: 'pagination-demo',
     loadChildren: ()=> import('./pagination-demo/pagination-demo.module').then(m => m.PaginationDemoModule)
+  },
+  {
+    path: 'grid-filter',
+    loadChildren: ()=> import('./grid-filter-demo/grid-filter-demo.module').then(m => m.GridFilterDemoModule)
   }
 ];
 
