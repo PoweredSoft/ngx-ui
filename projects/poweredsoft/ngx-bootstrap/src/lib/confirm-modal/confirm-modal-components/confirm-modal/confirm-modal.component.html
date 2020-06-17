@@ -1,0 +1,6 @@
+<div class="modal-body text-center">
+    <p>{{ message }}</p>
+    <button type="button" [ngClass]="yesButtonClass" (click)="confirm()">{{ yesText }}</button>
+    &nbsp;
+    <button type="button" [ngClass]="noButtonClass" (click)="decline()">{{ noText }}</button>
+</div>

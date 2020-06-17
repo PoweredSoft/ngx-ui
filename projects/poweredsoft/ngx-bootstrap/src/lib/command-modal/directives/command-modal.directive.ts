@@ -26,7 +26,7 @@ export class CommandModalDirective {
     this.dataSource.resolveCommandModelByName({
       command: this.command,
       model: this.model
-    }).subscribe(commandModel => {                    
+    }).subscribe(commandModel => {         
       const initialState = {
         dataSource: this.dataSource,
         command: this.command,

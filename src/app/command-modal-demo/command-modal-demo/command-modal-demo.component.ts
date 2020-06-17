@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IDataSource } from '@poweredsoft/data';
 import { IMerchant } from 'src/app/data/services/IMerchant';
 import { MerchantService } from 'src/app/data/services/merchant.service';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'ps-command-modal-demo',
@@ -10,7 +11,8 @@ import { MerchantService } from 'src/app/data/services/merchant.service';
 })
 export class CommandModalDemoComponent implements OnInit {
 
-  columns = ['id','name', 'address', 'commands']
+  columns = ['id','name', 'address', 'commands'];
+  pages:any;
   merchantDataSource: IDataSource<IMerchant>;  
   constructor(private  merchantService: MerchantService){
     this.merchantDataSource = this.createDataSource();
@@ -37,14 +39,23 @@ export class CommandModalDemoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.merchantDataSource.loading$.subscribe(isLoading => {
-      console.log('merchant data source event loading', isLoading);
-    });
-
-    this.merchantDataSource.data$.subscribe(receivedData => {
-      console.log('new data is coming from the server', receivedData);
-    });
     this.merchantDataSource.refresh();
+    this.merchantDataSource.data$.subscribe(newData => {     
+      if (newData)
+        this.pages = new Array(newData.numberOfPages);
+    });
+  }
+
+  message: string;
+  modalRef: BsModalRef;
+  confirm(): void {
+    this.message = 'Confirmed!';
+    this.modalRef.hide();
+  }
+ 
+  decline(): void {
+    this.message = 'Declined!';
+    this.modalRef.hide();
   }
 
 }

@@ -5,7 +5,7 @@ import { CommandModalDemoRoutingModule } from './command-modal-demo-routing.modu
 import { DataGridModule } from '@poweredsoft/ngx-cdk-ui';
 
 import {FormsModule} from '@angular/forms';
-import { CommandModalModule } from '@poweredsoft/ngx-bootstrap';
+import { CommandModalModule, psbxPaginationModule, ConfirmModalModule } from '@poweredsoft/ngx-bootstrap';
 @NgModule({
   declarations: [CommandModalDemoComponent],
   imports: [
@@ -13,7 +13,9 @@ import { CommandModalModule } from '@poweredsoft/ngx-bootstrap';
     CommandModalDemoRoutingModule,
     DataGridModule,
     CommandModalModule,
-    FormsModule
+    FormsModule,
+    psbxPaginationModule,
+    ConfirmModalModule
   ]
 })
 export class CommandModalDemoModule { }

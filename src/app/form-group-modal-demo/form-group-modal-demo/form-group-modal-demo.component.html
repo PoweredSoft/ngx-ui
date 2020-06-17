@@ -1,8 +1,10 @@
 <h3>This is the demo for form-group modal!</h3>
-<ps-data-grid [dataSource]="merchantDataSource" [(columns)]="columns" tableClasses="table table-dark table-striped table-sm table-bordered">
+<ps-data-grid [dataSource]="merchantDataSource" [(columns)]="columns" 
+              tableClasses="table table-dark table-striped table-sm table-bordered">
     <ng-container *psDataGridHeader>
-            <button class="btn-success btn" psbxFormGroupCommandModal commandTitle="Adding a new merchant" commandText="Add"
-            [dataSource]="merchantDataSource" command="addMerchant" (formCreate)="onFormCreate($event)" [template]="theModal">Create a new</button>   
+            <button class="btn-success btn" psbxFormGroupCommandModal commandTitle="Adding a new merchant"
+             commandText="Add" [dataSource]="merchantDataSource" command="addMerchant" 
+             (formCreate)="onFormCreate($event)" [template]="theModal">Create a new</button>   
     </ng-container>
     <ng-container psDataGridCol="id">
         <div *psDataGridColHeader>ID</div>
@@ -19,10 +21,22 @@
     <ng-container psDataGridCol="actions">
         <ng-container *psDataGridColHeader>Actions</ng-container>
         <ng-container *psDataGridCell="let model">
-            <button class="btn btn-primary mr-2">{{model.name}}</button>
+            <button class="btn-success btn" psbxFormGroupCommandModal [commandTitle]="'Change ' + model.name + ' name'" commandText="Update"
+            [dataSource]="merchantDataSource" command="changeMerchant" (formCreate)="onFormCreate($event)" [model]="model" [template]="theModal">Change</button>
+
+            <button class="btn-danger btn" psbxConfirmModal [commandTitle]="'Are you sure you wnat to remove ' + model.name + '?'" commandText="Remove"
+            [dataSource]="merchantDataSource" command="removeMerchant" [model]="model" >Delete!</button>
+
+            <!-- <button class="btn-danger btn" psbxExecuteCommand [dataSource]="merchantDataSource" [command]="removeMerchant"
+             [model]="model" [confirm]="true" [confirmMessage]="do you wish to delete the merchant `' + model.name + '`" [refresh]="false">Delete</button> -->
         </ng-container>
     </ng-container>
+    <ng-container *psDataGridFooter>
+        <psbx-ds-pagination [dataSource]="merchantDataSource"></psbx-ds-pagination> 
+    </ng-container>
 </ps-data-grid>
+
+
 
 <ng-template #theModal let-form let-loading="loading">
     <form [formGroup]="form">
@@ -30,6 +44,11 @@
             <label for="name" class="col-sm-2 control-label">Name</label>
             <div class="col-sm-8">
                 <input id="name" type="text" class="form-control" formControlName="name">
+            </div>
+
+            <label for="address" class="col-sm-2 control-label">Address</label>
+            <div class="col-sm-8">
+                <input id="address" type="text" class="form-control" formControlName="address">
             </div>
         </div>
     </form>

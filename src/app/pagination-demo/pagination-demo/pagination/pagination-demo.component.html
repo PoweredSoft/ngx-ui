@@ -1,0 +1,86 @@
+
+  
+<ps-data-grid [dataSource]="merchantDataSource" [(columns)]="columns"
+    tableClasses="table table-sm table-dark table-striped table-bordered">
+
+
+    
+
+    <psbx-spinner *psDataGridLoader></psbx-spinner>
+
+    <ng-container *psDataGridHeader>
+        <button class="btn-warning btn" psbxCommandModal commandTitle="Adding a new merchant" commandText="Add"
+            [dataSource]="merchantDataSource" command="addMerchant" [template]="theModal">Create a new record</button>
+    </ng-container>
+ 
+    <ng-container psDataGridCol="id">
+        <div *psDataGridColHeader>ID</div>
+        <div *psDataGridCell="let model">{{model.id}}</div>
+
+        <!-- <psfa-ds-sort-icon *psDataGridColSort [sortPath]="id" [dataSource]="merchantDataSource">
+
+        </psfa-ds-sort-icon>  -->
+
+        <!-- <psbx-ds-text-filter *psDataGridCellFilter [dataSource]="merchantDataSource"></psbx-ds-text-filter>
+        <psdb-ds-date-filter *psDataGridCellFilter></psdb-ds-date-filter>
+        <psdb-ds-date-range-filter *psDataGridCellFilter></psdb-ds-date-range-filter>
+        <psbx-ds-number-filter *psDataGridCellFilter></psbx-ds-number-filter>
+        <psbx-ds-multi-select-filter [dataSource]="merchantDataSource" [selectDataSource]="selectDataSource" [valueField]="id">
+            <ng-container *psSelectOption="let option">{{ option.name }}</ng-container>
+        </psbx-ds-multi-select-filter> -->
+    </ng-container>
+
+    <ng-container psDataGridCol="name">
+        <div *psDataGridColHeader>Name</div>
+        <div *psDataGridCell="let model">{{model.name}}</div>         
+    </ng-container>
+   
+    <ng-container psDataGridCol="address">
+        <div *psDataGridColHeader>Address</div>
+        <div *psDataGridCell="let model">{{model.address}}</div>
+    </ng-container>
+    <ng-container psDataGridCol="commands">
+        <ng-container *psDataGridColHeader>Actions</ng-container>
+        <ng-container *psDataGridCell="let model">
+            <button class="btn-danger btn" psbxConfirmModal [commandTitle]="'Are you sure you wnat to remove ' + model.name + '?'" commandText="Remove"
+            [dataSource]="merchantDataSource" command="removeMerchant" [model]="model" >Remove</button>
+        </ng-container>
+    </ng-container>
+
+    <ng-container *psDataGridFooter>
+        <psbx-ds-pagination [dataSource]="merchantDataSource"></psbx-ds-pagination> 
+    </ng-container>
+</ps-data-grid>
+
+
+
+<ng-template #confirm>
+    <div class="modal-body text-center">
+      <p>Do you want to confirm?</p>
+      <button type="button" class="btn btn-default"  >Yes</button>
+      <button type="button" class="btn btn-primary"  >No</button>
+    </div>
+  </ng-template>
+
+
+
+ <ng-template #theModal let-command let-loading="loading">
+        <label for="name">Name</label>
+        <input type="text" required [attr.disabled]="loading" [(ngModel)]="command.name" placeholder="Enter a merchant name" 
+               class="form-control"  >
+        <label for="address">Address</label>
+        <input type="text" required [attr.disabled]="loading" [(ngModel)]="command.address" placeholder="Enter the merchant's address" 
+              class="form-control" >
+        
+</ng-template> 
+
+<!-- <ng-template #theModal let-command let-form let-loading="loading">
+    <label for="name">Name</label>
+    <input type="text" required [attr.disabled]="loading" [(ngModel)]="command.name" name="name" placeholder="Enter a merchant name" 
+           class="form-control"  #nameField="ngModel" [class.field-error]="form.submitted && form.invalid"> 
+    <label for="address">Address</label>
+    <input type="text" required [attr.disabled]="loading" [(ngModel)]="command.address" name="address" placeholder="Enter the merchant's address" 
+          class="form-control" #addressField="ngModel" [class.field-error]="form.submitted && form.invalid">
+    
+    
+</ng-template> -->

@@ -3,6 +3,7 @@ import { IDataSource } from '@poweredsoft/data';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { finalize} from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'psbx-command-modal',
@@ -20,6 +21,8 @@ export class CommandModalComponent implements OnInit, OnDestroy {
   loading: boolean;
   commandText: string;
   cancelText: string;
+  form:NgForm;
+  validationMessage:string ;
 
   private _notifyMessage: Subscription;
   private _validationError: Subscription;
@@ -33,17 +36,26 @@ export class CommandModalComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._notifyMessage = this.dataSource.notifyMessage$.subscribe(message => {
-      
+      if (message.type != 'info')
+        this.validationMessage = message.message;
     });
 
-    this._validationError = this.dataSource.validationError$.subscribe(validatorErrors => {
-      console.log(validatorErrors);
+    this._validationError = this.dataSource.validationError$.subscribe(validatorErrors => {      
+      let validationSummary = '';
+      Object.getOwnPropertyNames(validatorErrors.errors).forEach(property => {
+        const errors = validatorErrors.errors[property].join('\n');
+        validationSummary += errors + '\n';
+      });
+      this.validationMessage = validationSummary.trim();
     });
   }
 
-  attemptSave() {
-    debugger;
+  onSubmit(){
+    
+
     this.loading = true;
+    this.validationMessage = null;
+
     this.dataSource.executeCommandByName(this.command, this.commandModel)
       .pipe(
         finalize(() => {
@@ -58,6 +70,10 @@ export class CommandModalComponent implements OnInit, OnDestroy {
       }, fail => {
         // you do not want to close on failure.. so just ignore..
       });
+  }
+
+  attemptSave() {
+    
   }
 
 }

@@ -25,23 +25,32 @@
         <ng-container *psDataGridColHeader>Actions</ng-container>
         <ng-container *psDataGridCell="let model">
             <button class="btn-primary btn" psbxCommandModal [commandTitle]="'Change ' + model.name + ' name'" commandText="Update"
-            [dataSource]="merchantDataSource" command="changeMerchantName" [model]="model" [template]="changeName">Change name</button>
+            [dataSource]="merchantDataSource" command="changeMerchant" [model]="model" [template]="changeName">Change</button>
+
+            <button class="btn-danger btn" psbxConfirmModal [commandTitle]="'Are you sure you wnat to remove ' + model.name + '?'" commandText="Remove"
+            [dataSource]="merchantDataSource" command="removeMerchant" [model]="model" >RemoveIt</button>
         </ng-container>
     </ng-container>
-    <ng-container *psDataGridFooter>
-        <button class="btn-primary btn" psbxCommandModal commandTitle="Adding a new merchant" commandText="Add"
-            [dataSource]="merchantDataSource" command="addMerchant" [template]="theModal">Create a new record</button>
-    </ng-container>
+        <ng-container *psDataGridFooter>
+            <psbx-ds-pagination [dataSource]="merchantDataSource"></psbx-ds-pagination> 
+        </ng-container>
 </ps-data-grid>
+
+
 
 <ng-template #changeName let-command let-loading="loading">
     New Name
-    <input type="text" [attr.disabled]="loading" [(ngModel)]="command.newName" placeholder="Entermerchant new name" class="form-control">
+    <input type="text" [attr.disabled]="loading" [(ngModel)]="command.name" placeholder="Entermerchant new name" class="form-control">
+    New Address
+    <input type="text" required [attr.disabled]="loading" [(ngModel)]="command.address" placeholder="Entermerchant new Address" class="form-control">
 </ng-template>
 
 <ng-template #theModal let-command let-loading="loading">
-    Name
-    <input type="text" [attr.disabled]="loading" [(ngModel)]="command.name" placeholder="Enter a merchant name" class="form-control">
-    Address
-    <input type="text" [attr.disabled]="loading" [(ngModel)]="command.address" placeholder="Enter the merchant's address" class="form-control">
+    <form ngNativeValidate  >
+        Name
+        <input type="text" required [disabled]="loading" name="name" [(ngModel)]="command.name"  placeholder="Enter a merchant name" class="form-control" >
+        Address
+        <input type="text" required [disabled]="loading" name="address" [(ngModel)]="command.address"  placeholder="Enter the merchant's address" class="form-control" >        
+    </form>
+    
 </ng-template>

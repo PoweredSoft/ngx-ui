@@ -6,18 +6,25 @@ import { DataGridColHeaderDirective } from './directives/data-grid-col-header.di
 import { DataGridCellDirective } from './directives/data-grid-cell.directive';
 import { DataGridFooterDirective } from './directives/data-grid-footer.directive';
 import { DataGridHeaderDirective } from './directives/data-grid-header.directive';
+import { DataGridLoaderDirective } from './directives/data-grid-loader.directive';
 
 
 
 
 
 @NgModule({
-  declarations: [DataGridComponent,DataGridColDirective,DataGridColHeaderDirective,DataGridCellDirective, DataGridFooterDirective, DataGridHeaderDirective,
+  declarations: [
+    DataGridComponent,DataGridColDirective,DataGridColHeaderDirective,
+    DataGridCellDirective, DataGridFooterDirective, DataGridHeaderDirective, 
+    DataGridLoaderDirective,
     
   ],
   imports: [
     CommonModule
   ],
-  exports: [DataGridComponent,DataGridColDirective,DataGridColHeaderDirective,DataGridCellDirective,DataGridFooterDirective, DataGridHeaderDirective]
+  exports: [
+    DataGridComponent,DataGridColDirective,DataGridColHeaderDirective,
+    DataGridCellDirective,DataGridFooterDirective, DataGridHeaderDirective,
+    DataGridLoaderDirective]
 })
 export class DataGridModule { }
