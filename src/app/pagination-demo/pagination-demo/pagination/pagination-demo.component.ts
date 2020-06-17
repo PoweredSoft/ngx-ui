@@ -20,29 +20,29 @@ export class PaginationDemoComponent implements OnInit {
 
   pages:any;
 
-  removeMerchant(id:string) {
-    this.confirmModalService.confirm({
-      message: 'Do you want to delete this merchant?',
-      yesText: 'yes delete this merchant',
-      yesClass: 'danger',
-      noText: 'no please dont',
-      noClass: 'light'
-    }).subscribe(result => {
-      if(result){
-        this.merchantDataSource.executeCommandByName('removeMerchant', {
-          id: id
-        }).subscribe(      
-          res => {
-            this.merchantDataSource.refresh();
-          },
-          err => {
-            console.log(err);
-            alert('failed');
-          }
-        );
-      }
-    })
-  }
+  // removeMerchant(id:string) {
+  //   this.confirmModalService.confirm({
+  //     message: 'Do you want to delete this merchant?',
+  //     yesText: 'yes delete this merchant',
+  //     yesClass: 'danger',
+  //     noText: 'no please dont',
+  //     noClass: 'light'
+  //   }).subscribe(result => {
+  //     if(result){
+  //       this.merchantDataSource.executeCommandByName('removeMerchant', {
+  //         id: id
+  //       }).subscribe(      
+  //         res => {
+  //           this.merchantDataSource.refresh();
+  //         },
+  //         err => {
+  //           console.log(err);
+  //           alert('failed');
+  //         }
+  //       );
+  //     }
+  //   })
+  // }
 
   
   createDataSource(): IDataSource<IMerchant> {
