@@ -44,7 +44,6 @@
         <ng-container *psDataGridCell="let model">
             <button class="btn-danger btn" psbxConfirmModal [commandTitle]="'Are you sure you wnat to remove ' + model.name + '?'" commandText="Remove"
             [dataSource]="merchantDataSource" command="removeMerchant" [model]="model" >Remove</button>
-            <!-- <button class="btn-danger btn" (click)="removeMerchant(model.id)">Remove</button> -->
         </ng-container>
     </ng-container>
 
@@ -52,7 +51,7 @@
         <psbx-ds-pagination [dataSource]="merchantDataSource"></psbx-ds-pagination> 
     </ng-container>
 </ps-data-grid>
-<!-- <button (click)="testService()">Test confirm</button> -->
+
 
 
 <ng-template #confirm>

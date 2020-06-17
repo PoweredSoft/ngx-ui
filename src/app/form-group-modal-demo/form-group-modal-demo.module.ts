@@ -5,6 +5,7 @@ import { FormGroupModalDemoRoutingModule } from './form-group-modal-demo-routing
 import { DataGridModule } from '@poweredsoft/ngx-cdk-ui';
 import { FormGroupCommandModalModule,CommandModalModule, psbxPaginationModule } from '@poweredsoft/ngx-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ConfirmModalModule } from 'projects/poweredsoft/ngx-bootstrap/src/public-api';
 
 
 
@@ -16,7 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     DataGridModule,
     FormGroupCommandModalModule,
     ReactiveFormsModule,
-    psbxPaginationModule
+    psbxPaginationModule,
+    ConfirmModalModule,
     
   ]
 })
