@@ -13,3 +13,5 @@ export * from './lib/confirm-modal/confirm-modal.service';
 export * from './lib/confirm-modal/confirm-modal.directive';
 export * from './lib/spinner/spinner.module';
 export * from './lib/spinner/spinner/spinner.component';
+export * from './lib/grid-filter/grid-filter.module';
+export * from './lib/grid-filter/text-filter/text-filter.component';
