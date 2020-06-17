@@ -7,13 +7,12 @@
 <div class="modal-body">
     <ng-container [ngTemplateOutlet]="template"
         [ngTemplateOutletContext]="{ $implicit: commandModel, loading: loading }"></ng-container>
+    <div *ngIf="validationMessage" class="alert alert-danger mt-2" style="white-space: pre-wrap">{{validationMessage}}</div>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="modalRef.hide()"
-        [attr.disabled]="loading">{{ cancelText }}</button>
-    <button type="button" class="btn btn-primary" (click)="attemptSave()"
-        [attr.disabled]="loading">{{ commandText }}</button>
-
+        [disabled]="loading">{{ cancelText }}</button>
+    <button type="button" class="btn btn-primary" [disabled]="loading" (click)="onSubmit()">{{ commandText }}</button>
     <br>
 
     <div class="progress" style="width: 100%" *ngIf="loading">
@@ -22,3 +21,4 @@
     </div>
 
 </div>
+

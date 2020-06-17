@@ -1,10 +1,10 @@
-import { Directive } from '@angular/core';
+import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
   selector: '[psDataGridLoader]'
 })
 export class DataGridLoaderDirective {
 
-  constructor() { }
+  constructor(public template: TemplateRef<any>) { }
 
 }

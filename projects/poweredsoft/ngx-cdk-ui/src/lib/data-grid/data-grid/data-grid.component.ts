@@ -1,27 +1,34 @@
-import { Component, OnInit, ContentChildren, QueryList, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ContentChildren, QueryList, Input, Output, EventEmitter, ContentChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { IQueryExecutionResult, IQueryExecutionGroupResult, IDataSource } from '@poweredsoft/data';
 import { DataGridColDirective } from '../directives/data-grid-col.directive';
 import { DataGridHeaderDirective } from '../directives/data-grid-header.directive';
 import { DataGridFooterDirective } from '../directives/data-grid-footer.directive';
+import { DataGridLoaderDirective } from '../directives/data-grid-loader.directive';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ps-data-grid',
   templateUrl: './data-grid.component.html',
   styleUrls: ['./data-grid.component.scss']
 })
-export class DataGridComponent implements OnInit {
+export class DataGridComponent implements OnInit, OnDestroy {
 
   latestResult: IQueryExecutionResult<any> & IQueryExecutionGroupResult<any>;
+  loading:boolean;
 
   @ContentChildren(DataGridColDirective) columnDefinitions: QueryList<DataGridColDirective>;
   @ContentChildren(DataGridHeaderDirective) gridHeaders: QueryList<DataGridHeaderDirective>;
   @ContentChildren(DataGridFooterDirective) gridFooters: QueryList<DataGridFooterDirective>;
-  
+  @ContentChildren(DataGridLoaderDirective) loaders: QueryList<DataGridLoaderDirective>;
   
   @Input() dataSource: IDataSource<any>;
   @Input() tableClasses: any;
+  @Input() noRecordsText: string;
+
   private _columns: string[];
-  loading:boolean;
+  private _dataSubscription: Subscription;
+  private _loadingSubscription: Subscription;
+
   @Input() set columns(value: string[]) {
     this._columns = value;
     this.columnsChange.emit(value);
@@ -32,19 +39,45 @@ export class DataGridComponent implements OnInit {
   }  
 
   @Output() columnsChange:EventEmitter<string []> = new EventEmitter<string []>();
-  constructor() { }
+
+  
+
+  get noData() {
+    return !this.latestResult || this.latestResult.totalRecords == 0; 
+  }
+
+  get noRecordsDisplayText() {
+    return this.noRecordsText || 'No records';
+  }
+
+  constructor(private cdr: ChangeDetectorRef) { 
+
+  }
+
+  ngOnDestroy(): void {
+    this._dataSubscription.unsubscribe();
+    this._loadingSubscription.unsubscribe();
+  }
 
   ngOnInit(): void {
-    this.loading = true;
-    console.log(this.columnDefinitions);
-    this.dataSource.data$.subscribe(newData => {
-      this.loading=false;
+  
+    this._dataSubscription = this.dataSource.data$.subscribe(newData => {
       this.latestResult = newData;
     });
+
+    this._loadingSubscription = this.dataSource.loading$.subscribe(isLoading => {
+      this.loading = isLoading;
+      this.cdr.detectChanges();
+    });
+
+    console.log(this.loaders);
   }
 
   getColumn(columnName: string) {
     
+    if (!this.columnDefinitions)
+      return null;
+
     const ret = this.columnDefinitions.find(t => 
     {
       return t.columnName == columnName;

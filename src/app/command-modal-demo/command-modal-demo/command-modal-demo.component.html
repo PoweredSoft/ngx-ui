@@ -46,8 +46,11 @@
 </ng-template>
 
 <ng-template #theModal let-command let-loading="loading">
-    Name
-    <input type="text" [attr.disabled]="loading" [(ngModel)]="command.name" placeholder="Enter a merchant name" class="form-control">
-    Address
-    <input type="text" required [attr.disabled]="loading" [(ngModel)]="command.address" placeholder="Enter the merchant's address" class="form-control">
+    <form ngNativeValidate  >
+        Name
+        <input type="text" required [disabled]="loading" name="name" [(ngModel)]="command.name"  placeholder="Enter a merchant name" class="form-control" >
+        Address
+        <input type="text" required [disabled]="loading" name="address" [(ngModel)]="command.address"  placeholder="Enter the merchant's address" class="form-control" >        
+    </form>
+    
 </ng-template>

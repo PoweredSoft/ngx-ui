@@ -13,12 +13,18 @@ import { DataGridLoaderDirective } from './directives/data-grid-loader.directive
 
 
 @NgModule({
-  declarations: [DataGridComponent,DataGridColDirective,DataGridColHeaderDirective,DataGridCellDirective, DataGridFooterDirective, DataGridHeaderDirective, DataGridLoaderDirective,
+  declarations: [
+    DataGridComponent,DataGridColDirective,DataGridColHeaderDirective,
+    DataGridCellDirective, DataGridFooterDirective, DataGridHeaderDirective, 
+    DataGridLoaderDirective,
     
   ],
   imports: [
     CommonModule
   ],
-  exports: [DataGridComponent,DataGridColDirective,DataGridColHeaderDirective,DataGridCellDirective,DataGridFooterDirective, DataGridHeaderDirective,DataGridLoaderDirective]
+  exports: [
+    DataGridComponent,DataGridColDirective,DataGridColHeaderDirective,
+    DataGridCellDirective,DataGridFooterDirective, DataGridHeaderDirective,
+    DataGridLoaderDirective]
 })
 export class DataGridModule { }

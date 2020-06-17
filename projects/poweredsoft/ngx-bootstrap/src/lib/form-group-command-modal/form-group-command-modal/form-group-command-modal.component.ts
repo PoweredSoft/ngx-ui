@@ -23,17 +23,16 @@ export class FormGroupCommandModalComponent implements OnInit {
   commandText: string;
   cancelText: string;
   errorMessage: string;
-  commandModel:any;
+  commandModel:any; 
+  
   private _notifyMessage: Subscription;
   private _validationError: Subscription;
 
   constructor(public modalRef: BsModalRef) { }
 
   ngOnDestroy(): void {
-    /*
     this._notifyMessage.unsubscribe();
     this._validationError.unsubscribe();
-    */
   }
 
   ngOnInit(): void {
@@ -41,19 +40,24 @@ export class FormGroupCommandModalComponent implements OnInit {
     // this._notifyMessage = this.dataSource.notifyMessage$.subscribe(message => {
       
     // });
-
-    // this._validationError = this.dataSource.validationError$.subscribe(validatorErrors => {
-    //   console.log(validatorErrors);
-    // });
+   
+    this._validationError = this.dataSource.validationError$.subscribe(validatorErrors => {      
+      let validationSummary = '';
+      Object.getOwnPropertyNames(validatorErrors.errors).forEach(property => {
+        const errors = validatorErrors.errors[property].join('\n');
+        validationSummary += errors + '\n';
+      });
+      this.errorMessage = validationSummary.trim();
+    });
   }
 
   attemptSave() {
-    this.errorMessage = null;
-    if (!this.modelForm.valid)
-    {
-      this.errorMessage = 'Form is not valid, please enter all required fields';
-      return;
-    }
+    // this.errorMessage = null;
+    // if (!this.modelForm.valid)
+    // {
+    //   this.errorMessage = 'Form is not valid, please enter all required fields';      
+    //   return;
+    // }
 
     const finalModel = this.modelForm.value;  
     if(this.commandModel.id)

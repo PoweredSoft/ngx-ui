@@ -11,17 +11,15 @@
         <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ $implicit: modelForm, loading: loading }">
         </ng-container>
 
-        <div *ngIf="errorMessage" class="alert alert-danger mt-2">
-            {{ errorMessage }}
-        </div>
+        <div *ngIf="errorMessage" class="alert alert-danger mt-2" style="white-space: pre-wrap">{{ errorMessage }}</div>
     </div>
   
     
     
     <div class="modal-footer">
         <button type="button" class="btn btn-light" (click)="modalRef.hide()"
-            [attr.disabled]="loading">{{ cancelText }}</button>
-        <button type="button" class="btn btn-primary" (click)="attemptSave()" [attr.disabled]="loading">{{commandText}}</button>
+            [disabled]="loading">{{ cancelText }}</button>
+        <button type="button" class="btn btn-primary" (click)="attemptSave()" [disabled]="loading">{{commandText}}</button>
         <br>
     
         <div class="progress" style="width: 100%" *ngIf="loading">

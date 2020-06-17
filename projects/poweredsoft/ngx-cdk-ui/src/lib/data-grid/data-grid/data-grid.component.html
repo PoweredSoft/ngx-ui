@@ -1,4 +1,6 @@
-<table [ngClass]="tableClasses">
+<ng-container *ngIf="loading" [ngTemplateOutlet]="loadingTemplate"></ng-container> 
+
+<table [ngClass]="tableClasses" style="min-height: 300px;">
   <thead>
     <tr>
       <th *ngFor="let header of gridHeaders" [attr.colspan]="columns.length">
@@ -15,12 +17,7 @@
       </th>
     </tr>
   </thead>
-  <tbody *ngIf="loading">
-    <tr>
-      <td [attr.colspan]="columns.length"><ng-content select="psDataGridLoader"></ng-content></td>
-    </tr>
-  </tbody>
-  <tbody *ngIf="latestResult&&!loading">
+  <tbody *ngIf="!noData else noResultTemplate">
     <tr *ngFor="let rowModel of latestResult.data; let i = index">
       <td *ngFor="let column of columns">
         <ng-container *ngIf="hasCellTemplate(column)">
@@ -44,3 +41,18 @@
     </tr>
   </tfoot>
 </table>
+
+<ng-template #loadingTemplate>
+  <ng-container *ngFor="let loader of loaders">
+    <ng-container [ngTemplateOutlet]="loader.template"></ng-container>
+  </ng-container>
+</ng-template>
+<ng-template #noResultTemplate>
+  <tbody>
+    <tr>
+      <td [attr.colspan]="columns.length">
+        <p style="text-align: center;">{{ noRecordsDisplayText }}</p>
+      </td>
+    </tr>
+  </tbody>
+</ng-template>

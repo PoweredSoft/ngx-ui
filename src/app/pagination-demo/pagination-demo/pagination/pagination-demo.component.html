@@ -1,7 +1,13 @@
 
-   <psbx-spinner psDataGridLoader></psbx-spinner>
+  
 <ps-data-grid [dataSource]="merchantDataSource" [(columns)]="columns"
     tableClasses="table table-sm table-dark table-striped table-bordered">
+
+
+    
+
+    <psbx-spinner *psDataGridLoader></psbx-spinner>
+
     <ng-container *psDataGridHeader>
         <button class="btn-warning btn" psbxCommandModal commandTitle="Adding a new merchant" commandText="Add"
             [dataSource]="merchantDataSource" command="addMerchant" [template]="theModal">Create a new record</button>
@@ -10,6 +16,18 @@
     <ng-container psDataGridCol="id">
         <div *psDataGridColHeader>ID</div>
         <div *psDataGridCell="let model">{{model.id}}</div>
+
+        <!-- <psfa-ds-sort-icon *psDataGridColSort [sortPath]="id" [dataSource]="merchantDataSource">
+
+        </psfa-ds-sort-icon>  -->
+
+        <!-- <psbx-ds-text-filter *psDataGridCellFilter [dataSource]="merchantDataSource"></psbx-ds-text-filter>
+        <psdb-ds-date-filter *psDataGridCellFilter></psdb-ds-date-filter>
+        <psdb-ds-date-range-filter *psDataGridCellFilter></psdb-ds-date-range-filter>
+        <psbx-ds-number-filter *psDataGridCellFilter></psbx-ds-number-filter>
+        <psbx-ds-multi-select-filter [dataSource]="merchantDataSource" [selectDataSource]="selectDataSource" [valueField]="id">
+            <ng-container *psSelectOption="let option">{{ option.name }}</ng-container>
+        </psbx-ds-multi-select-filter> -->
     </ng-container>
 
     <ng-container psDataGridCol="name">
@@ -27,7 +45,6 @@
             <!-- <button class="btn-warning btn" psbxCommandModal [commandTitle]="'Change ' + model.name + ' name'" commandText="Update"
             [dataSource]="merchantDataSource" command="changeMerchant" [model]="model" [template]="changeName">Change</button> -->
             <button class="btn-danger btn" (click)="removeMerchant(model.id)">Remove</button>
-           
         </ng-container>
     </ng-container>
 
@@ -48,9 +65,23 @@
 
 
 
-<ng-template #theModal let-command let-loading="loading">
-    Name
-    <input type="text" [attr.disabled]="loading" [(ngModel)]="command.name" placeholder="Enter a merchant name" class="form-control">
-    Address
-    <input type="text" [attr.disabled]="loading" [(ngModel)]="command.address" placeholder="Enter the merchant's address" class="form-control">
-</ng-template>
+ <ng-template #theModal let-command let-loading="loading">
+        <label for="name">Name</label>
+        <input type="text" required [attr.disabled]="loading" [(ngModel)]="command.name" placeholder="Enter a merchant name" 
+               class="form-control"  >
+        <label for="address">Address</label>
+        <input type="text" required [attr.disabled]="loading" [(ngModel)]="command.address" placeholder="Enter the merchant's address" 
+              class="form-control" >
+        
+</ng-template> 
+
+<!-- <ng-template #theModal let-command let-form let-loading="loading">
+    <label for="name">Name</label>
+    <input type="text" required [attr.disabled]="loading" [(ngModel)]="command.name" name="name" placeholder="Enter a merchant name" 
+           class="form-control"  #nameField="ngModel" [class.field-error]="form.submitted && form.invalid"> 
+    <label for="address">Address</label>
+    <input type="text" required [attr.disabled]="loading" [(ngModel)]="command.address" name="address" placeholder="Enter the merchant's address" 
+          class="form-control" #addressField="ngModel" [class.field-error]="form.submitted && form.invalid">
+    
+    
+</ng-template> -->
