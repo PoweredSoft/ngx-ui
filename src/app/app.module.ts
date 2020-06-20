@@ -10,6 +10,7 @@ import { HttpLink, HttpLinkModule } from 'apollo-angular-link-http';
 import { DefaultOptions } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function app_Init(apollo: Apollo, httpLink: HttpLink) {
   return async () => {
@@ -56,7 +57,8 @@ export function app_Init(apollo: Apollo, httpLink: HttpLink) {
     AppRoutingModule,
     HttpClientModule,
     ApolloModule,
-    HttpLinkModule
+    HttpLinkModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {

@@ -5,6 +5,7 @@ import { DataGridHeaderDirective } from '../directives/data-grid-header.directiv
 import { DataGridFooterDirective } from '../directives/data-grid-footer.directive';
 import { DataGridLoaderDirective } from '../directives/data-grid-loader.directive';
 import { Subscription } from 'rxjs';
+import { DataGridCellFilterDirective } from '../directives/data-grid-cell-filter.directive';
 
 @Component({
   selector: 'ps-data-grid',
@@ -20,9 +21,11 @@ export class DataGridComponent implements OnInit, OnDestroy {
   @ContentChildren(DataGridHeaderDirective) gridHeaders: QueryList<DataGridHeaderDirective>;
   @ContentChildren(DataGridFooterDirective) gridFooters: QueryList<DataGridFooterDirective>;
   @ContentChildren(DataGridLoaderDirective) loaders: QueryList<DataGridLoaderDirective>;
+  @ContentChildren(DataGridCellFilterDirective) filters: QueryList<DataGridCellFilterDirective>;
   
   @Input() dataSource: IDataSource<any>;
   @Input() tableClasses: any;
+  @Input() headerClasses: any;
   @Input() noRecordsText: string;
 
   private _columns: string[];
@@ -69,8 +72,7 @@ export class DataGridComponent implements OnInit, OnDestroy {
       this.loading = isLoading;
       this.cdr.detectChanges();
     });
-
-    console.log(this.loaders);
+    
   }
 
   getColumn(columnName: string) {

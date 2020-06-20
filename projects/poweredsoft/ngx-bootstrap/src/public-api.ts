@@ -15,3 +15,5 @@ export * from './lib/spinner/spinner.module';
 export * from './lib/spinner/spinner/spinner.component';
 export * from './lib/grid-filter/grid-filter.module';
 export * from './lib/grid-filter/text-filter/text-filter.component';
+export * from './lib/grid-filter/number-filter/number-filter.component';
+export * from './lib/grid-filter/datetime-filter/datetime-filter.component';

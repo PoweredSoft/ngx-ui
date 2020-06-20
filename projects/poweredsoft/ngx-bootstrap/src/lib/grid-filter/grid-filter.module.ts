@@ -1,14 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TextFilterComponent } from './text-filter/text-filter.component';
+import { FormsModule } from '@angular/forms';
+import { NumberFilterComponent } from './number-filter/number-filter.component';
+import { DatetimeFilterComponent } from './datetime-filter/datetime-filter.component';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
+
+
 
 
 
 @NgModule({
-  declarations: [TextFilterComponent],
+  declarations: [TextFilterComponent, NumberFilterComponent,DatetimeFilterComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,    
+    BsDatepickerModule.forRoot(),
   ],
-  exports: [TextFilterComponent]
+  exports: [TextFilterComponent, NumberFilterComponent,DatetimeFilterComponent]
 })
 export class GridFilterModule { }

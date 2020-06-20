@@ -7,6 +7,7 @@ import { DataGridCellDirective } from './directives/data-grid-cell.directive';
 import { DataGridFooterDirective } from './directives/data-grid-footer.directive';
 import { DataGridHeaderDirective } from './directives/data-grid-header.directive';
 import { DataGridLoaderDirective } from './directives/data-grid-loader.directive';
+import { DataGridCellFilterDirective } from './directives/data-grid-cell-filter.directive';
 
 
 
@@ -16,7 +17,7 @@ import { DataGridLoaderDirective } from './directives/data-grid-loader.directive
   declarations: [
     DataGridComponent,DataGridColDirective,DataGridColHeaderDirective,
     DataGridCellDirective, DataGridFooterDirective, DataGridHeaderDirective, 
-    DataGridLoaderDirective,
+    DataGridLoaderDirective, DataGridCellFilterDirective,
     
   ],
   imports: [
@@ -25,6 +26,6 @@ import { DataGridLoaderDirective } from './directives/data-grid-loader.directive
   exports: [
     DataGridComponent,DataGridColDirective,DataGridColHeaderDirective,
     DataGridCellDirective,DataGridFooterDirective, DataGridHeaderDirective,
-    DataGridLoaderDirective]
+    DataGridLoaderDirective,DataGridCellFilterDirective]
 })
 export class DataGridModule { }

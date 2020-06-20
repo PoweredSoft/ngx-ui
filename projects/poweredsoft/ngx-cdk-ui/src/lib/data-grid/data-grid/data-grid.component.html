@@ -5,6 +5,9 @@
     <tr>
       <th *ngFor="let header of gridHeaders" [attr.colspan]="columns.length">
         <ng-container [ngTemplateOutlet]="header.template"></ng-container>
+        <ng-container *ngFor="let filter of filters" >
+          <ng-container [ngTemplateOutlet]="filter.template"></ng-container>
+        </ng-container>
       </th>
     </tr>
     <tr>
