@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, OnDestroy, Output,EventEmitter } from '@angular/core';
-import { IDataSource, IQueryExecutionResult, IQueryExecutionGroupResult } from '@poweredsoft/data';
-import { Subscription } from 'rxjs';
-import { IFilter, ISimpleFilter } from '../../models/IFilter';
+import { Component, OnInit, Input } from '@angular/core';
+import { IDataSource} from '@poweredsoft/data';
+import { ISimpleFilter } from '../../models/IFilter';
 
 
 @Component({
@@ -12,18 +11,11 @@ import { IFilter, ISimpleFilter } from '../../models/IFilter';
 export class TextFilterComponent implements OnInit {
 
   @Input() dataSource : IDataSource<any>;   
-  @Output() onFilter: EventEmitter<IFilter> = new EventEmitter();
-  title = 'Welcome word';
-  content = 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus.';
- 
-  private _searchTerm: string;
+  @Input() path:string;
  
   filterType: string = 'Contains';
   filterValue: string = null;
-
-  get filterTypes(){
-    return ["contains","equals","startsWith"]
-  }
+  filterTypes = ['contains', 'equal', 'startsWith','endsWith'];
 
   constructor() { }
  
@@ -32,12 +24,35 @@ export class TextFilterComponent implements OnInit {
     
   }
 
+  clearFilter() {
+    const existingFilter = this.dataSource.filters.find(t => (t as ISimpleFilter).path == this.path) as ISimpleFilter;
+    if (existingFilter) {
+      this.dataSource.query({
+        page: 1,
+        filters: this.dataSource.filters.filter(t => t != existingFilter)
+      })
+    }
+  }
+
   applyFilter(){
-    this.onFilter.emit(<ISimpleFilter>{
-      path: "name",
-      value: this.filterValue,
-      type: this.filterType,
-      and: true
-    });
+
+    const filters = this.dataSource.filters;
+    const existingFilter = filters.find(t => (t as ISimpleFilter).path == this.path) as ISimpleFilter;
+    if (existingFilter) {
+      existingFilter.type = this.filterType;
+      existingFilter.value = this.filterValue;
+    } else {
+      filters.push(<ISimpleFilter>{
+        and: true,
+        type: this.filterType,
+        path: this.path, 
+        value: this.filterValue
+      })
+    }
+
+    this.dataSource.query({
+      filters: filters,
+      page: 1
+    })
   }
 }

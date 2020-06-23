@@ -1,0 +1,8 @@
+:host  .flex-container{
+    display: flex;
+    justify-content: flex-start;
+}
+
+:host .flex-item{
+    margin-right: 1px;
+}

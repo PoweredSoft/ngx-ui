@@ -14,8 +14,11 @@
     
     <ng-container psDataGridCol="id">
         <div *psDataGridColHeader>ID</div>
+        <psbx-ds-text-filter  *psDataGridCellFilter [dataSource]="merchantDataSource" path="id"></psbx-ds-text-filter>
+        <psbx-grid-sorting *psDataGridColSort [dataSource]="merchantDataSource" path="id"></psbx-grid-sorting>
         <div *psDataGridCell="let model">{{model.id}}</div>
-        <psbx-ds-text-filter  *psDataGridCellFilter [dataSource]="merchantDataSource" (onFilter)="filterMerchants($event)" ></psbx-ds-text-filter>
+        <!--<psbx-number-filter *psDataGridCellFilter [dataSource]="merchantDataSource" path="id"></psbx-number-filter>-->
+        <!--<psbx-grid-sorting *psDataGridColSort path="id" [dataSource]="merchantDataSource"></psbx-grid-sorting>-->
         <!-- <psfa-ds-sort-icon *psDataGridColSort [sortPath]="id" [dataSource]="merchantDataSource">
 
         </psfa-ds-sort-icon>  -->
@@ -31,12 +34,16 @@
 
     <ng-container psDataGridCol="name">
         <div *psDataGridColHeader>Name</div>
-        <div *psDataGridCell="let model">{{model.name}}</div>         
+        <psbx-ds-text-filter  *psDataGridCellFilter [dataSource]="merchantDataSource" path="name"></psbx-ds-text-filter>
+        <psbx-grid-sorting *psDataGridColSort [dataSource]="merchantDataSource" path="name"></psbx-grid-sorting>
+        <div *psDataGridCell="let model">{{model.name}}</div>
     </ng-container>
    
     <ng-container psDataGridCol="address">
         <div *psDataGridColHeader>Address</div>
         <div *psDataGridCell="let model">{{model.address}}</div>
+        <psbx-ds-text-filter  *psDataGridCellFilter [dataSource]="merchantDataSource" path="address"></psbx-ds-text-filter>
+        <psbx-grid-sorting *psDataGridColSort [dataSource]="merchantDataSource" path="address"></psbx-grid-sorting>
     </ng-container>
     <ng-container psDataGridCol="commands">
         <ng-container *psDataGridColHeader>Actions</ng-container>
@@ -51,6 +58,7 @@
         <psbx-ds-pagination [dataSource]="merchantDataSource"></psbx-ds-pagination> 
     </ng-container>
 </ps-data-grid>
+
 
 
 

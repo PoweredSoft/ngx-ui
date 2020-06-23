@@ -1,15 +1,24 @@
 <ng-template #popTemplate>
-    <select class="custom-select" title="Choose one of the following..." [(ngModel)]="filterType">
-        <option *ngFor="let filter of filterTypes">{{filter}}</option>
-    </select>    
-
-    <input type="text" class="form-control" placeholder="column value" aria-label="Username"
+    <div class="container" >
+        <div class="row">
+            <select class="custom-select" title="Choose one of the following..." [(ngModel)]="filterType">
+                <option *ngFor="let filter of filterTypes">{{filter}}</option>
+            </select>    
+        </div>
+       
+        <div class="row mt-1 mb-1">
+            <input type="text" class="form-control" placeholder="column value" aria-label="Username"
         aria-describedby="basic-addon1" [(ngModel)]="filterValue">
-    <button class="btn btn-primary" (click)="applyFilter()">Filter</button>
+        </div>
+        
+        <button class="btn btn-primary mr-1" (click)="applyFilter()">Filter</button>
+        <button type="button" class="btn btn-warning" (click)="pop.hide()">
+            Hide
+          </button>
+    </div>
 </ng-template>
 
-
-<span [popover]="popTemplate" popoverTitle="Template ref content inside">
+<button [popover]="popTemplate"  [outsideClick]="true" #pop="bs-popover">
     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
         y="0px" viewBox="0 0 477.875 477.875" style="enable-background:new 0 0 477.875 477.875;" xml:space="preserve"
         width="13px" height="13px">
@@ -54,4 +63,4 @@
         </g>
     </svg>
 
-</span>
+</button>

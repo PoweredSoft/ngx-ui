@@ -30,7 +30,7 @@ const routes: Routes = [
   },
   {
     path: 'grid-filter',
-    loadChildren: ()=> import('./grid-filter-demo/grid-filter-demo.module').then(m => m.GridFilterDemoModule)
+    loadChildren: ()=> import('./grid-filter&sorting-demo/grid-filter-demo.module').then(m => m.GridFilterDemoModule)
   }
 ];
 

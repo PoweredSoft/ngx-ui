@@ -11,3 +11,4 @@ export * from './lib/data-grid/directives/data-grid-header.directive';
 export * from './lib/data-grid/directives/data-grid-footer.directive';
 export * from './lib/data-grid/directives/data-grid-loader.directive';
 export * from './lib/data-grid/directives/data-grid-cell-filter.directive';
+export * from './lib/data-grid/directives/data-grid-col-sort.directive';

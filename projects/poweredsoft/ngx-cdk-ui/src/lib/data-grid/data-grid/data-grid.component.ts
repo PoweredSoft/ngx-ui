@@ -6,6 +6,7 @@ import { DataGridFooterDirective } from '../directives/data-grid-footer.directiv
 import { DataGridLoaderDirective } from '../directives/data-grid-loader.directive';
 import { Subscription } from 'rxjs';
 import { DataGridCellFilterDirective } from '../directives/data-grid-cell-filter.directive';
+import { DataGridColSortDirective } from '../directives/data-grid-col-sort.directive';
 
 @Component({
   selector: 'ps-data-grid',
@@ -21,7 +22,6 @@ export class DataGridComponent implements OnInit, OnDestroy {
   @ContentChildren(DataGridHeaderDirective) gridHeaders: QueryList<DataGridHeaderDirective>;
   @ContentChildren(DataGridFooterDirective) gridFooters: QueryList<DataGridFooterDirective>;
   @ContentChildren(DataGridLoaderDirective) loaders: QueryList<DataGridLoaderDirective>;
-  @ContentChildren(DataGridCellFilterDirective) filters: QueryList<DataGridCellFilterDirective>;
   
   @Input() dataSource: IDataSource<any>;
   @Input() tableClasses: any;
@@ -31,6 +31,8 @@ export class DataGridComponent implements OnInit, OnDestroy {
   private _columns: string[];
   private _dataSubscription: Subscription;
   private _loadingSubscription: Subscription;
+
+  _fiters:any
 
   @Input() set columns(value: string[]) {
     this._columns = value;
@@ -75,8 +77,24 @@ export class DataGridComponent implements OnInit, OnDestroy {
     
   }
 
+  getSortingTemplate(columnName){
+    const ret = this.getColumn(columnName);
+    if (ret && ret.sortTemplate) 
+      return ret.sortTemplate.template;
+
+    return null;
+  }
+
+  getFilterTemplate(columnName){
+    const ret = this.getColumn(columnName);
+    if (ret && ret.filterTemplate) 
+      return ret.filterTemplate.template;
+
+    return null;
+  }
+
   getColumn(columnName: string) {
-    
+  
     if (!this.columnDefinitions)
       return null;
 
@@ -87,6 +105,7 @@ export class DataGridComponent implements OnInit, OnDestroy {
 
     return ret;
   }
+
 
   getColumnHeaderTemplate(columnName: string) {
     const ret = this.getColumn(columnName);
@@ -110,6 +129,14 @@ export class DataGridComponent implements OnInit, OnDestroy {
 
   hasCellTemplate(columnName: string) {
     return this.getColumnCellTemplate(columnName) ? true :false;
+  }
+
+  hasFilterTemplate(columnName: string) {
+    return this.getFilterTemplate(columnName) ? true :false;
+  }
+
+  hasSortingTemplate(columnName: string) {
+    return this.getSortingTemplate(columnName) ? true :false;
   }
 
 
