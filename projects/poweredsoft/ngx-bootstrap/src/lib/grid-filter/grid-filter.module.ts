@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { NumberFilterComponent } from './number-filter/number-filter.component';
 import { DatetimeFilterComponent } from './datetime-filter/datetime-filter.component';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-
-
+import { PopoverModule } from 'ngx-bootstrap/popover';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 
 
@@ -17,6 +17,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     CommonModule,
     FormsModule,    
     BsDatepickerModule.forRoot(),
+    PopoverModule.forRoot(),
+    BsDropdownModule.forRoot()
   ],
   exports: [TextFilterComponent, NumberFilterComponent,DatetimeFilterComponent]
 })

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnDestroy, Output,EventEmitter } from '@angular/core';
 import { IDataSource, IQueryExecutionResult, IQueryExecutionGroupResult } from '@poweredsoft/data';
 import { Subscription } from 'rxjs';
+import { IFilter, ISimpleFilter } from '../../models/IFilter';
 
 
 @Component({
@@ -8,39 +9,35 @@ import { Subscription } from 'rxjs';
   templateUrl: './text-filter.component.html',
   styleUrls: ['./text-filter.component.scss']
 })
-export class TextFilterComponent implements OnInit, OnDestroy {
+export class TextFilterComponent implements OnInit {
 
   @Input() dataSource : IDataSource<any>;   
-  @Output() filteredResults: EventEmitter<any> = new EventEmitter();
-  latestResult: IQueryExecutionResult<any> & IQueryExecutionGroupResult<any>;
-  
-  private _dataSubscription: Subscription;
+  @Output() onFilter: EventEmitter<IFilter> = new EventEmitter();
+  title = 'Welcome word';
+  content = 'Vivamus sagittis lacus vel augue laoreet rutrum faucibus.';
+ 
   private _searchTerm: string;
  
+  filterType: string = 'Contains';
+  filterValue: string = null;
 
-  get searchTerm(): string {
-    return this._searchTerm;
+  get filterTypes(){
+    return ["contains","equals","startsWith"]
   }
-
-  set searchTerm(value: string) {
-    this._searchTerm = value;    
-    //this.filteredResults.emit(this.dataFilter(value));
-  }
-
-  // dataFilter(searchString: string) {
-  //   return this.latestResult.data.filter(x =>
-  //     x.name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1);
-  // }
 
   constructor() { }
-  ngOnDestroy(): void {
-    this._dataSubscription.unsubscribe();
-  }
+ 
 
   ngOnInit(): void {
-    this._dataSubscription = this.dataSource.data$.subscribe(newData => {
-      this.latestResult = newData;
-    });
+    
   }
 
+  applyFilter(){
+    this.onFilter.emit(<ISimpleFilter>{
+      path: "name",
+      value: this.filterValue,
+      type: this.filterType,
+      and: true
+    });
+  }
 }

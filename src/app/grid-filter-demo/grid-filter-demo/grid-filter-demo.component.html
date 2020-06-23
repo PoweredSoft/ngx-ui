@@ -1,6 +1,6 @@
 <h2>grid-filter-demo works!</h2>
 <psbx-datetime-filter></psbx-datetime-filter>
-<button class="btn btn-danger" (click)="test()">Test</button>
+
 
 <ps-data-grid [dataSource]="merchantDataSource" [(columns)]="columns"
     tableClasses="table table-sm table-dark table-striped table-bordered">
@@ -10,11 +10,12 @@
             [dataSource]="merchantDataSource" command="addMerchant" [template]="theModal">Create Record</button>
     </ng-container>
 
-    <psbx-ds-text-filter  *psDataGridCellFilter [dataSource]="merchantDataSource" (filteredResults)="filteredResults = $event"></psbx-ds-text-filter>
+    
     
     <ng-container psDataGridCol="id">
         <div *psDataGridColHeader>ID</div>
         <div *psDataGridCell="let model">{{model.id}}</div>
+        <psbx-ds-text-filter  *psDataGridCellFilter [dataSource]="merchantDataSource" (onFilter)="filterMerchants($event)" ></psbx-ds-text-filter>
         <!-- <psfa-ds-sort-icon *psDataGridColSort [sortPath]="id" [dataSource]="merchantDataSource">
 
         </psfa-ds-sort-icon>  -->

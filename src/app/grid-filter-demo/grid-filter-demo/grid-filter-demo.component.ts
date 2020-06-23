@@ -20,6 +20,7 @@ export class GridFilterDemoComponent implements OnInit {
 
   pages:any;
   filteredResults:any;
+  somefilter:any;
   
   createDataSource(): IDataSource<IMerchant> {
     return this.merchantService.createDataSource();
@@ -28,9 +29,12 @@ export class GridFilterDemoComponent implements OnInit {
 
   ngOnInit() {
     this.merchantDataSource.refresh();
+    
   }
 
-  test(){
-    console.log(this.filteredResults);
+  filterMerchants(event){
+    this.somefilter = event;
+    this.merchantDataSource.filters[0]=this.somefilter;    
+    this.merchantDataSource.refresh();
   }
 }
