@@ -3,7 +3,7 @@
 
 
 <ps-data-grid [dataSource]="merchantDataSource" [(columns)]="columns"
-    tableClasses="table table-sm table-dark table-striped table-bordered">
+    tableClasses="table table-sm table-striped table-bordered">
     <psbx-spinner *psDataGridLoader></psbx-spinner>
     <ng-container *psDataGridHeader>
         <button class="btn-info btn" psbxCommandModal commandTitle="Adding a new merchant" commandText="Add"

@@ -14,8 +14,15 @@ export class TextFilterComponent implements OnInit {
   @Input() path:string;
  
   filterType: string = 'Contains';
-  filterValue: string = null;
-  filterTypes = ['contains', 'equal', 'startsWith','endsWith'];
+  filterValue: string = null; 
+  isFiltering: boolean;
+  filterTypes = [
+    {key:'contains', value: 'Contains'}, 
+    {key:'equal', value: 'Equal'}, 
+    {key:'startsWith', value: 'Starts With'},
+    {key:'endsWith', value: 'Ends With'}
+  ];
+  filterIsOpenned: boolean = false;
 
   constructor() { }
  
@@ -25,6 +32,7 @@ export class TextFilterComponent implements OnInit {
   }
 
   clearFilter() {
+    this.isFiltering = false;
     const existingFilter = this.dataSource.filters.find(t => (t as ISimpleFilter).path == this.path) as ISimpleFilter;
     if (existingFilter) {
       this.dataSource.query({
@@ -35,7 +43,7 @@ export class TextFilterComponent implements OnInit {
   }
 
   applyFilter(){
-
+    this.isFiltering = true;
     const filters = this.dataSource.filters;
     const existingFilter = filters.find(t => (t as ISimpleFilter).path == this.path) as ISimpleFilter;
     if (existingFilter) {
@@ -54,5 +62,9 @@ export class TextFilterComponent implements OnInit {
       filters: filters,
       page: 1
     })
+  }
+
+  showTooltip(){
+    return "Filter by "+ this.path;
   }
 }

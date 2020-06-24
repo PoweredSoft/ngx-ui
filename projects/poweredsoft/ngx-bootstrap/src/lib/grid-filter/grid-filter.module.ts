@@ -7,6 +7,7 @@ import { DatetimeFilterComponent } from './datetime-filter/datetime-filter.compo
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 
 
@@ -18,7 +19,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     FormsModule,    
     BsDatepickerModule.forRoot(),
     PopoverModule.forRoot(),
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    TooltipModule.forRoot()
   ],
   exports: [TextFilterComponent, NumberFilterComponent,DatetimeFilterComponent]
 })
