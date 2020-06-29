@@ -1,6 +1,4 @@
 <h2>grid-filter-demo works!</h2>
-<psbx-datetime-filter></psbx-datetime-filter>
-
 
 <ps-data-grid [dataSource]="merchantDataSource" [(columns)]="columns"
     tableClasses="table table-sm table-striped table-bordered">
@@ -10,11 +8,11 @@
             [dataSource]="merchantDataSource" command="addMerchant" [template]="theModal">Create Record</button>
     </ng-container>
 
-    
-    
+
+
     <ng-container psDataGridCol="id">
         <div *psDataGridColHeader>ID</div>
-        <psbx-ds-text-filter  *psDataGridCellFilter [dataSource]="merchantDataSource" path="id"></psbx-ds-text-filter>
+        <psbx-ds-text-filter *psDataGridCellFilter [dataSource]="merchantDataSource" path="id"></psbx-ds-text-filter>
         <psbx-grid-sorting *psDataGridColSort [dataSource]="merchantDataSource" path="id"></psbx-grid-sorting>
         <div *psDataGridCell="let model">{{model.id}}</div>
         <!--<psbx-number-filter *psDataGridCellFilter [dataSource]="merchantDataSource" path="id"></psbx-number-filter>-->
@@ -34,50 +32,73 @@
 
     <ng-container psDataGridCol="name">
         <div *psDataGridColHeader>Name</div>
-        <psbx-ds-text-filter  *psDataGridCellFilter [dataSource]="merchantDataSource" path="name"></psbx-ds-text-filter>
+        <psbx-ds-text-filter *psDataGridCellFilter [dataSource]="merchantDataSource" path="name"></psbx-ds-text-filter>
         <psbx-grid-sorting *psDataGridColSort [dataSource]="merchantDataSource" path="name"></psbx-grid-sorting>
         <div *psDataGridCell="let model">{{model.name}}</div>
     </ng-container>
-   
+
     <ng-container psDataGridCol="address">
         <div *psDataGridColHeader>Address</div>
         <div *psDataGridCell="let model">{{model.address}}</div>
-        <psbx-ds-text-filter  *psDataGridCellFilter [dataSource]="merchantDataSource" path="address"></psbx-ds-text-filter>
+        <psbx-ds-text-filter *psDataGridCellFilter [dataSource]="merchantDataSource" path="address">
+        </psbx-ds-text-filter>
         <psbx-grid-sorting *psDataGridColSort [dataSource]="merchantDataSource" path="address"></psbx-grid-sorting>
     </ng-container>
+
+    <ng-container psDataGridCol="ordering">
+        <div *psDataGridColHeader>Priority</div>
+        <div *psDataGridCell="let model">{{model.ordering}}</div>
+        <psbx-number-filter *psDataGridCellFilter [dataSource]="merchantDataSource" path="ordering">
+        </psbx-number-filter>
+        <psbx-grid-sorting *psDataGridColSort [dataSource]="merchantDataSource" path="ordering"></psbx-grid-sorting>
+    </ng-container>
+
+    <ng-container psDataGridCol="openDate">
+        <div *psDataGridColHeader>Open Date</div>
+        <div *psDataGridCell="let model">{{model.openDate}}</div>
+        <psbx-datetime-filter *psDataGridCellFilter [dataSource]="merchantDataSource" path="openDate">
+        </psbx-datetime-filter>
+        <psbx-grid-sorting *psDataGridColSort [dataSource]="merchantDataSource" path="openDate"></psbx-grid-sorting>
+    </ng-container>
+
     <ng-container psDataGridCol="commands">
         <ng-container *psDataGridColHeader>Actions</ng-container>
         <ng-container *psDataGridCell="let model">
-            <button class="btn-info btn" psbxCommandModal [commandTitle]="'Change ' + model.name + ' name'" commandText="Update"
-            [dataSource]="merchantDataSource" command="changeMerchant" [model]="model" [template]="theModal">Change</button>
-            <button class="btn-danger btn" psbxConfirmModal [commandTitle]="'Are you sure you wnat to remove ' + model.name + '?'" commandText="Remove"
-            [dataSource]="merchantDataSource" command="removeMerchant" [model]="model" >Remove</button>
+            <button class="btn-info btn" psbxCommandModal [commandTitle]="'Change ' + model.name + ' name'"
+                commandText="Update" [dataSource]="merchantDataSource" command="changeMerchant" [model]="model"
+                [template]="theModal">Change</button>
+            <button class="btn-danger btn" psbxConfirmModal
+                [commandTitle]="'Are you sure you wnat to remove ' + model.name + '?'" commandText="Remove"
+                [dataSource]="merchantDataSource" command="removeMerchant" [model]="model">Remove</button>
         </ng-container>
     </ng-container>
     <ng-container *psDataGridFooter>
-        <psbx-ds-pagination [dataSource]="merchantDataSource"></psbx-ds-pagination> 
+        <psbx-ds-pagination [dataSource]="merchantDataSource"></psbx-ds-pagination>
     </ng-container>
 </ps-data-grid>
 
 
+<ng-template #theModal let-command let-loading="loading">
+    <label for="name">Name</label>
+    <input type="text" required  [(ngModel)]="command.name" placeholder="Enter a merchant name"
+        class="form-control">
+    <label for="address">Address</label>
+    <input type="text" required  [(ngModel)]="command.address"
+        placeholder="Enter the merchant's address" class="form-control">
+    <label for="address">Priority</label>
+    <input type="number" required  [(ngModel)]="command.ordering"
+        placeholder="Enter the merchant's Priority" class="form-control">
+    <label for="address">Priority</label>
+    <input type="date" required  [(ngModel)]="command.openDate"
+        placeholder="Enter the merchant's Priority" class="form-control">
+
+</ng-template>
 
 
 <ng-template #confirm>
     <div class="modal-body text-center">
-      <p>Do you want to confirm?</p>
-      <button type="button" class="btn btn-default"  >Yes</button>
-      <button type="button" class="btn btn-primary"  >No</button>
+        <p>Do you want to confirm?</p>
+        <button type="button" class="btn btn-default">Yes</button>
+        <button type="button" class="btn btn-primary">No</button>
     </div>
-  </ng-template>
-
-
-
- <ng-template #theModal let-command let-loading="loading">
-        <label for="name">Name</label>
-        <input type="text" required [attr.disabled]="loading" [(ngModel)]="command.name" placeholder="Enter a merchant name" 
-               class="form-control"  >
-        <label for="address">Address</label>
-        <input type="text" required [attr.disabled]="loading" [(ngModel)]="command.address" placeholder="Enter the merchant's address" 
-              class="form-control" >
-        
-</ng-template> 
+</ng-template>

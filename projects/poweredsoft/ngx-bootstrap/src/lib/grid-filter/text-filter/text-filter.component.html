@@ -2,7 +2,7 @@
     <div class="container" >
         <div class="row">
             <select class="custom-select" title="Choose one of the following..." [(ngModel)]="filterType">
-                <option *ngFor="let filter of filterTypes">{{filter.value}}</option>
+                <option *ngFor="let filter of filterTypes" [value]="filter.value">{{filter.key}}</option>
             </select>    
         </div>
        

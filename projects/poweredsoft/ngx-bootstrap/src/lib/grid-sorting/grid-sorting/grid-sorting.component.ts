@@ -17,10 +17,9 @@ export class GridSortingComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  ascending(){
-    this.isSorting = !this.isSorting;
+  sorting(){
+    this.isSorting = true;
     this.isAscending = !this.isAscending;
-    console.log("ascending result...")
     const existingSort = this.dataSource.sorts.find(t => t.path == this.path);
     if (existingSort){
       existingSort.ascending = (this.isAscending)? true : false;

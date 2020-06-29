@@ -1,24 +1,66 @@
-<div class="row">
-    <div class="col-xs-12 col-12 col-md-4 form-group">
-      <input type="text"
-             placeholder="Datepicker"
-             class="form-control"
-             bsDatepicker>
-    </div>
-    <div class="col-xs-12 col-12 col-md-4 form-group">
-      <input type="text"
-             placeholder="Daterangepicker"
-             class="form-control"
-             bsDaterangepicker>
-    </div>
+<ng-template #popTemplate>
+    <div class="container" >
+      <div class="row">
+        <div class="form-group">
+          <input type="text"
+                 placeholder="Datepicker"
+                 class="form-control"
+                 bsDatepicker [(ngModel)]="filterValue">
+        </div>
+      </div>
+      <div class="row">
+        <input type="text"
+      placeholder="Daterangepicker"
+      class="form-control"
+      bsDaterangepicker>
+      </div>
+      <div class="row mt-2">
+        <button class="btn btn-primary mr-1" >Filter</button>
+        <button type="button" class="btn btn-warning" *ngIf="!isFiltering" (click)="pop.hide()">Hide</button>
+        <button type="button" class="btn btn-dark" *ngIf="isFiltering">Clear</button>
+      </div>
   </div>
+</ng-template>
 
-<!-- 
-  <div class="row">
-    <div class="pr-3 pb-3">
-      <bs-datepicker-inline [bsValue]="bsInlineValue"></bs-datepicker-inline>
-    </div>
-    <div class="pr-3 pb-3">
-      <bs-daterangepicker-inline [bsValue]="bsInlineRangeValue"></bs-daterangepicker-inline>
-    </div>
-  </div> -->
+<button [popover]="popTemplate" class="btn btn-default" [(isOpen)]="filterPopUpOpened" [outsideClick]="true" #pop="bs-popover">
+    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 477.875 477.875" style="enable-background:new 0 0 477.875 477.875;" xml:space="preserve" fill-opacity="0.5" [tooltip]="showTooltip()" [tooltipEnable]="!filterPopUpOpened" width="13px" height="13px" [ngStyle]="{'fill': isFiltering ? 'red': 'black', 'fill-opacity': isFiltering ? '1': '0.5'}">
+<g>
+	<g>
+		<path d="M460.804,0H17.071C7.645,0,0.004,7.641,0.004,17.067V102.4c-0.004,4.842,2.05,9.458,5.649,12.698l165.018,148.514V460.8
+			c-0.004,9.426,7.633,17.07,17.059,17.075c2.651,0.001,5.266-0.615,7.637-1.8l102.4-51.2c5.786-2.891,9.441-8.806,9.438-15.275
+			V263.612l165.018-148.48c3.608-3.247,5.662-7.878,5.649-12.732V17.067C477.871,7.641,470.23,0,460.804,0z"/>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+</button>

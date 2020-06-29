@@ -11,7 +11,7 @@ import { ConfirmModalService } from '@poweredsoft/ngx-bootstrap';
 })
 export class GridFilterDemoComponent implements OnInit {
 
-  columns = ['id','name', 'address','commands']
+  columns = ['id','name', 'address', 'ordering','openDate', 'commands']
   merchantDataSource: IDataSource<IMerchant>;  
   constructor(private  merchantService: MerchantService){
     this.merchantDataSource = this.createDataSource();

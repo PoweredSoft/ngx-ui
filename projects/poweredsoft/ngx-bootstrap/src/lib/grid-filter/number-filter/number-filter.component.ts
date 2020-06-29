@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { IDataSource,IFilter } from '@poweredsoft/data';
 import { ISimpleFilter } from '../../models/IFilter';
 
@@ -9,29 +9,62 @@ import { ISimpleFilter } from '../../models/IFilter';
 })
 export class NumberFilterComponent implements OnInit {
   @Input() dataSource : IDataSource<any>;   
-  @Output() onFilter: EventEmitter<IFilter> = new EventEmitter();
-  @Input() columnName:string;
+  @Input() path:string;
  
-  filterType: string = 'Contains';
-  filterValue: string = null;
-
-  get filterTypes(){
-    return ["contains","equals","startsWith","GreaterThan","LessThan"]
-  }
+  filterType: string = 'Equals';
+  filterValue: number = 0; 
+  isFiltering: boolean;
+  filterTypes = [    
+    {key:'Equals', value: 'Equal'}, 
+    {key:'Greater Than', value: 'GreaterThan'},
+    {key:'Less Than', value: 'LessThan'},    
+    {key:'Greater Than Equal', value: 'GreaterThanOrEqual'},
+    {key:'Less Than Equal', value: 'LessThanOrEqual'},    
+  ];
+  filterIsOpenned: boolean = false;
 
   constructor() { }
  
 
   ngOnInit(): void {
+
     
   }
 
+  clearFilter() {
+    this.isFiltering = false;
+    const existingFilter = this.dataSource.filters.find(t => (t as ISimpleFilter).path == this.path) as ISimpleFilter;
+    if (existingFilter) {
+      this.dataSource.query({
+        page: 1,
+        filters: this.dataSource.filters.filter(t => t != existingFilter)
+      })
+    }
+  }
+
   applyFilter(){
-    this.onFilter.emit(<ISimpleFilter>{
-      path: this.columnName,
-      value: this.filterValue,
-      type: this.filterType,
-      and: true
-    });
+    this.isFiltering = true;
+    const filters = this.dataSource.filters;
+    const existingFilter = filters.find(t => (t as ISimpleFilter).path == this.path) as ISimpleFilter;
+    if (existingFilter) {
+      existingFilter.type = this.filterType;
+      existingFilter.value =this.filterValue.toString();
+    } else {
+      filters.push(<ISimpleFilter>{
+        and: true,
+        type: this.filterType,
+        path: this.path, 
+        value: this.filterValue.toString()
+      })
+    }
+
+    this.dataSource.query({
+      filters: filters,
+      page: 1
+    })
+  }
+
+  showTooltip(){
+    return "Filter by "+ this.path;
   }
 }

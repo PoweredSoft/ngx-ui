@@ -4,7 +4,7 @@ import { IDataSource, DataSource } from '@poweredsoft/data';
 import { Apollo } from 'apollo-angular';
 import  gql  from 'graphql-tag';
 import { of } from 'rxjs';
-import { IChangeMerchantNameCommand, IAddMerchantCommand, IRemoveMerchantCommand } from './IChangeMerchantNameCommand';
+import { IChangeMerchantCommand as IChangeMerchantCommand, IAddMerchantCommand, IRemoveMerchantCommand } from './IChangeMerchantCommand';
 import { IMerchant } from './IMerchant';
 
 @Injectable({
@@ -23,7 +23,7 @@ export class MerchantService {
     >(
       'merchants',
       'GraphQLAdvanceQueryOfMerchantInput',
-      'id, name, address',
+      'id, name, address, ordering, openDate',
       (model) => model.id,
       {
         page: 1,
@@ -31,8 +31,8 @@ export class MerchantService {
       },
       true
     );
-
-    builder.addMutation<IChangeMerchantNameCommand, string>(
+   
+    builder.addMutation<IChangeMerchantCommand, string>(
       'changeMerchant', //<-- command name
       'changeMerchant', //<-- graph ql mutation name
       
@@ -51,10 +51,11 @@ export class MerchantService {
       },
       
       // viewModel -> transform to the form model for that command -> IChangeMerchantName
-      e => of(<IChangeMerchantNameCommand>{
+      e => of(<IChangeMerchantCommand>{
         id: e.model.id,
         name: e.model.name,
-        address: e.model.address
+        address: e.model.address,
+        ordering:e.model.ordering,
       })
     );
 
@@ -80,7 +81,8 @@ export class MerchantService {
       // viewModel -> transform to the form model for that command -> IChangeMerchantName
       e => of(<IAddMerchantCommand>{
         name: 'A New merchant',
-        address: ''
+        address: '',
+        ordering: 11
       })
     );
 

@@ -17,10 +17,10 @@ export class TextFilterComponent implements OnInit {
   filterValue: string = null; 
   isFiltering: boolean;
   filterTypes = [
-    {key:'contains', value: 'Contains'}, 
-    {key:'equal', value: 'Equal'}, 
-    {key:'startsWith', value: 'Starts With'},
-    {key:'endsWith', value: 'Ends With'}
+    {key:'Contains', value: 'Contains'}, 
+    {key:'Equals', value: 'Equal'}, 
+    {key:'Starts With', value: 'startsWith'},
+    {key:'Ends With', value: 'endsWith'}
   ];
   filterIsOpenned: boolean = false;
 
