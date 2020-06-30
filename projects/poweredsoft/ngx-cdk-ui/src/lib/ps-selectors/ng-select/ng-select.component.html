@@ -1,0 +1,9 @@
+<ng-select [items]="data$ | async"
+           bindLabel="name"
+           bindValue="id"
+           autofocus
+           [typeahead] = "searchInput$"           
+           [(ngModel)]="selectedId">
+</ng-select>
+
+<br/>Selected: {{selectedId | json }}  

@@ -12,3 +12,8 @@ export * from './lib/data-grid/directives/data-grid-footer.directive';
 export * from './lib/data-grid/directives/data-grid-loader.directive';
 export * from './lib/data-grid/directives/data-grid-cell-filter.directive';
 export * from './lib/data-grid/directives/data-grid-col-sort.directive';
+
+//ng selects
+export * from './lib/ps-selectors/ps-selectors.module';
+export * from './lib/ps-selectors/ng-select/ng-select.component';
+export * from './lib/ps-selectors/ng-multi-select/ng-multi-select.component';
