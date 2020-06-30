@@ -31,6 +31,10 @@ const routes: Routes = [
   {
     path: 'grid-filter',
     loadChildren: ()=> import('./grid-filter&sorting-demo/grid-filter-demo.module').then(m => m.GridFilterDemoModule)
+  },
+  {
+    path: 'select',
+    loadChildren: ()=> import('./ng-select-demo/ng-select-demo.module').then(m => m.NgSelectDemoModule)
   }
 ];
 
