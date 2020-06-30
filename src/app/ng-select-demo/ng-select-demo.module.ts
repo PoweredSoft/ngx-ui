@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgSelectDemoComponent } from './ng-select-demo/ng-select-demo.component';
 import { NgSelectDemoRoutingModule } from './ng-select-demo-routing.module';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -9,6 +11,8 @@ import { NgSelectDemoRoutingModule } from './ng-select-demo-routing.module';
   declarations: [NgSelectDemoComponent],
   imports: [
     CommonModule,
+    NgSelectModule,
+    FormsModule,
     NgSelectDemoRoutingModule
   ]
 })
