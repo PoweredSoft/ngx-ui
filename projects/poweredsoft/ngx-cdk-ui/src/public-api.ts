@@ -17,3 +17,4 @@ export * from './lib/data-grid/directives/data-grid-col-sort.directive';
 export * from './lib/ps-selectors/ps-selectors.module';
 export * from './lib/ps-selectors/ng-select/ng-select.component';
 export * from './lib/ps-selectors/ng-multi-select/ng-multi-select.component';
+export * from './lib/ps-selectors/select-option-template.directive';

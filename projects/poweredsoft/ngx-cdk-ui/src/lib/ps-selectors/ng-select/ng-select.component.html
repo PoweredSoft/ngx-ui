@@ -1,9 +1,17 @@
-<ng-select [items]="data$ | async"
-           [bindLabel]="bindLabel"
-           bindValue="id"
+<ng-select [items]="data$ |async"
+           [bindLabel]="bindLabel"    
+           [bindValue]="bindValue"       
            autofocus
-           [typeahead] = "searchInput$"           
-           [(ngModel)]="selectedId">
+           [typeahead] = "searchInput$"
+           [trackByFn]="trackFn"       
+           (change)="valueChanged($event)">
+           <ng-container *ngIf="hasOptionTemplate">
+               <ng-template ng-option-tmp let-item="item" let-index="index">
+                <ng-container [ngTemplateOutlet]="selectOptionTemplate"
+                    [ngTemplateOutletContext]="{
+                    $implicit: item,
+                    index: index       
+                    }"></ng-container>
+               </ng-template>
+           </ng-container>
 </ng-select>
-
-<br/>Selected: {{selectedId | json }}  
