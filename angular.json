@@ -204,6 +204,46 @@
           }
         }
       }
+    },
+    "@poweredsoft/ng-select": {
+      "projectType": "library",
+      "root": "projects/poweredsoft/ng-select",
+      "sourceRoot": "projects/poweredsoft/ng-select/src",
+      "prefix": "ps-ng",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/poweredsoft/ng-select/tsconfig.lib.json",
+            "project": "projects/poweredsoft/ng-select/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/poweredsoft/ng-select/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/poweredsoft/ng-select/src/test.ts",
+            "tsConfig": "projects/poweredsoft/ng-select/tsconfig.spec.json",
+            "karmaConfig": "projects/poweredsoft/ng-select/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/poweredsoft/ng-select/tsconfig.lib.json",
+              "projects/poweredsoft/ng-select/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "ngx-cdk-ui"
 }

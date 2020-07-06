@@ -12,6 +12,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 export function app_Init(apollo: Apollo, httpLink: HttpLink) {
   return async () => {
     const defaultOptions: DefaultOptions = {
@@ -50,6 +51,7 @@ export function app_Init(apollo: Apollo, httpLink: HttpLink) {
   declarations: [
     AppComponent,
     HomeComponent,
+    //SelectLabelTemplateDirective,
     
   ],
   imports: [

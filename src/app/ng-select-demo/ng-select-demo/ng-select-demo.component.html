@@ -1,25 +1,27 @@
 <h2>Single Select Demo</h2>
 <ps-ng-select [dataSource]="merchantDataSource" bindLabel="name" bindValue="id" [serverFiltering]="true">
-    <div *psSelectOptionTemplate="let item">
+    <div *psNgSelectLabel="let item">
         {{ item.name }} - {{ item.address }}
     </div>
 </ps-ng-select>
 
 
-<h2>Multi-Select Demo</h2>
-<ps-ng-multi-select [dataSource]="merchantDataSource" [searchPath]="'name'" [sortingPath]="'name'" [disableServer]="false" [bindLabel]="'name'"></ps-ng-multi-select>
+<!-- <h2>Multi-Select Demo</h2>
+<ps-ng-multi-select [dataSource]="merchantDataSource" [searchPath]="'name'" [sortingPath]="'name'" [disableServer]="false" [bindLabel]="'name'"></ps-ng-multi-select> -->
 
 
 <!-- <form>
     <ps-ng-select [dataSource]="merchantDataSource" searchPath="name" sortingPath="name" formControlName="name" [disableServer]="false" bindLabel="name">
-        <ng-template *psSelectOptionTemplate="let item" ng-label-tmp >
+        <ng-template *psNgSelectLabel="let item" ng-label-tmp >
             <span>Name: </span> {{item.name}} | <span>Adress: </span>{{item.address}} | <span>Date: </span>{{item.openDate}}
         </ng-template>
     </ps-ng-select>
 </form> -->
+
+<!-- 
 <form #form [formGroup]="myForm">
     <ps-ng-select [dataSource]="merchantDataSource" bindLabel="name" bindValue="id" formControlName="merchantId">
-        <div *psSelectOptionTemplate="let item">
+        <div *psNgSelectLabel="let item">
             {{ item.name }} - {{ item.address }}
         </div>
     </ps-ng-select>
@@ -29,9 +31,9 @@
 
 
 <ps-ng-select [dataSource]="merchantDataSource" bindLabel="name" bindValue="id" [(ngModel)]="myValue">
-    <div *psSelectOptionTemplate="let item">
+    <div *psNgSelectLabel="let item">
         {{ item.name }} - {{ item.address }}
     </div>
 </ps-ng-select>
 
-{{ myValue | json }}
+{{ myValue | json }} -->
