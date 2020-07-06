@@ -37,9 +37,9 @@ export class FormGroupCommandModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.errorMessage = null;
-    // this._notifyMessage = this.dataSource.notifyMessage$.subscribe(message => {
+    this._notifyMessage = this.dataSource.notifyMessage$.subscribe(message => {
       
-    // });
+    });
    
     this._validationError = this.dataSource.validationError$.subscribe(validatorErrors => {      
       let validationSummary = '';

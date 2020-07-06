@@ -14,15 +14,24 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class NgSelectDemoComponent implements OnInit {
 
-  merchantDataSource: IDataSource<IMerchant>;  
+  merchantDataSource: IDataSource<IMerchant>;
+  merchantDataSource2: IDataSource<IMerchant>; 
+  merchantDataSource3: IDataSource<IMerchant>; 
+  merchantDataSource4: IDataSource<IMerchant>;   
   
   selectedValue: IMerchant;
+  selectedValue2: IMerchant;
+  selectedValue3: IMerchant;
+  selectedValue4: IMerchant;
   myForm: FormGroup;
   myValue: string;
 
   constructor(private merchantService: MerchantService, private fb: FormBuilder
               ) {
     this.merchantDataSource = merchantService.createDataSource(); //Assign the dataSource
+    this.merchantDataSource2 = merchantService.createDataSource(); 
+    this.merchantDataSource3 = merchantService.createDataSource(); 
+    this.merchantDataSource4 = merchantService.createDataSource(); 
     this.myForm = fb.group({
       'merchantId': [null, null]
     })

@@ -111,9 +111,7 @@ export class MultiSelectComponent implements OnInit {
   }
 
   get selectedModel() {
-
     return this.selectComponent.selectedItems.map(t => t.value);
-    //return this.selectComponent.hasValue ? this.selectComponent.selectedItems[0].value : null;
   }
 
   refreshDataSource(searchTerm:any = null, page:number = null, pageSize:number = null){
