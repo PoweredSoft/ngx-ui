@@ -1,39 +1,34 @@
-<h2>Single Select Demo</h2>
-<ps-ng-select [dataSource]="merchantDataSource" bindLabel="name" bindValue="id" [serverFiltering]="true">
-    <div *psNgSelectLabel="let item">
-        {{ item.name }} - {{ item.address }}
+<h2>Single Select Demo | ngModel | option template</h2>
+<ps-ng-select [dataSource]="merchantDataSource" bindLabel="name" bindValue="id" [(ngModel)]="myValue">
+    <div *psNgSelectOption="let item">
+        <!-- {{ item.name }} - {{ item.address }} -->
+        {{item | json}}
     </div>
 </ps-ng-select>
 
+selected: {{ myValue | json }} 
 
-<!-- <h2>Multi-Select Demo</h2>
-<ps-ng-multi-select [dataSource]="merchantDataSource" [searchPath]="'name'" [sortingPath]="'name'" [disableServer]="false" [bindLabel]="'name'"></ps-ng-multi-select> -->
-
-
-<!-- <form>
-    <ps-ng-select [dataSource]="merchantDataSource" searchPath="name" sortingPath="name" formControlName="name" [disableServer]="false" bindLabel="name">
-        <ng-template *psNgSelectLabel="let item" ng-label-tmp >
-            <span>Name: </span> {{item.name}} | <span>Adress: </span>{{item.address}} | <span>Date: </span>{{item.openDate}}
-        </ng-template>
-    </ps-ng-select>
-</form> -->
-
-<!-- 
+<h2>Single Select With Form | formGroup | option template</h2>
 <form #form [formGroup]="myForm">
-    <ps-ng-select [dataSource]="merchantDataSource" bindLabel="name" bindValue="id" formControlName="merchantId">
-        <div *psNgSelectLabel="let item">
+    <ps-ng-select [dataSource]="merchantDataSource" bindLabel="name" bindValue="id" formControlName="merchantId" [serverFiltering]="true">
+        <div *psNgSelectOption="let item">
             {{ item.name }} - {{ item.address }}
         </div>
     </ps-ng-select>
 </form>
 
-{{ myForm.value | json }}
+selected:  {{ myForm.value | json }}
 
-
-<ps-ng-select [dataSource]="merchantDataSource" bindLabel="name" bindValue="id" [(ngModel)]="myValue">
-    <div *psNgSelectLabel="let item">
-        {{ item.name }} - {{ item.address }}
+<h2>Single Select Demo | label Template</h2>
+<ps-ng-select [dataSource]="merchantDataSource" bindLabel="name" bindValue="id" [(ngModel)]="myValue" [serverFiltering]="true">
+    <div  *psNgSelectLabel="let item">
+        <span>Name: </span>{{ item.name }} - <img src="/src/assets/avatar.png"><span> Address: </span>{{item.address }}
     </div>
 </ps-ng-select>
 
-{{ myValue | json }} -->
+ <h2>Multi-Select Demo</h2>
+<ps-ng-multi-select [dataSource]="merchantDataSource" bindLabel="name" bindValue="id"  [serverFiltering]="true" [(ngModel)]="myValue" >
+
+</ps-ng-multi-select>
+selected: {{ myValue | json }} 
+

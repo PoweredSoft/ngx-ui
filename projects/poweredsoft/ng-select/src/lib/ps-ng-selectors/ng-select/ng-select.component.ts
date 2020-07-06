@@ -5,6 +5,8 @@ import { Observable, Subject, Subscription } from 'rxjs';
 import { map, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 import { NgSelectComponent as SelectComponent } from '@ng-select/ng-select';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { SelectOptionTemplateDirective } from '../select-option-template.directive';
+
 
 @Component({
   selector: 'ps-ng-select',
@@ -18,7 +20,10 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class NgSelectComponent implements OnInit {
 
-  @ContentChild(SelectLabelTemplateDirective) LabelTemplate: SelectLabelTemplateDirective;
+  @ContentChild(SelectOptionTemplateDirective) optionTemplate: SelectOptionTemplateDirective;
+  @ContentChild(SelectLabelTemplateDirective) labelTemplate: SelectLabelTemplateDirective;
+
+  
   @ViewChild(SelectComponent, { static: true }) selectComponent: SelectComponent;
   @Input() dataSource: IDataSource<any>;
   @Input() searchPath: string;
@@ -107,8 +112,8 @@ export class NgSelectComponent implements OnInit {
     this.refreshDataSource(); //send the query to server to sorting & filtering by default
   }
 
-  get selectedModel() {
-    return this.selectComponent.hasValue ? this.selectComponent.selectedItems[0].value : null;
+  get selectedModel() {    
+    return this.selectComponent.hasValue ? this.selectComponent.selectedItems[0] : null;
   }
 
   refreshDataSource(searchTerm:any = null, page:number = null, pageSize:number = null){
@@ -131,13 +136,22 @@ export class NgSelectComponent implements OnInit {
   }
 
   get hasOptionTemplate() {    
-    return this.LabelTemplate ? true : false;
+    return this.optionTemplate ? true : false;
   }
 
   get selectOptionTemplate(){
-    if (this.LabelTemplate)    
-      return this.LabelTemplate.template;
+    if (this.optionTemplate)    
+      return this.optionTemplate.template;
     return null;
   }
 
+  get hasLabelTemplate() {
+    return this.labelTemplate ? true : false;
+  }
+
+  get selectLabelTemplate(){
+    if (this.labelTemplate)    
+      return this.labelTemplate.template;
+    return null;
+  }
 }
