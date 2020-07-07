@@ -24,10 +24,16 @@ selected:  {{ myForm.value | json }}
         <img src="assets/32x32-blue.png"><span>Name: </span>{{ item.name }} - <span> Address: </span>{{item.address }}
     </div>
 </ps-ng-select>
+selected: {{ myValue3 | json }} 
 
  <h2>Multi-Select Demo</h2>
 <ps-ng-multi-select [dataSource]="merchantDataSource4" bindLabel="name" bindValue="id"  [serverFiltering]="true" [(ngModel)]="myValue4" >
-
+    <div   *psNgSelectOption="let item">
+        <img src="assets/32x32-blue.png"><span>Name: </span>{{ item.name }} - <span> Address: </span>{{item.address }}
+    </div>
+    <ng-container  *psNgSelectLabel="let item;">
+        {{ item.name }}
+    </ng-container>
 </ps-ng-multi-select>
-selected: {{ myValue | json }} 
+selected: {{ myValue4 | json }} 
 

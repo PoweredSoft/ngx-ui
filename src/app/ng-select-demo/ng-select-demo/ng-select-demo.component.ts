@@ -20,11 +20,12 @@ export class NgSelectDemoComponent implements OnInit {
   merchantDataSource4: IDataSource<IMerchant>;   
   
   selectedValue: IMerchant;
-  selectedValue2: IMerchant;
-  selectedValue3: IMerchant;
-  selectedValue4: IMerchant;
+
   myForm: FormGroup;
   myValue: string;
+  myValue2: string;
+  myValue3: string;
+  myValue4: string;
 
   constructor(private merchantService: MerchantService, private fb: FormBuilder
               ) {

@@ -18,12 +18,12 @@
            </ng-container>
 
            <ng-container *ngIf="hasLabelTemplate">
-            <ng-template ng-label-tmp let-item="item" let-index="index">
-             <ng-container [ngTemplateOutlet]="selectLabelTemplate"
-                 [ngTemplateOutletContext]="{
-                 $implicit: item,
-                 index: index       
-                 }"></ng-container>
+            <ng-template ng-label-tmp let-item="item" let-index="index" let-clear="clear">
+                <span class="ng-value-label">
+                    <ng-container [ngTemplateOutlet]="selectLabelTemplate"
+                    [ngTemplateOutletContext]="{ $implicit: item, index: index, clear: clear }"></ng-container>
+                </span>
+                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
             </ng-template>
         </ng-container>
 </ng-select>
