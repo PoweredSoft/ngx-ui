@@ -3,7 +3,7 @@ import { IDataSource,IFilter } from '@poweredsoft/data';
 import { ISimpleFilter } from '../../models/IFilter';
 
 @Component({
-  selector: 'psbx-number-filter',
+  selector: 'psbx-ds-number-filter',
   templateUrl: './number-filter.component.html',
   styleUrls: ['./number-filter.component.scss']
 })
@@ -32,6 +32,7 @@ export class NumberFilterComponent implements OnInit {
   }
 
   clearFilter() {
+    this.filterValue = 0;
     this.isFiltering = false;
     const existingFilter = this.dataSource.filters.find(t => (t as ISimpleFilter).path == this.path) as ISimpleFilter;
     if (existingFilter) {

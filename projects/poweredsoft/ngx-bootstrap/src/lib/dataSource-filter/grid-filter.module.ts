@@ -24,4 +24,4 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
   ],
   exports: [TextFilterComponent, NumberFilterComponent,DatetimeFilterComponent]
 })
-export class GridFilterModule { }
+export class GridFilterModule { } //DS Filter

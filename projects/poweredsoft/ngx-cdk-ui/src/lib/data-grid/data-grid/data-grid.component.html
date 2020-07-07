@@ -2,8 +2,8 @@
 
 <table [ngClass]="tableClasses" style="min-height: 300px;">
   <thead>
-    <tr>
-      <th *ngFor="let header of gridHeaders" [attr.colspan]="columns.length">
+    <tr *ngFor="let header of gridHeaders" >
+      <th [attr.colspan]="columns.length">
         <ng-container [ngTemplateOutlet]="header.template"></ng-container>
       </th>
     </tr>

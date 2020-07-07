@@ -6,6 +6,7 @@ import { map, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 import { NgSelectComponent as SelectComponent } from '@ng-select/ng-select';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SelectOptionTemplateDirective } from '../select-option-template.directive';
+import { NotFoundTemplateDirective } from '../not-found-template.directive';
 
 
 @Component({
@@ -22,6 +23,8 @@ export class NgSelectComponent implements OnInit {
 
   @ContentChild(SelectOptionTemplateDirective) optionTemplate: SelectOptionTemplateDirective;
   @ContentChild(SelectLabelTemplateDirective) labelTemplate: SelectLabelTemplateDirective;
+  @ContentChild(NotFoundTemplateDirective) notFoundTemplate: NotFoundTemplateDirective;
+
 
   
   @ViewChild(SelectComponent, { static: true }) selectComponent: SelectComponent;
@@ -152,6 +155,16 @@ export class NgSelectComponent implements OnInit {
   get selectLabelTemplate(){
     if (this.labelTemplate)    
       return this.labelTemplate.template;
+    return null;
+  }
+
+  get hasNotFoundTemplate() {
+    return this.notFoundTemplate ? true : false;
+  }
+
+  get selectNotFoundTemplate(){
+    if(this.notFoundTemplate)
+      return this.notFoundTemplate.template;
     return null;
   }
 }

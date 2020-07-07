@@ -23,5 +23,14 @@
                  index: index       
                  }"></ng-container>
             </ng-template>
+            </ng-container>
+
+        <ng-container *ngIf="hasNotFoundTemplate">
+            <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
+                <ng-container [ngTemplateOutlet]="selectNotFoundTemplate"
+                [ngTemplateOutletContext]="{
+                $implicit: searchTerm                    
+                }"></ng-container>
+            </ng-template>
         </ng-container>
 </ng-select>

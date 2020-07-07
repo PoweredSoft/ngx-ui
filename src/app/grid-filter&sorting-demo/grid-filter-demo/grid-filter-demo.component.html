@@ -13,27 +13,14 @@
     <ng-container psDataGridCol="id">
         <ng-container *psDataGridColHeader>ID</ng-container>
         <psbx-ds-text-filter *psDataGridCellFilter [dataSource]="merchantDataSource" path="id"></psbx-ds-text-filter>
-        <psbx-grid-sorting *psDataGridColSort [dataSource]="merchantDataSource" path="id"></psbx-grid-sorting>
-        <ng-container *psDataGridCell="let model">{{model.id}}</ng-container>
-        <!--<psbx-number-filter *psDataGridCellFilter [dataSource]="merchantDataSource" path="id"></psbx-number-filter>-->
-        <!--<psbx-grid-sorting *psDataGridColSort path="id" [dataSource]="merchantDataSource"></psbx-grid-sorting>-->
-        <!-- <psfa-ds-sort-icon *psDataGridColSort [sortPath]="id" [dataSource]="merchantDataSource">
-
-        </psfa-ds-sort-icon>  -->
-
-        <!-- <psbx-ds-text-filter *psDataGridCellFilter [dataSource]="merchantDataSource"></psbx-ds-text-filter>
-        <psdb-ds-date-filter *psDataGridCellFilter></psdb-ds-date-filter>
-        <psdb-ds-date-range-filter *psDataGridCellFilter></psdb-ds-date-range-filter>
-        <psbx-ds-number-filter *psDataGridCellFilter></psbx-ds-number-filter>
-        <psbx-ds-multi-select-filter [dataSource]="merchantDataSource" [selectDataSource]="selectDataSource" [valueField]="id">
-            <ng-container *psSelectOption="let option">{{ option.name }}</ng-container>
-        </psbx-ds-multi-select-filter> -->
+        <psbx-ds-sorting *psDataGridColSort [dataSource]="merchantDataSource" path="id"></psbx-ds-sorting>
+        <ng-container *psDataGridCell="let model">{{model.id}}</ng-container>      
     </ng-container>
 
     <ng-container psDataGridCol="name">
         <ng-container *psDataGridColHeader>Name</ng-container>
         <psbx-ds-text-filter *psDataGridCellFilter [dataSource]="merchantDataSource" path="name"></psbx-ds-text-filter>
-        <psbx-grid-sorting *psDataGridColSort [dataSource]="merchantDataSource" path="name"></psbx-grid-sorting>
+        <psbx-ds-sorting *psDataGridColSort [dataSource]="merchantDataSource" path="name"></psbx-ds-sorting>
         <ng-container *psDataGridCell="let model">{{model.name}}</ng-container>
     </ng-container>
 
@@ -42,15 +29,15 @@
         <ng-container *psDataGridCell="let model">{{model.address}}</ng-container>
         <psbx-ds-text-filter *psDataGridCellFilter [dataSource]="merchantDataSource" path="address">
         </psbx-ds-text-filter>
-        <psbx-grid-sorting *psDataGridColSort [dataSource]="merchantDataSource" path="address"></psbx-grid-sorting>
+        <psbx-ds-sorting *psDataGridColSort [dataSource]="merchantDataSource" path="address"></psbx-ds-sorting>
     </ng-container>
 
     <ng-container psDataGridCol="ordering">
         <ng-container *psDataGridColHeader>Priority</ng-container>
         <ng-container *psDataGridCell="let model">{{model.ordering}}</ng-container>
-        <psbx-number-filter *psDataGridCellFilter [dataSource]="merchantDataSource" path="ordering">
-        </psbx-number-filter>
-        <psbx-grid-sorting *psDataGridColSort [dataSource]="merchantDataSource" path="ordering"></psbx-grid-sorting>
+        <psbx-ds-number-filter *psDataGridCellFilter [dataSource]="merchantDataSource" path="ordering">
+        </psbx-ds-number-filter>
+        <psbx-ds-sorting *psDataGridColSort [dataSource]="merchantDataSource" path="ordering"></psbx-ds-sorting>
     </ng-container>
 
     <ng-container psDataGridCol="openDate">
@@ -58,7 +45,7 @@
         <ng-container *psDataGridCell="let model">{{model.openDate}}</ng-container>
         <psbx-datetime-filter *psDataGridCellFilter [dataSource]="merchantDataSource" path="openDate">
         </psbx-datetime-filter>
-        <psbx-grid-sorting *psDataGridColSort [dataSource]="merchantDataSource" path="openDate"></psbx-grid-sorting>
+        <psbx-ds-sorting *psDataGridColSort [dataSource]="merchantDataSource" path="openDate"></psbx-ds-sorting>
     </ng-container>
 
     <ng-container psDataGridCol="commands">

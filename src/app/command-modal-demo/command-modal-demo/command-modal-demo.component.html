@@ -4,8 +4,10 @@
 <ps-data-grid [dataSource]="merchantDataSource" [(columns)]="columns"
     tableClasses="table table-sm table-dark table-striped table-bordered">
     <ng-container *psDataGridHeader>
-        <button class="btn-primary btn" psbxCommandModal commandTitle="Adding a new merchant" commandText="Add"
-            [dataSource]="merchantDataSource" command="addMerchant" [template]="theModal">Create a new record</button>
+        <button class="btn-primary btn" psbxCommandModal 
+        commandTitle="Adding a new merchant" commandText="Add"
+            [dataSource]="merchantDataSource" command="addMerchant" 
+            [template]="theModal">Create a new record</button>
 
     </ng-container>
     <ng-container psDataGridCol="id">
@@ -50,6 +52,8 @@
         Name
         <input type="text" required [disabled]="loading" name="name" [(ngModel)]="command.name"  placeholder="Enter a merchant name" class="form-control" >
         Address
+        <input type="text" required [disabled]="loading" name="address" [(ngModel)]="command.address"  placeholder="Enter the merchant's address" class="form-control" >        
+        Date
         <input type="text" required [disabled]="loading" name="address" [(ngModel)]="command.address"  placeholder="Enter the merchant's address" class="form-control" >        
     </form>
     

@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { IDataSource } from '@poweredsoft/data';
 
 @Component({
-  selector: 'psbx-grid-sorting',
-  templateUrl: './grid-sorting.component.html',
-  styleUrls: ['./grid-sorting.component.scss']
+  selector: 'psbx-ds-sorting',
+  templateUrl: './ds-sorting.component.html',
+  styleUrls: ['./ds-sorting.component.scss']
 })
-export class GridSortingComponent implements OnInit {
+export class DataSourceSortingComponent implements OnInit {
 
   @Input() dataSource : IDataSource<any>;
   @Input() path:string; 
@@ -16,7 +16,7 @@ export class GridSortingComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  
   sorting(){
     this.isSorting = true;
     this.isAscending = !this.isAscending;

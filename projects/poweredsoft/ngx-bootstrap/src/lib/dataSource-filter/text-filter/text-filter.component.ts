@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IDataSource} from '@poweredsoft/data';
 import { ISimpleFilter } from '../../models/IFilter';
+import { PopoverDirective } from 'ngx-bootstrap/popover';
 
 
 @Component({
@@ -32,6 +33,7 @@ export class TextFilterComponent implements OnInit {
   }
 
   clearFilter() {
+    this.filterValue = '';
     this.isFiltering = false;
     const existingFilter = this.dataSource.filters.find(t => (t as ISimpleFilter).path == this.path) as ISimpleFilter;
     if (existingFilter) {
@@ -42,7 +44,7 @@ export class TextFilterComponent implements OnInit {
     }
   }
 
-  applyFilter(){
+  applyFilter(pop: PopoverDirective = null){
     this.isFiltering = true;
     const filters = this.dataSource.filters;
     const existingFilter = filters.find(t => (t as ISimpleFilter).path == this.path) as ISimpleFilter;
@@ -62,6 +64,9 @@ export class TextFilterComponent implements OnInit {
       filters: filters,
       page: 1
     })
+
+    if (pop) 
+      pop.hide();
   }
 
   showTooltip(){

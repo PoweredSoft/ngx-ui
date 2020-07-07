@@ -11,20 +11,33 @@ selected: {{ myValue | json }}
 <form #form [formGroup]="myForm">
     <ps-ng-select [dataSource]="merchantDataSource2" bindLabel="name" bindValue="id" formControlName="merchantId" [serverFiltering]="true">
         <div *psNgSelectOption="let item">
-            {{ item.name }} - {{ item.address }}
+           <span>Merchant:</span>  {{ item.name }} - <span>Address: </span>{{ item.address }}
         </div>
     </ps-ng-select>
 </form>
-
 selected:  {{ myForm.value | json }}
 
 <h2>Single Select Demo | label Template</h2>
 <ps-ng-select [dataSource]="merchantDataSource3" bindLabel="name" bindValue="id" [(ngModel)]="myValue3" [serverFiltering]="true">
+    <div *psNgSelectOption="let item">
+        <span>Merchant:</span>  {{ item.name }} - <span>Address: </span>{{ item.address }}
+     </div>
+    
     <div  *psNgSelectLabel="let item">
         <img src="assets/32x32-blue.png"><span>Name: </span>{{ item.name }} - <span> Address: </span>{{item.address }}
     </div>
 </ps-ng-select>
 selected: {{ myValue3 | json }} 
+
+<h2>Single Select Demo | notFound Template</h2>
+<ps-ng-select [dataSource]="merchantDataSource3" bindLabel="name" bindValue="id" [(ngModel)]="myValue2" [serverFiltering]="true">
+    <div  *psNgNotFoundTemplate="let searchTerm">
+        <div class="ng-option disabled">
+            No data found for "{{searchTerm}}" <button class="btn btn-success">Create New {{searchTerm}}</button>
+        </div>
+    </div>
+</ps-ng-select>
+selected: {{ myValue2 | json }} 
 
  <h2>Multi-Select Demo</h2>
 <ps-ng-multi-select [dataSource]="merchantDataSource4" bindLabel="name" bindValue="id"  [serverFiltering]="true" [(ngModel)]="myValue4" >

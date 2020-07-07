@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GridSortingComponent } from './grid-sorting/grid-sorting.component';
+import { DataSourceSortingComponent } from './ds-sorting/ds-sorting.component';
 
 
 
 @NgModule({
-  declarations: [GridSortingComponent],
+  declarations: [DataSourceSortingComponent],
   imports: [
     CommonModule
   ],
-  exports:[GridSortingComponent]
+  exports:[DataSourceSortingComponent]
 })
 export class GridSortingModule { }

@@ -6,11 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SelectLabelTemplateDirective } from './select-label-template.directive';
 import { SelectOptionTemplateDirective } from './select-option-template.directive';
+import { NotFoundTemplateDirective } from './not-found-template.directive';
 
 
 
 @NgModule({
-  declarations: [NgSelectComponent, MultiSelectComponent, SelectLabelTemplateDirective, SelectOptionTemplateDirective],
+  declarations: [NgSelectComponent, MultiSelectComponent, SelectLabelTemplateDirective, SelectOptionTemplateDirective, NotFoundTemplateDirective],
   imports: [
     CommonModule,
     FormsModule,
@@ -20,7 +21,8 @@ import { SelectOptionTemplateDirective } from './select-option-template.directiv
     NgSelectComponent,
     MultiSelectComponent,
     SelectLabelTemplateDirective,
-    SelectOptionTemplateDirective
+    SelectOptionTemplateDirective,
+    NotFoundTemplateDirective
   ]
 })
-export class PsNgSelectorsModule { }
+export class PsNgSelectorsModule { }//NGSELECT
