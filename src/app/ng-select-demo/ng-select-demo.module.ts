@@ -4,7 +4,7 @@ import { NgSelectDemoComponent } from './ng-select-demo/ng-select-demo.component
 import { NgSelectDemoRoutingModule } from './ng-select-demo-routing.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PsNgSelectorsModule } from '@poweredsoft/ng-select';
+import { PsNgSelectModule } from '@poweredsoft/ng-select';
 
 
 
@@ -17,7 +17,7 @@ import { PsNgSelectorsModule } from '@poweredsoft/ng-select';
     FormsModule,
     ReactiveFormsModule,
     NgSelectDemoRoutingModule,
-    PsNgSelectorsModule
+    PsNgSelectModule
   ]
 })
 export class NgSelectDemoModule { }

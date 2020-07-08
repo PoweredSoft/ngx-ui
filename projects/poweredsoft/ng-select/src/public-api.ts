@@ -2,12 +2,9 @@
  * Public API Surface of ng-select
  */
 
-export * from './lib/ps-ng-selectors/ps-ng-selectors.module';
-export * from './lib/ps-ng-selectors/ng-select/ng-select.component';
-export * from './lib/ps-ng-selectors/multi-select/multi-select.component';
-export * from './lib/ps-ng-selectors/select-label-template.directive';
-export * from './lib/ps-ng-selectors/select-option-template.directive';
-export * from './lib/ps-ng-selectors/not-found-template.directive';
-
-
-
+export * from './lib/ps-ng-select/ps-ng-select.module';
+export * from './lib/ps-ng-select/ng-select/ng-select.component';
+export * from './lib/ps-ng-select/multi-select/multi-select.component';
+export * from './lib/ps-ng-select/select-label-template.directive';
+export * from './lib/ps-ng-select/select-option-template.directive';
+export * from './lib/ps-ng-select/not-found-template.directive';

@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { IDataSource, ISimpleFilter } from '@poweredsoft/data';
 
 @Component({
-  selector: 'psbx-datetime-filter',
-  templateUrl: './datetime-filter.component.html',
-  styleUrls: ['./datetime-filter.component.scss']
+  selector: 'psbx-ds-datetime-filter',
+  templateUrl: './data-source-datetime-filter.component.html',
+  styleUrls: ['./data-source-datetime-filter.component.scss']
 })
-export class DatetimeFilterComponent {
+export class DataSourceDatetimeFilterComponent {
 
   @Input() path: string;
   @Input() dataSource : IDataSource<any>; 

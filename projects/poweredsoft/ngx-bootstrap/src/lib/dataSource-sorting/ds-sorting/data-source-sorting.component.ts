@@ -3,8 +3,8 @@ import { IDataSource } from '@poweredsoft/data';
 
 @Component({
   selector: 'psbx-ds-sorting',
-  templateUrl: './ds-sorting.component.html',
-  styleUrls: ['./ds-sorting.component.scss']
+  templateUrl: './data-source-sorting.component.html',
+  styleUrls: ['./data-source-sorting.component.scss']
 })
 export class DataSourceSortingComponent implements OnInit {
 

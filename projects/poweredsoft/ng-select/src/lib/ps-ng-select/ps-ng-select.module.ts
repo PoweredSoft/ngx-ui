@@ -25,4 +25,4 @@ import { NotFoundTemplateDirective } from './not-found-template.directive';
     NotFoundTemplateDirective
   ]
 })
-export class PsNgSelectorsModule { }//NGSELECT
+export class PsNgSelectModule { }//NGSELECT

@@ -43,8 +43,8 @@
     <ng-container psDataGridCol="openDate">
         <ng-container *psDataGridColHeader>Open Date</ng-container>
         <ng-container *psDataGridCell="let model">{{model.openDate}}</ng-container>
-        <psbx-datetime-filter *psDataGridCellFilter [dataSource]="merchantDataSource" path="openDate">
-        </psbx-datetime-filter>
+        <psbx-ds-datetime-filter *psDataGridCellFilter [dataSource]="merchantDataSource" path="openDate">
+        </psbx-ds-datetime-filter>
         <psbx-ds-sorting *psDataGridColSort [dataSource]="merchantDataSource" path="openDate"></psbx-ds-sorting>
     </ng-container>
 

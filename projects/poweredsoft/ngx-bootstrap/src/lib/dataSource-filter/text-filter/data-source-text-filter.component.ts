@@ -1,25 +1,27 @@
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
-import { IDataSource,IFilter } from '@poweredsoft/data';
+import { Component, OnInit, Input } from '@angular/core';
+import { IDataSource} from '@poweredsoft/data';
 import { ISimpleFilter } from '../../models/IFilter';
+import { PopoverDirective } from 'ngx-bootstrap/popover';
+
 
 @Component({
-  selector: 'psbx-ds-number-filter',
-  templateUrl: './number-filter.component.html',
-  styleUrls: ['./number-filter.component.scss']
+  selector: 'psbx-ds-text-filter',
+  templateUrl: './data-source-text-filter.component.html',
+  styleUrls: ['./data-source-text-filter.component.scss']
 })
-export class NumberFilterComponent implements OnInit {
+export class DataSourceTextFilterComponent implements OnInit {
+
   @Input() dataSource : IDataSource<any>;   
   @Input() path:string;
  
-  filterType: string = 'Equals';
-  filterValue: number = 0; 
+  filterType: string = 'Contains';
+  filterValue: string = null; 
   isFiltering: boolean;
-  filterTypes = [    
+  filterTypes = [
+    {key:'Contains', value: 'Contains'}, 
     {key:'Equals', value: 'Equal'}, 
-    {key:'Greater Than', value: 'GreaterThan'},
-    {key:'Less Than', value: 'LessThan'},    
-    {key:'Greater Than Equal', value: 'GreaterThanOrEqual'},
-    {key:'Less Than Equal', value: 'LessThanOrEqual'},    
+    {key:'Starts With', value: 'startsWith'},
+    {key:'Ends With', value: 'endsWith'}
   ];
   filterIsOpenned: boolean = false;
 
@@ -27,12 +29,11 @@ export class NumberFilterComponent implements OnInit {
  
 
   ngOnInit(): void {
-
     
   }
 
   clearFilter() {
-    this.filterValue = 0;
+    this.filterValue = '';
     this.isFiltering = false;
     const existingFilter = this.dataSource.filters.find(t => (t as ISimpleFilter).path == this.path) as ISimpleFilter;
     if (existingFilter) {
@@ -43,19 +44,19 @@ export class NumberFilterComponent implements OnInit {
     }
   }
 
-  applyFilter(){
+  applyFilter(pop: PopoverDirective = null){
     this.isFiltering = true;
     const filters = this.dataSource.filters;
     const existingFilter = filters.find(t => (t as ISimpleFilter).path == this.path) as ISimpleFilter;
     if (existingFilter) {
       existingFilter.type = this.filterType;
-      existingFilter.value =this.filterValue.toString();
+      existingFilter.value = this.filterValue;
     } else {
       filters.push(<ISimpleFilter>{
         and: true,
         type: this.filterType,
         path: this.path, 
-        value: this.filterValue.toString()
+        value: this.filterValue
       })
     }
 
@@ -63,6 +64,9 @@ export class NumberFilterComponent implements OnInit {
       filters: filters,
       page: 1
     })
+
+    if (pop) 
+      pop.hide();
   }
 
   showTooltip(){

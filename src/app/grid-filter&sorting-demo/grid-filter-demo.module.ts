@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { GridFilterDemoRoutingModule } from './grid-filter-demo-routing.module';
 import { GridFilterDemoComponent } from './grid-filter-demo/grid-filter-demo.component';
-import { GridFilterModule, psbxPaginationModule, CommandModalModule, ConfirmModalModule, SpinnerModule, GridSortingModule } from '@poweredsoft/ngx-bootstrap';
+import { DataSourceFilterModule, psbxPaginationModule, CommandModalModule, ConfirmModalModule, SpinnerModule, DataSourceSortingModule } from '@poweredsoft/ngx-bootstrap';
 import { DataGridModule } from '@poweredsoft/ngx-cdk-ui';
 import { FormsModule } from '@angular/forms';
 
@@ -12,14 +12,14 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     GridFilterDemoRoutingModule,
-    GridFilterModule,    
+    DataSourceFilterModule,    
     psbxPaginationModule,
     DataGridModule,
     CommandModalModule,
     ConfirmModalModule,
     FormsModule,
     SpinnerModule,
-    GridSortingModule
+    DataSourceSortingModule
   ]
 })
 export class GridFilterDemoModule { }
