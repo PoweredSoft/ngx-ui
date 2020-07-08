@@ -15,7 +15,6 @@ export class GridFilterDemoComponent implements OnInit {
   merchantDataSource: IDataSource<IMerchant>;  
   constructor(private  merchantService: MerchantService){
     this.merchantDataSource = this.createDataSource();
-    console.log(this.merchantDataSource);    
   }
 
   pages:any;

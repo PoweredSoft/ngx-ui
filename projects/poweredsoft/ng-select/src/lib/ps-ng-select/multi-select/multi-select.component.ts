@@ -1,4 +1,4 @@
-import { Component, OnInit, ContentChild, ViewChild, Input, Output, EventEmitter, ChangeDetectorRef, forwardRef } from '@angular/core';
+import { Component, OnInit, ContentChild, ViewChild, Input, Output, EventEmitter, ChangeDetectorRef, forwardRef, OnDestroy } from '@angular/core';
 import { SelectLabelTemplateDirective } from '../select-label-template.directive';
 import { IDataSource, ISimpleFilter } from '@poweredsoft/data';
 import { Observable, Subject, Subscription } from 'rxjs';
@@ -17,7 +17,7 @@ import { SelectOptionTemplateDirective } from '../select-option-template.directi
 }],
   styleUrls: ['./multi-select.component.scss']
 })
-export class MultiSelectComponent implements OnInit {
+export class MultiSelectComponent implements OnInit,OnDestroy {
 
   
   @ContentChild(SelectOptionTemplateDirective) optionTemplate: SelectOptionTemplateDirective;
@@ -74,9 +74,6 @@ export class MultiSelectComponent implements OnInit {
   ngOnInit(): void {
     this.dataFetching();    
     this.detectLoading();
-
-    console.log(this.serverFiltering);
-
     if(this.serverFiltering){
       this.searchOnServer();
     }else{

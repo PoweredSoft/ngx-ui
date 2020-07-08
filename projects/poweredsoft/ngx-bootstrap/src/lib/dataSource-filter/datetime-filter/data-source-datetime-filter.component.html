@@ -1,19 +1,25 @@
 <ng-template #popTemplate>
     <div class="container" >
       <div class="row">
-        <div class="form-group">
-          <input type="text"
+        <select class="custom-select" title="Choose one of the following..." [(ngModel)]="filterType" [ngModelOptions]="{standalone: true}">
+            <option *ngFor="let filter of filterTypes" [value]="filter.value">{{filter.key}}</option>
+        </select>    
+    </div>
+      <div class="row mt-1 mb-1">
+          <input *ngIf="filterType =='GreaterThan' || filterType == 'LessThan'" type="text"
                  placeholder="Datepicker"
                  class="form-control"
-                 bsDatepicker [(ngModel)]="filterValue">
-        </div>
+                 bsDatepicker [(ngModel)]="filterValue"> 
       </div>
-      <div class="row">
-        <input type="text"
-      placeholder="Daterangepicker"
-      class="form-control"
-      bsDaterangepicker>
-      </div>
+      <div class="row mt-1 mb-1">
+        <input *ngIf="filterType =='Equal'" type="text"
+        placeholder="Daterangepicker"
+        class="form-control"
+        bsDaterangepicker [(ngModel)]="filterValue">       
+    </div>
+
+     
+     
       <div class="row mt-2">
         <button class="btn btn-primary mr-1" >Filter</button>
         <button type="button" class="btn btn-warning" *ngIf="!isFiltering" (click)="pop.hide()">Hide</button>

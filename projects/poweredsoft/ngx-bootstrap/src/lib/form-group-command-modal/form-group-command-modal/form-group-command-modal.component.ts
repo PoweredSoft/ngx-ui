@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, OnDestroy } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { IDataSource } from '@poweredsoft/data';
 import { finalize } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { FormGroup, FormControl } from '@angular/forms';
   templateUrl: './form-group-command-modal.component.html',
   styleUrls: ['./form-group-command-modal.component.scss']
 })
-export class FormGroupCommandModalComponent implements OnInit {
+export class FormGroupCommandModalComponent implements OnInit, OnDestroy {
 
 
   modelForm: FormGroup;

@@ -1,21 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataSource, IDataSource, IQueryExecutionResult, IQueryExecutionGroupResult } from '@poweredsoft/data';
 import { IMerchant } from 'src/app/data/services/IMerchant';
 import { MerchantService } from 'src/app/data/services/merchant.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ps-data-grid-demo-home',
   templateUrl: './data-grid-demo-home.component.html',
   styleUrls: ['./data-grid-demo-home.component.scss']
 })
-export class DataGridDemoHomeComponent implements OnInit {
+export class DataGridDemoHomeComponent implements OnInit, OnDestroy {
 
   title = 'cdkDemo';
   columns = ['id','name', 'address', 'commands']
   merchantDataSource: IDataSource<IMerchant>;  
+  private _dataSubscription: Subscription;
   constructor(private  merchantService: MerchantService){
     this.merchantDataSource = this.createDataSource();
 
+  }
+  ngOnDestroy(): void {
+    this._dataSubscription.unsubscribe();
   }
 
   

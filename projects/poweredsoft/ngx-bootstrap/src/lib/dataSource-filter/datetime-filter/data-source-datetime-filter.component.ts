@@ -16,6 +16,10 @@ export class DataSourceDatetimeFilterComponent {
   filterType: string = 'Equal';
   filterTypes = [
     {key:'equal', value: 'Equal'},
+    {key:'Greater Than', value: 'GreaterThan'},
+    {key:'Less Than', value: 'LessThan'},    
+    {key:'Greater Than Equal', value: 'GreaterThanOrEqual'},
+    {key:'Less Than Equal', value: 'LessThanOrEqual'},    
   ];
 
 
@@ -31,7 +35,7 @@ export class DataSourceDatetimeFilterComponent {
     return "Filter by "+ this.path;
   }
 
-  applyFilter(){debugger;
+  applyFilter(){
     this.isFiltering = true;
     const filters = this.dataSource.filters;
     const existingFilter = filters.find(t => (t as ISimpleFilter).path == this.path) as ISimpleFilter;
