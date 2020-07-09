@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IDataSource} from '@poweredsoft/data';
-import { ISimpleFilter } from '../../models/IFilter';
+import { ISimpleFilter } from '@poweredsoft/data';
 import { PopoverDirective } from 'ngx-bootstrap/popover';
 
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
-import { IDataSource,IFilter } from '@poweredsoft/data';
-import { ISimpleFilter } from '../../models/IFilter';
+import { IDataSource,IFilter, ISimpleFilter } from '@poweredsoft/data';
+
 
 @Component({
   selector: 'psbx-ds-number-filter',
@@ -11,7 +11,7 @@ export class DataSourceNumberFilterComponent implements OnInit {
   @Input() dataSource : IDataSource<any>;   
   @Input() path:string;
  
-  filterType: string = 'Equals';
+  filterType: string = 'Equal';
   filterValue: number = 0; 
   isFiltering: boolean;
   filterTypes = [    

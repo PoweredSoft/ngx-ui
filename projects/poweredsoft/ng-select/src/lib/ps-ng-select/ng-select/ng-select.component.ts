@@ -1,12 +1,12 @@
 import { Component, OnInit, ContentChild, ViewChild, Input, Output, EventEmitter, ChangeDetectorRef, forwardRef, OnDestroy } from '@angular/core';
-import { SelectLabelTemplateDirective } from '../select-label-template.directive';
+import { SelectLabelTemplateDirective } from '../directives/select-label-template.directive';
 import { IDataSource, ISimpleFilter } from '@poweredsoft/data';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { map, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 import { NgSelectComponent as SelectComponent } from '@ng-select/ng-select';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { SelectOptionTemplateDirective } from '../select-option-template.directive';
-import { NotFoundTemplateDirective } from '../not-found-template.directive';
+import { SelectOptionTemplateDirective } from '../directives/select-option-template.directive';
+import { NotFoundTemplateDirective } from '../directives/not-found-template.directive';
 
 
 @Component({

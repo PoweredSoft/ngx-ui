@@ -31,7 +31,7 @@ export class FormGroupModalDemoComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     this.merchantDataSource.refresh();
-    this.merchantDataSource.data$.subscribe(newData => {     
+    this._dataSubscription = this.merchantDataSource.data$.subscribe(newData => {     
       if (newData)
         this.pages = new Array(newData.numberOfPages);
     });

@@ -30,10 +30,13 @@ selected:  {{ myForm.value | json }}
 selected: {{ myValue3 | json }} 
 
 <h2>Single Select Demo | notFound Template</h2>
-<ps-ng-select [dataSource]="merchantDataSource3" bindLabel="name" bindValue="id" [(ngModel)]="myValue2" [serverFiltering]="true">
+<ps-ng-select [dataSource]="merchantDataSource3" bindLabel="name" bindValue="id" [(ngModel)]="myValue2" [serverFiltering]="false">
     <div  *psNgNotFoundTemplate="let searchTerm">
         <div class="ng-option disabled">
-            No data found for "{{searchTerm}}" <button class="btn btn-success">Create New {{searchTerm}}</button>
+            No data found for "{{searchTerm}}" <button class="btn btn-success" 
+                psbxCommand
+                (success)="myValue2 = $event">
+                Create New {{searchTerm}}</button>
         </div>
     </div>
 </ps-ng-select>

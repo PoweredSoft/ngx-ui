@@ -1,5 +1,5 @@
 <ng-template #popTemplate>
-    <form (ngSubmit)="applyFilter()">
+    <form (ngSubmit)="applyFilter()" novalidate>
         <div class="container" >
             <div class="row">
                 <select class="custom-select" title="Choose one of the following..." [(ngModel)]="filterType" [ngModelOptions]="{standalone: true}">

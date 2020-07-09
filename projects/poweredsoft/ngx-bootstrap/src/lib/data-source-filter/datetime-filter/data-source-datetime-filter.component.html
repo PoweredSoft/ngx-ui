@@ -1,4 +1,5 @@
 <ng-template #popTemplate>
+  <form (ngSubmit)="applyFilter(pop)" novalidate>
     <div class="container" >
       <div class="row">
         <select class="custom-select" title="Choose one of the following..." [(ngModel)]="filterType" [ngModelOptions]="{standalone: true}">
@@ -6,26 +7,55 @@
         </select>    
     </div>
       <div class="row mt-1 mb-1">
-          <input *ngIf="filterType =='GreaterThan' || filterType == 'LessThan'" type="text"
+          <input *ngIf="filterType !='Range'" 
+                 type="text"
                  placeholder="Datepicker"
                  class="form-control"
-                 bsDatepicker [(ngModel)]="filterValue"> 
+                 bsDatepicker [(ngModel)]="filterValue" [ngModelOptions]="{standalone: true}"> 
       </div>
+      
       <div class="row mt-1 mb-1">
-        <input *ngIf="filterType =='Equal'" type="text"
+        <input *ngIf="filterType =='Range'" type="text"
         placeholder="Daterangepicker"
         class="form-control"
-        bsDaterangepicker [(ngModel)]="filterValue">       
+        bsDaterangepicker [(ngModel)]="filterValue" [ngModelOptions]="{standalone: true}">       
     </div>
-
-     
-     
+    
       <div class="row mt-2">
-        <button class="btn btn-primary mr-1" >Filter</button>
+        <button class="btn btn-primary mr-1" type="submit" >Filter</button>
         <button type="button" class="btn btn-warning" *ngIf="!isFiltering" (click)="pop.hide()">Hide</button>
-        <button type="button" class="btn btn-dark" *ngIf="isFiltering">Clear</button>
+        <button type="button" class="btn btn-dark" *ngIf="isFiltering" (click)="clearFilter()">Clear</button>
       </div>
   </div>
+  </form>
+
+  <!-- <div class="container" >
+    <div class="row">
+      <select class="custom-select" title="Choose one of the following..." >
+          <option *ngFor="let filter of filterTypes" [value]="filter.value">{{filter.key}}</option>
+      </select>    
+  </div>
+    <div class="row mt-1 mb-1">
+        <input *ngIf="filterType !='Range'" 
+               type="text"
+               placeholder="Datepicker"
+               class="form-control"
+               bsDatepicker [(ngModel)]="filterValue" > 
+    </div>
+    
+    <div class="row mt-1 mb-1">
+      <input *ngIf="filterType =='Range'" type="text"
+      placeholder="Daterangepicker"
+      class="form-control"
+      bsDaterangepicker [(ngModel)]="filterValue">       
+  </div>
+  
+    <div class="row mt-2">
+      <button class="btn btn-primary mr-1" type="submit" (click)="applyFilter()">Filter</button>
+      <button type="button" class="btn btn-warning" *ngIf="!isFiltering" (click)="pop.hide()">Hide</button>
+      <button type="button" class="btn btn-dark" *ngIf="isFiltering" (click)="clearFilter()">Clear</button>
+    </div>
+</div> -->
 </ng-template>
 
 <button [popover]="popTemplate" class="btn btn-default" [(isOpen)]="filterPopUpOpened" [outsideClick]="true" #pop="bs-popover">

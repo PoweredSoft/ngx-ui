@@ -26,11 +26,26 @@
     <ng-container psDataGridCol="commands">
         <ng-container *psDataGridColHeader>Actions</ng-container>
         <ng-container *psDataGridCell="let model">
+            <div class="btn-group">
+
+        
             <button class="btn-primary btn" psbxCommandModal [commandTitle]="'Change ' + model.name + ' name'" commandText="Update"
             [dataSource]="merchantDataSource" command="changeMerchant" [model]="model" [template]="changeName">Change</button>
 
-            <button class="btn-danger btn" psbxConfirmModal [commandTitle]="'Are you sure you wnat to remove ' + model.name + '?'" commandText="Remove"
-            [dataSource]="merchantDataSource" command="removeMerchant" [model]="model" >RemoveIt</button>
+            <button class="btn-danger btn" psbxCommand 
+            [dataSource]="merchantDataSource" 
+            command="removeMerchant" 
+            [model]="model" 
+            [confirm]="true"
+            confirmMessage="Are you sure you want to delete this merchant?"
+            
+            >RemoveIt</button>
+
+            <button class="btn-warning btn" psbxCommand 
+            [dataSource]="merchantDataSource" 
+            command="removeMerchant" 
+            [model]="model"             
+            >Remove Without confirmation</button>    </div>
         </ng-container>
     </ng-container>
         <ng-container *psDataGridFooter>

@@ -50,7 +50,7 @@ export class DataGridDemoHomeComponent implements OnInit, OnDestroy {
       console.log('merchant data source event loading', isLoading);
     });
 
-    this.merchantDataSource.data$.subscribe(receivedData => {
+    this._dataSubscription = this.merchantDataSource.data$.subscribe(receivedData => {
       console.log('new data is coming from the server', receivedData);
     });
     this.merchantDataSource.refresh();

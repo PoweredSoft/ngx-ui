@@ -45,7 +45,7 @@ export class CommandModalDemoComponent implements OnInit,OnDestroy {
 
   ngOnInit() {
     this.merchantDataSource.refresh();
-    this.merchantDataSource.data$.subscribe(newData => {     
+    this._dataSubscription = this.merchantDataSource.data$.subscribe(newData => {     
       if (newData)
         this.pages = new Array(newData.numberOfPages);
     });

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CommandModalDirective } from './directives/command-modal.directive';
 import { CommandModalComponent } from './command-modal/command-modal.component';
-import { InputValidatorDirective } from './directives/input-validator.directive';
+
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
     ModalModule.forRoot(),
     FormsModule
   ],
-  declarations: [CommandModalDirective, CommandModalComponent, InputValidatorDirective],
+  declarations: [CommandModalDirective, CommandModalComponent],
   exports: [CommandModalDirective]
 })
 export class CommandModalModule { }
