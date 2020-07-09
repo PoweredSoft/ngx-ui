@@ -20,6 +20,7 @@ export class CommandModalDirective {
   @Input() commandText: string;
   @Input() cancelText: string;
   @Input() animated: boolean;
+  @Input() btnClass:string;
 
   @Output() success: EventEmitter<any> = new EventEmitter<any>();
 
@@ -38,7 +39,8 @@ export class CommandModalDirective {
         refreshOnSuccess: this.refreshOnSuccess === undefined ? true : this.refreshOnSuccess,
         commandText: this.commandText || 'OK',
         cancelText: this.cancelText || 'Cancel',
-        successEmitter: this.success
+        successEmitter: this.success,
+        btnClass: this.btnClass || 'primary'
       };
       this.modalService.show(CommandModalComponent, {
         animated: this.animated === undefined ? true : this.animated,

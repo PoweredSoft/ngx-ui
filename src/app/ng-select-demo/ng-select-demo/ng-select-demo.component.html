@@ -33,10 +33,16 @@ selected: {{ myValue3 | json }}
 <ps-ng-select [dataSource]="merchantDataSource3" bindLabel="name" bindValue="id" [(ngModel)]="myValue2" [serverFiltering]="false">
     <div  *psNgNotFoundTemplate="let searchTerm">
         <div class="ng-option disabled">
-            No data found for "{{searchTerm}}" <button class="btn btn-success" 
-                psbxCommand
-                (success)="myValue2 = $event">
-                Create New {{searchTerm}}</button>
+            No data found for "{{searchTerm}}"
+                <button class="btn-primary btn" 
+                psbxCommandModal 
+                commandTitle="Adding a new {{searchTerm}}" 
+                commandText="Add"
+                [dataSource]="merchantDataSource" 
+                command="addMerchant" 
+                cancelText="Abort"
+                [template]="theModal"
+                (success)="myValue2 = $event"> Create New {{searchTerm}}</button>
         </div>
     </div>
 </ps-ng-select>
@@ -53,3 +59,11 @@ selected: {{ myValue2 | json }}
 </ps-ng-multi-select>
 selected: {{ myValue4 | json }} 
 
+<ng-template #theModal let-command let-loading="loading">
+    <form   >
+        Name
+        <input type="text" required [disabled]="loading" name="name" [(ngModel)]="command.name"  placeholder="Enter a merchant name" class="form-control" >
+        Address
+        <input type="text" required [disabled]="loading" name="address" [(ngModel)]="command.address"  placeholder="Enter the merchant's address" class="form-control" >                
+    </form>
+</ng-template>

@@ -5,6 +5,7 @@ import { NgSelectDemoRoutingModule } from './ng-select-demo-routing.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PsNgSelectModule } from '@poweredsoft/ng-select';
+import { CommandModule, CommandModalModule } from '@poweredsoft/ngx-bootstrap';
 
 
 
@@ -17,7 +18,9 @@ import { PsNgSelectModule } from '@poweredsoft/ng-select';
     FormsModule,
     ReactiveFormsModule,
     NgSelectDemoRoutingModule,
-    PsNgSelectModule
+    PsNgSelectModule,
+    CommandModule,
+    CommandModalModule
   ]
 })
 export class NgSelectDemoModule { }
