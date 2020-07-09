@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PaginationDemoRoutingModule } from './pagination-demo-routing.module';
 import { PaginationDemoComponent } from './pagination-demo/pagination/pagination-demo.component';
 import { DataGridModule } from '@poweredsoft/ngx-cdk-ui';
-import { PaginationModule, CommandModalModule, ConfirmModalModule,SpinnerModule } from '@poweredsoft/ngx-bootstrap';
+import { PaginationModule, CommandModalModule, ConfirmModalModule,SpinnerModule, CommandModule } from '@poweredsoft/ngx-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
@@ -21,7 +21,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     CommandModalModule,
     ConfirmModalModule,
     FormsModule,
-    SpinnerModule
+    SpinnerModule,
+    CommandModule
        
   ]
 })

@@ -34,7 +34,7 @@ export class NgSelectDemoComponent implements OnInit {
     this.merchantDataSource3 = merchantService.createDataSource(); 
     this.merchantDataSource4 = merchantService.createDataSource(); 
     this.myForm = fb.group({
-      'merchantId': [null, null]
+      'merchantId': [null]
     })
   }
 
