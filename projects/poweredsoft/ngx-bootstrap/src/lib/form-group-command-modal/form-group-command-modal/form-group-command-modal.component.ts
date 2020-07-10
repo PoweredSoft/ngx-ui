@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, OnDestroy, EventEmitter } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { IDataSource } from '@poweredsoft/data';
 import { finalize } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { FormGroup, FormControl } from '@angular/forms';
   templateUrl: './form-group-command-modal.component.html',
   styleUrls: ['./form-group-command-modal.component.scss']
 })
-export class FormGroupCommandModalComponent implements OnInit {
+export class FormGroupCommandModalComponent implements OnInit, OnDestroy {
 
 
   modelForm: FormGroup;
@@ -24,9 +24,12 @@ export class FormGroupCommandModalComponent implements OnInit {
   cancelText: string;
   errorMessage: string;
   commandModel:any; 
-  
+  successEmitter: EventEmitter<any>;
+
   private _notifyMessage: Subscription;
   private _validationError: Subscription;
+
+
 
   constructor(public modalRef: BsModalRef) { }
 
@@ -37,9 +40,9 @@ export class FormGroupCommandModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.errorMessage = null;
-    // this._notifyMessage = this.dataSource.notifyMessage$.subscribe(message => {
+    this._notifyMessage = this.dataSource.notifyMessage$.subscribe(message => {
       
-    // });
+    });
    
     this._validationError = this.dataSource.validationError$.subscribe(validatorErrors => {      
       let validationSummary = '';
@@ -71,11 +74,12 @@ export class FormGroupCommandModalComponent implements OnInit {
           this.loading = false;
         })
       )
-      .subscribe(success => {
+      .subscribe(commandResult => {
         if (this.refreshOnSuccess)
           this.dataSource.refresh();
 
         this.modalRef.hide();
+        this.successEmitter.emit(commandResult);
       }, fail => {
         // you do not want to close on failure.. so just ignore..
       });

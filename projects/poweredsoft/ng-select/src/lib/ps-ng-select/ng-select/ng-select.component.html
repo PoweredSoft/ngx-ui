@@ -1,0 +1,36 @@
+<ng-select [items]="data$ |async"
+           [bindLabel]="bindLabel"    
+           [bindValue]="bindValue"       
+           autofocus
+           [typeahead] = "searchInput$"
+           [trackByFn]="trackFn"       
+           (change)="valueChanged($event)">
+           <ng-container *ngIf="hasOptionTemplate">
+               <ng-template ng-option-tmp let-item="item" let-index="index">
+                <ng-container [ngTemplateOutlet]="selectOptionTemplate"
+                    [ngTemplateOutletContext]="{
+                    $implicit: item,
+                    index: index       
+                    }"></ng-container>
+               </ng-template>
+           </ng-container>
+
+           <ng-container *ngIf="hasLabelTemplate">
+            <ng-template ng-label-tmp let-item="item" let-index="index">
+             <ng-container [ngTemplateOutlet]="selectLabelTemplate"
+                 [ngTemplateOutletContext]="{
+                 $implicit: item,
+                 index: index       
+                 }"></ng-container>
+            </ng-template>
+            </ng-container>
+
+        <ng-container *ngIf="hasNotFoundTemplate">
+            <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
+                <ng-container [ngTemplateOutlet]="selectNotFoundTemplate"
+                [ngTemplateOutletContext]="{
+                $implicit: searchTerm                    
+                }"></ng-container>
+            </ng-template>
+        </ng-container>
+</ng-select>

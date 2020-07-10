@@ -1,0 +1,16 @@
+:host span.dropdown-toggle.sort-desc{
+    transform: rotate(180deg);
+    display: inline-block;
+}
+
+:host span{
+    margin: 10px;
+}
+
+:host .not-sorting-state{
+    opacity: 0.3;
+}
+
+:host .not-sorting-state:hover{
+    opacity: 1;
+}

@@ -1,4 +1,4 @@
-import { Directive, HostListener, Input, TemplateRef } from '@angular/core';
+import { Directive, HostListener, Input, TemplateRef, Output, EventEmitter } from '@angular/core';
 import { IDataSource } from '@poweredsoft/data';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { CommandModalComponent } from '../command-modal/command-modal.component';
@@ -20,6 +20,9 @@ export class CommandModalDirective {
   @Input() commandText: string;
   @Input() cancelText: string;
   @Input() animated: boolean;
+  @Input() btnClass:string;
+
+  @Output() success: EventEmitter<any> = new EventEmitter<any>();
 
   @HostListener('click')
   wasClicked() {            
@@ -35,7 +38,9 @@ export class CommandModalDirective {
         title: this.commandTitle,
         refreshOnSuccess: this.refreshOnSuccess === undefined ? true : this.refreshOnSuccess,
         commandText: this.commandText || 'OK',
-        cancelText: this.cancelText || 'Cancel'
+        cancelText: this.cancelText || 'Cancel',
+        successEmitter: this.success,
+        btnClass: this.btnClass || 'primary'
       };
       this.modalService.show(CommandModalComponent, {
         animated: this.animated === undefined ? true : this.animated,

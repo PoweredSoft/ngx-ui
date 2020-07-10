@@ -1,22 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IDataSource } from '@poweredsoft/data';
 import { IMerchant } from 'src/app/data/services/IMerchant';
 import { MerchantService } from 'src/app/data/services/merchant.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ps-command-modal-demo',
   templateUrl: './command-modal-demo.component.html',
   styleUrls: ['./command-modal-demo.component.scss']
 })
-export class CommandModalDemoComponent implements OnInit {
+export class CommandModalDemoComponent implements OnInit,OnDestroy {
 
   columns = ['id','name', 'address', 'commands'];
   pages:any;
   merchantDataSource: IDataSource<IMerchant>;  
+  private _dataSubscription: Subscription;
   constructor(private  merchantService: MerchantService){
     this.merchantDataSource = this.createDataSource();
 
+  }
+  ngOnDestroy(): void {
+    this._dataSubscription.unsubscribe();
   }
 
   newMerchant(name: string) {
@@ -40,7 +45,7 @@ export class CommandModalDemoComponent implements OnInit {
 
   ngOnInit() {
     this.merchantDataSource.refresh();
-    this.merchantDataSource.data$.subscribe(newData => {     
+    this._dataSubscription = this.merchantDataSource.data$.subscribe(newData => {     
       if (newData)
         this.pages = new Array(newData.numberOfPages);
     });

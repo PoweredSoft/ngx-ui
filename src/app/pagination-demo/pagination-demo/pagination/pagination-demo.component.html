@@ -16,18 +16,6 @@
     <ng-container psDataGridCol="id">
         <div *psDataGridColHeader>ID</div>
         <div *psDataGridCell="let model">{{model.id}}</div>
-
-        <!-- <psfa-ds-sort-icon *psDataGridColSort [sortPath]="id" [dataSource]="merchantDataSource">
-
-        </psfa-ds-sort-icon>  -->
-
-        <!-- <psbx-ds-text-filter *psDataGridCellFilter [dataSource]="merchantDataSource"></psbx-ds-text-filter>
-        <psdb-ds-date-filter *psDataGridCellFilter></psdb-ds-date-filter>
-        <psdb-ds-date-range-filter *psDataGridCellFilter></psdb-ds-date-range-filter>
-        <psbx-ds-number-filter *psDataGridCellFilter></psbx-ds-number-filter>
-        <psbx-ds-multi-select-filter [dataSource]="merchantDataSource" [selectDataSource]="selectDataSource" [valueField]="id">
-            <ng-container *psSelectOption="let option">{{ option.name }}</ng-container>
-        </psbx-ds-multi-select-filter> -->
     </ng-container>
 
     <ng-container psDataGridCol="name">
@@ -42,8 +30,29 @@
     <ng-container psDataGridCol="commands">
         <ng-container *psDataGridColHeader>Actions</ng-container>
         <ng-container *psDataGridCell="let model">
-            <button class="btn-danger btn" psbxConfirmModal [commandTitle]="'Are you sure you wnat to remove ' + model.name + '?'" commandText="Remove"
-            [dataSource]="merchantDataSource" command="removeMerchant" [model]="model" >Remove</button>
+            <div class="btn-group">
+                <button class="btn-warning btn" psbxCommandModal 
+                commandTitle="Update {{model.name}}" 
+                commandText="Save"
+                [dataSource]="merchantDataSource" 
+                command="changeMerchant"
+                [model]="model"  
+                [template]="theModal">Update</button>
+
+                <button class="btn-danger btn" 
+                psbxCommand 
+                [dataSource]="merchantDataSource" 
+                command="removeMerchant" 
+                [model]="model" 
+                [confirm]="true"
+                yesClass="warning"
+                noClass = "secondary"
+                noText = "Cancel Delete"
+                yesText = "Delete It"
+                confirmMessage="Are you sure you want to delete this merchant?"
+                >Remove</button>
+            </div>
+
         </ng-container>
     </ng-container>
 
@@ -61,7 +70,6 @@
       <button type="button" class="btn btn-primary"  >No</button>
     </div>
   </ng-template>
-
 
 
  <ng-template #theModal let-command let-loading="loading">

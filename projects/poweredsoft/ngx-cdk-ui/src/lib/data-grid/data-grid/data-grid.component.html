@@ -2,18 +2,34 @@
 
 <table [ngClass]="tableClasses" style="min-height: 300px;">
   <thead>
-    <tr>
-      <th *ngFor="let header of gridHeaders" [attr.colspan]="columns.length">
+    <tr *ngFor="let header of gridHeaders" >
+      <th [attr.colspan]="columns.length">
         <ng-container [ngTemplateOutlet]="header.template"></ng-container>
       </th>
     </tr>
     <tr>
       <th *ngFor="let column of columns">
-        <ng-container *ngIf="hasHeaderTemplate(column)">
-          <ng-container
-            [ngTemplateOutlet]="getColumnHeaderTemplate(column)"
-          ></ng-container>
-        </ng-container>
+        <div class="flex-container">
+          <div class="flex-item">
+            <ng-container *ngIf="hasHeaderTemplate(column)" >
+              <ng-container
+                [ngTemplateOutlet]="getColumnHeaderTemplate(column)"
+              ></ng-container>
+            </ng-container>
+          </div>
+  
+          <div class="flex-item">
+         
+              <ng-container *ngIf="hasSortingTemplate(column)">
+                <ng-container [ngTemplateOutlet]="getSortingTemplate(column)"></ng-container>
+              </ng-container>
+  
+              <ng-container *ngIf="hasFilterTemplate(column)">
+                <ng-container [ngTemplateOutlet]="getFilterTemplate(column)"></ng-container>
+              </ng-container>
+            </div>
+           
+        </div>
       </th>
     </tr>
   </thead>

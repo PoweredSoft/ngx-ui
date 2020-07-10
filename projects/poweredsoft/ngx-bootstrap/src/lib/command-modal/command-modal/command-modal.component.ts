@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, TemplateRef, OnDestroy, EventEmitter } from '@angular/core';
 import { IDataSource } from '@poweredsoft/data';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { finalize} from 'rxjs/operators';
@@ -23,6 +23,8 @@ export class CommandModalComponent implements OnInit, OnDestroy {
   cancelText: string;
   form:NgForm;
   validationMessage:string ;
+  btnClass:string;
+  successEmitter: EventEmitter<any>; 
 
   private _notifyMessage: Subscription;
   private _validationError: Subscription;
@@ -62,11 +64,12 @@ export class CommandModalComponent implements OnInit, OnDestroy {
           this.loading = false;
         })
       )
-      .subscribe(success => {
+      .subscribe(commandResult => {
         if (this.refreshOnSuccess)
           this.dataSource.refresh();
 
         this.modalRef.hide();
+        this.successEmitter.emit(commandResult);
       }, fail => {
         // you do not want to close on failure.. so just ignore..
       });

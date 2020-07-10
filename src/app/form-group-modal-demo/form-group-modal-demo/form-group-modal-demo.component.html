@@ -4,7 +4,7 @@
     <ng-container *psDataGridHeader>
             <button class="btn-success btn" psbxFormGroupCommandModal commandTitle="Adding a new merchant"
              commandText="Add" [dataSource]="merchantDataSource" command="addMerchant" 
-             (formCreate)="onFormCreate($event)" [template]="theModal">Create a new</button>   
+             (formCreate)="onFormCreate($event)" [template]="theModal">Create New Records</button>   
     </ng-container>
     <ng-container psDataGridCol="id">
         <div *psDataGridColHeader>ID</div>
@@ -19,16 +19,32 @@
         <div *psDataGridCell="let model">{{model.address}}</div>
     </ng-container>
     <ng-container psDataGridCol="actions">
+    
         <ng-container *psDataGridColHeader>Actions</ng-container>
         <ng-container *psDataGridCell="let model">
-            <button class="btn-success btn" psbxFormGroupCommandModal [commandTitle]="'Change ' + model.name + ' name'" commandText="Update"
-            [dataSource]="merchantDataSource" command="changeMerchant" (formCreate)="onFormCreate($event)" [model]="model" [template]="theModal">Change</button>
-
-            <button class="btn-danger btn" psbxConfirmModal [commandTitle]="'Are you sure you wnat to remove ' + model.name + '?'" commandText="Remove"
-            [dataSource]="merchantDataSource" command="removeMerchant" [model]="model" >Delete!</button>
-
-            <!-- <button class="btn-danger btn" psbxExecuteCommand [dataSource]="merchantDataSource" [command]="removeMerchant"
-             [model]="model" [confirm]="true" [confirmMessage]="do you wish to delete the merchant `' + model.name + '`" [refresh]="false">Delete</button> -->
+            <div class="btn-group">
+            <button class="btn-success btn" psbxFormGroupCommandModal 
+            [commandTitle]="'Change ' + model.name + ' name'" 
+            commandText="Update"
+            [dataSource]="merchantDataSource" 
+            command="changeMerchant" 
+            (formCreate)="onFormCreate($event)" 
+            [model]="model" 
+            [template]="theModal">Change</button>
+            
+            <button class="btn-danger btn" 
+            psbxCommand 
+            [dataSource]="merchantDataSource" 
+            command="removeMerchant" 
+            [model]="model" 
+            [confirm]="true"
+            yesClass="warning"
+            noClass = "secondary"
+            noText = "Cancel Delete"
+            yesText = "Delete It"
+            confirmMessage="Are you sure you want to delete this merchant?"
+            >RemoveIt</button>
+            </div>
         </ng-container>
     </ng-container>
     <ng-container *psDataGridFooter>

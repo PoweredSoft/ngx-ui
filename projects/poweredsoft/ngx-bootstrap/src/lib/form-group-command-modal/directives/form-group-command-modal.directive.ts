@@ -29,8 +29,9 @@ export class FormGroupCommandModalDirective {
   @Input() refreshOnSuccess: boolean;
   @Input() commandText: string;
   @Input() cancelText: string;
-  @Input() isConfirmModal:boolean;
   @Output() formCreate: EventEmitter<IModelFormCreateEvent> = new EventEmitter<IModelFormCreateEvent>();
+
+  @Output() success: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private modalService: BsModalService) { }
 
@@ -47,25 +48,6 @@ export class FormGroupCommandModalDirective {
         shouldSetCommandModel: true
       }
 
-      if(this.isConfirmModal){
-
-        const initialState = {
-          dataSource: this.dataSource,
-          command: this.command,
-          template: this.template,
-          title: this.commandTitle,
-          refreshOnSuccess: this.refreshOnSuccess === undefined ? true : this.refreshOnSuccess,
-          commandText: this.commandText || 'OK',
-          cancelText: this.cancelText || 'Cancel',
-          commandModel:commandModel
-        };
-      
-        this.modalService.show(ConfirmModalComponent, {
-          animated: this.animated === undefined ? true : this.animated,
-          initialState
-        });
-
-      }else{
         this.formCreate.emit(event);
         if (event.formGroup == null)
           throw new Error('form group should be set, after form createEvent');
@@ -82,61 +64,18 @@ export class FormGroupCommandModalDirective {
           commandText: this.commandText || 'OK',
           cancelText: this.cancelText || 'Cancel',
           modelForm: event.formGroup,
-          commandModel:commandModel
+          commandModel:commandModel,
+          successEmitter: this.success
         };
       
         this.modalService.show(FormGroupCommandModalComponent, {
           animated: this.animated === undefined ? true : this.animated,
           initialState
         });
-      }
+
     }, error => {
 
     });
   }
-
-  // @HostListener('click')
-  // wasClicked() {
-  //   this.dataSource.resolveCommandModelByName({
-  //     command: this.command,
-  //     model: this.model
-  //   }).subscribe(commandModel => {
-  //     debugger;
-  //     const event = <IModelFormCreateEvent>{
-  //       commandName: this.command,
-  //       viewModel: this.model,
-  //       commandModel: commandModel,
-  //       shouldSetCommandModel: true
-  //     }
-
-  //     this.formCreate.emit(event);
-
-  //     if (event.formGroup == null)
-  //       throw new Error('form group should be set, after form createEvent');
-
-  //     if (event.shouldSetCommandModel)
-  //       event.formGroup.patchValue(commandModel);
-
-  //     const initialState = {
-  //       dataSource: this.dataSource,
-  //       command: this.command,
-  //       template: this.template,
-  //       title: this.commandTitle,
-  //       refreshOnSuccess: this.refreshOnSuccess === undefined ? true : this.refreshOnSuccess,
-  //       commandText: this.commandText || 'OK',
-  //       cancelText: this.cancelText || 'Cancel',
-  //       modelForm: event.formGroup,
-  //       commandModel:commandModel
-  //     };
-      
-  //     this.modalService.show(FormGroupCommandModalComponent, {
-  //       animated: this.animated === undefined ? true : this.animated,
-  //       initialState
-  //     });
-
-  //   }, error => {
-
-  //   });
-  // }
 
 }

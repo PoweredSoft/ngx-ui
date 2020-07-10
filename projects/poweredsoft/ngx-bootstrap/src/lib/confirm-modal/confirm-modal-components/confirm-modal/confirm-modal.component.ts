@@ -1,6 +1,5 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, EventEmitter } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { ConfirmModalService } from '../../confirm-modal.service';
 import { Observer } from 'rxjs';
 
 
@@ -19,7 +18,7 @@ export class ConfirmModalComponent implements OnInit {
   noClass: string;
   observer: Observer<boolean>;
 
-  constructor(private modelRef: BsModalRef, private actionService: ConfirmModalService) {
+  constructor(private modelRef: BsModalRef) {
 
   }
 
@@ -28,11 +27,11 @@ export class ConfirmModalComponent implements OnInit {
   }
 
   get yesButtonClass() {
-    return `btn btn-sm btn-${this.yesClass}`
+    return `btn btn-${this.yesClass}`
   }
 
   get noButtonClass() {
-    return `btn btn-sm btn-${this.noClass}`
+    return `btn btn-${this.noClass}`
   }
 
   confirm(): void {
