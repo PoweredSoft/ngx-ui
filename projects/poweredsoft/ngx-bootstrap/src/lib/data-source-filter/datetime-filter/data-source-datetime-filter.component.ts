@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import { IDataSource, ISimpleFilter, ICompositeFilter, IFilter } from '@poweredsoft/data';
-import { PopoverDirective } from 'ngx-bootstrap/popover';
+import { IDataSource, ISimpleFilter, ICompositeFilter, IFilter,FilterType } from '@poweredsoft/data';
+
+
 
 @Component({
   selector: 'psbx-ds-datetime-filter',
@@ -23,7 +24,7 @@ export class DataSourceDatetimeFilterComponent implements OnInit {
     {key:'Less Than', value: 'LessThan'},    
     {key:'Greater Than Equal', value: 'GreaterThanOrEqual'},
     {key:'Less Than Equal', value: 'LessThanOrEqual'},    
-    {key:'Range', value: 'Range' }
+    {key:'Range', value: FilterType.COMPOSITE }
   ];
 
 
@@ -35,6 +36,11 @@ export class DataSourceDatetimeFilterComponent implements OnInit {
     this.maxDate.setDate(this.maxDate.getDate() + 7);
     this.bsInlineRangeValue = [this.bsInlineValue, this.maxDate];
   }
+
+  get isRangeFilter() {
+    return this.filterType == FilterType.COMPOSITE;
+  }
+
   ngOnInit(): void {
     if (!this.filterType)
       this.filterType = 'Equal';
@@ -43,17 +49,27 @@ export class DataSourceDatetimeFilterComponent implements OnInit {
     return "Filter by "+ this.path;
   }
   clearFilter() {
+    
     this.filterValue = null;
     this.isFiltering = false;
-    const existingFilter = this.dataSource.filters.find(t => (t as ISimpleFilter).path == this.path) as ISimpleFilter;
+    const existingFilter = this.dataSource.filters.find(t => (t as ISimpleFilter).path == this.path) as ISimpleFilter;    
     if (existingFilter) {
       this.dataSource.query({
         page: 1,
         filters: this.dataSource.filters.filter(t => t != existingFilter)
       })
     }
+    
+    if (this.isRangeFilter){
+     
+      let existingFilter2 = this.dataSource.filters.find(t=> t.type == 'Composite');
+      this.dataSource.query({
+        page: 1,
+        filters: this.dataSource.filters.filter(t => t != existingFilter2)
+      })
+    }
   }
-  applyFilter(pop: PopoverDirective = null){
+  applyFilter(){
 
     this.isFiltering = true;
     const filters = this.dataSource.filters;
@@ -61,17 +77,18 @@ export class DataSourceDatetimeFilterComponent implements OnInit {
     let freshFilter: ISimpleFilter = null;
     let startDate:Date;
     let endDate:Date;
-debugger;
-    if(Array.isArray(this.filterValue)){
+
+    // TODO create filter here.
+    if(Array.isArray(this.filterValue)){ //check if it's a dateRange value 
       startDate = this.filterValue[0];
       endDate = this.filterValue[1];
       compositeF = {
-        type: 'Composite',
+        type: FilterType.COMPOSITE,
         filters: [
           {
             path: this.path,
             type: 'GREATERTHANOREQUAL',
-            value: startDate, // check if this string works
+            value: startDate, 
           },
           {
             and: true,
@@ -89,19 +106,15 @@ debugger;
         path: this.path,
         value: this.filterValue
       }
-
-      if (pop) 
-      pop.hide();
     }
 
     // TODO???
     // set this for gql better handling of variant.
     //(freshFilter as IGraphQLFilter).__gqlVariantType = 'DATETIME';
 
-    // TODO create filter here.
     
     const existingFilterIndex = filters.findIndex(t => {
-        if (t.type == 'Composite') {
+        if (t.type == 'COMPOSITE') {
           const compositeFilter = t as ICompositeFilter;
           return compositeFilter.filters && compositeFilter.filters.length 
             && compositeFilter[0].path == this.path;

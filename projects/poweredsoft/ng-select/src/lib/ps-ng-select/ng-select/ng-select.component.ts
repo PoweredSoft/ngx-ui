@@ -49,6 +49,18 @@ export class NgSelectComponent implements OnInit,OnDestroy {
     this.trackFn = this.trackBy.bind(this);
   
   }
+
+  ngOnInit(): void {
+    this.dataFetching();    
+    this.detectLoading();
+
+    if(this.serverFiltering){
+      this.searchOnServer();
+    }else{
+      this.refreshDataSource();
+    }
+  }
+
  
   valueChanged(event) {
     this.changeEvent.emit(event);
@@ -76,16 +88,6 @@ export class NgSelectComponent implements OnInit,OnDestroy {
     this._loadingSubscription.unsubscribe();
   }
 
-  ngOnInit(): void {
-    this.dataFetching();    
-    this.detectLoading();
-
-    if(this.serverFiltering){
-      this.searchOnServer();
-    }else{
-      this.refreshDataSource();
-    }
-  }
 
   dataFetching(){
     this.data$ = this.dataSource.data$.pipe(
