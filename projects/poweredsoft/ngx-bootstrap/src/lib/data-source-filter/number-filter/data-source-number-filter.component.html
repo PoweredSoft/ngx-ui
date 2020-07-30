@@ -20,9 +20,8 @@
     </form>
 </ng-template>
 
-<button [popover]="popTemplate" class="btn btn-default" [(isOpen)]="filterIsOpenned"  [outsideClick]="true" #pop="bs-popover">
-    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 477.875 477.875" style="enable-background:new 0 0 477.875 477.875;" xml:space="preserve" fill-opacity="0.5" [tooltip]="showTooltip()" [tooltipEnable]="!filterIsOpenned" width="13px" height="13px" [ngStyle]="{'fill': isFiltering ? 'red': 'black', 'fill-opacity': isFiltering ? '1': '0.5'}">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 477.875 477.875" style="enable-background:new 0 0 477.875 477.875;" xml:space="preserve" fill-opacity="0.5" [tooltip]="showTooltip()" [tooltipEnable]="!filterIsOpenned" width="13px" height="13px" [ngStyle]="{'fill': isFiltering ? 'red': 'black', 'fill-opacity': isFiltering ? '1': '0.5'}" [popover]="popTemplate" [(isOpen)]="filterIsOpenned"  [outsideClick]="true" #pop="bs-popover">
 <g>
 	<g>
 		<path d="M460.804,0H17.071C7.645,0,0.004,7.641,0.004,17.067V102.4c-0.004,4.842,2.05,9.458,5.649,12.698l165.018,148.514V460.8
@@ -61,4 +60,3 @@
 <g>
 </g>
 </svg>
-</button>
