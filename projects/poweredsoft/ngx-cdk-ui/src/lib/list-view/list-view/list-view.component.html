@@ -1,0 +1,17 @@
+
+<ng-container [ngTemplateOutlet]="getViewHeaderTemplate()"></ng-container>
+<ng-container *ngIf= "!noData else noResultTemplate">
+    <ng-container *ngFor="let item of latestResult.data">
+        <ng-container [ngTemplateOutlet]="getViewItemTemplate()"
+        [ngTemplateOutletContext]="{
+            $implicit: item
+          }">
+        </ng-container>
+    </ng-container>
+</ng-container>
+<ng-container [ngTemplateOutlet]="getViewFooterTemplate()"></ng-container>
+
+
+<ng-template #noResultTemplate>
+          <p>{{noRecords}}</p>
+</ng-template>

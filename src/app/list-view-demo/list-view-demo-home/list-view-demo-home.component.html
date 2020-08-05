@@ -1,1 +1,11 @@
-<p>list-view-demo-home works!</p>
+<h1>list view demo</h1>
+
+<ps-list-view [dataSource]="merchantDataSource" >
+    <div *psListViewHeader>Some Header ..</div>
+    <div *psListViewItem="let item">
+        <div>Name: {{item.name}} </div>
+        <div>Address: {{item.address}} </div>
+    </div>
+    <div *psListViewFooter>Some Footer ..</div>
+</ps-list-view>
+
