@@ -1,6 +1,6 @@
 <ng-container *ngIf="loading" [ngTemplateOutlet]="loadingTemplate"></ng-container> 
 
-<table [ngClass]="tableClasses" style="min-height: 300px;">
+<table [ngClass]="tableClasses">
   <thead [ngClass]="headerClasses">
     <tr *ngFor="let header of gridHeaders" >
       <th [attr.colspan]="columns.length">
