@@ -25,6 +25,7 @@ export class CommandModalComponent implements OnInit, OnDestroy {
   validationMessage:string ;
   btnClass:string;
   successEmitter: EventEmitter<any>; 
+  hasError: boolean;
 
   private _notifyMessage: Subscription;
   private _validationError: Subscription;
@@ -53,8 +54,6 @@ export class CommandModalComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(){
-    
-
     this.loading = true;
     this.validationMessage = null;
 
@@ -67,10 +66,11 @@ export class CommandModalComponent implements OnInit, OnDestroy {
       .subscribe(commandResult => {
         if (this.refreshOnSuccess)
           this.dataSource.refresh();
-
+        this.hasError = false;
         this.modalRef.hide();
         this.successEmitter.emit(commandResult);
       }, fail => {
+        this.hasError = true;
         // you do not want to close on failure.. so just ignore..
       });
   }
