@@ -1,0 +1,7 @@
+<form (submit)="applySearch()">
+    <div [ngClass]="classes">
+        <input type="search" (onSearch)="onSearch()" [placeholder]="finalSearchText" [ngClass]="searchClasses"
+            [(ngModel)]="filterValue" [ngModelOptions]="{standalone: true}">
+        <button type="submit" [ngClass]="submitButtonClasses">{{ finalSearchText }}</button>
+    </div>
+</form>

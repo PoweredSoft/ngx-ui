@@ -14,6 +14,8 @@ export class ListViewComponent implements OnInit, OnDestroy {
 
   @Input() dataSource: IDataSource<any>;
   @Input() noRecordsText: string;
+  @Input() noRecordClasses: any;
+  @Input() listViewClasses: any;
 
   latestResult: IQueryExecutionResult<any> & IQueryExecutionGroupResult<any>;
   loading:boolean;
@@ -40,7 +42,10 @@ export class ListViewComponent implements OnInit, OnDestroy {
   }
 
   get noData(){
-    return !this.latestResult;
+    if (!this.latestResult)
+      return true;
+
+    return this.latestResult.data.length == 0;
   }
 
   get noRecords(){

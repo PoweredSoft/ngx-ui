@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { ListViewDemoRoutingModule } from './list-view-demo-routing.module';
 import { ListViewDemoHomeComponent } from './list-view-demo-home/list-view-demo-home.component';
 import { ListViewModule } from '@poweredsoft/ngx-cdk-ui';
+import { FormGroupCommandModalModule, PaginationModule } from '@poweredsoft/ngx-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
+import { DsSearchModule } from 'projects/poweredsoft/ngx-cdk-ui/src/lib/ds-search/ds-search.module';
 
 
 
@@ -12,7 +15,11 @@ import { ListViewModule } from '@poweredsoft/ngx-cdk-ui';
   imports: [
     CommonModule,
     ListViewDemoRoutingModule,
-    ListViewModule
+    ListViewModule,
+    PaginationModule,
+    ReactiveFormsModule,
+    FormGroupCommandModalModule,
+    DsSearchModule
   ]
 })
 export class ListViewDemoModule { }
