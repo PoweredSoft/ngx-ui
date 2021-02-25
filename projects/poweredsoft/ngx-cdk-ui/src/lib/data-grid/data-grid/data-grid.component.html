@@ -34,7 +34,7 @@
     </tr>
   </thead>
   <tbody *ngIf="!noData else noResultTemplate">
-    <tr *ngFor="let rowModel of latestResult.data; let i = index">
+    <tr *ngFor="let rowModel of latestResult.data; let i = index; let first = first; let last = last; let odd = odd">
       <td *ngFor="let column of columns">
         <ng-container *ngIf="hasCellTemplate(column)">
           <ng-container
@@ -42,7 +42,10 @@
             [ngTemplateOutletContext]="{
               $implicit: rowModel,
               column: column,
-              rowIndex: i
+              rowIndex: i,
+              first: first,
+              last: last,
+              odd: odd
             }"
           ></ng-container>
         </ng-container>

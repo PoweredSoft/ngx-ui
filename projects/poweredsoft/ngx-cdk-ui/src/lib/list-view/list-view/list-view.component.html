@@ -1,9 +1,13 @@
 <ng-container [ngTemplateOutlet]="getViewHeaderTemplate()"></ng-container>
 <ng-container *ngIf="!noData else noResultTemplate">
     <div [ngClass]="listViewClasses">
-        <ng-container *ngFor="let item of latestResult.data">
+        <ng-container *ngFor="let item of latestResult.data; let index = index; let first = first; let last = last; let odd = odd">
             <ng-container [ngTemplateOutlet]="getViewItemTemplate()" [ngTemplateOutletContext]="{
-                $implicit: item
+                $implicit: item,
+                index: index,
+                first: first,
+                last: last,
+                odd: odd
               }">
             </ng-container>
         </ng-container>
