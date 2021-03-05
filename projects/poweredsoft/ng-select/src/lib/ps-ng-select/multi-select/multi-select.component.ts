@@ -31,6 +31,7 @@ export class MultiSelectComponent implements OnInit,OnDestroy {
   @Input() serverFiltering:boolean;
   @Input() bindLabel:string;
   @Input() bindValue: string;
+  @Input() placeholder: string;
 
   @Output('change') changeEvent = new EventEmitter();
 

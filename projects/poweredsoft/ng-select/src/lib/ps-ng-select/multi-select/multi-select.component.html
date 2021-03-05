@@ -6,6 +6,7 @@
            [trackByFn]="trackFn"   
            [searchable]="true"   
            [multiple]="true" 
+           [placeholder]="placeholder"
            (change)="valueChanged($event)">
            <ng-container *ngIf="hasOptionTemplate">
                <ng-template ng-option-tmp let-item="item" let-index="index">

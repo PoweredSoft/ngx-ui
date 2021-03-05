@@ -1,6 +1,7 @@
 <ng-select [items]="data$ |async"
            [bindLabel]="bindLabel"    
-           [bindValue]="bindValue"       
+           [bindValue]="bindValue"    
+           [placeholder]="placeholder"   
            autofocus
            [typeahead] = "searchInput$"
            [trackByFn]="trackFn"       
