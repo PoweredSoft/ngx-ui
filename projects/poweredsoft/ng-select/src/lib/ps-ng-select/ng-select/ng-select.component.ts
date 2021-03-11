@@ -7,6 +7,8 @@ import { NgSelectComponent as SelectComponent } from '@ng-select/ng-select';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SelectOptionTemplateDirective } from '../directives/select-option-template.directive';
 import { NotFoundTemplateDirective } from '../directives/not-found-template.directive';
+import { NgFooterTemplateDirective } from '@ng-select/ng-select/lib/ng-templates.directive';
+import { SelectFooterTemplateDirective } from '../directives/select-footer-template.directive';
 
 
 @Component({
@@ -24,6 +26,7 @@ export class NgSelectComponent implements OnInit,OnDestroy {
   @ContentChild(SelectOptionTemplateDirective) optionTemplate: SelectOptionTemplateDirective;
   @ContentChild(SelectLabelTemplateDirective) labelTemplate: SelectLabelTemplateDirective;
   @ContentChild(NotFoundTemplateDirective) notFoundTemplate: NotFoundTemplateDirective;
+  @ContentChild(SelectFooterTemplateDirective) footerTemplate: SelectFooterTemplateDirective;
 
 
   

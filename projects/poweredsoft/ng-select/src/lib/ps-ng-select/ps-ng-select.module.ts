@@ -7,11 +7,12 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { SelectLabelTemplateDirective } from './directives/select-label-template.directive';
 import { SelectOptionTemplateDirective } from './directives/select-option-template.directive';
 import { NotFoundTemplateDirective } from './directives/not-found-template.directive';
+import { SelectFooterTemplateDirective } from './directives/select-footer-template.directive';
 
 
 
 @NgModule({
-  declarations: [NgSelectComponent, MultiSelectComponent, SelectLabelTemplateDirective, SelectOptionTemplateDirective, NotFoundTemplateDirective],
+  declarations: [NgSelectComponent, MultiSelectComponent, SelectLabelTemplateDirective, SelectOptionTemplateDirective, NotFoundTemplateDirective, SelectFooterTemplateDirective],
   imports: [
     CommonModule,
     FormsModule,
@@ -22,6 +23,7 @@ import { NotFoundTemplateDirective } from './directives/not-found-template.direc
     MultiSelectComponent,
     SelectLabelTemplateDirective,
     SelectOptionTemplateDirective,
+    SelectFooterTemplateDirective,
     NotFoundTemplateDirective
   ]
 })

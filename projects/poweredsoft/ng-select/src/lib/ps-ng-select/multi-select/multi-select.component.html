@@ -28,3 +28,7 @@
             </ng-template>
         </ng-container>
 </ng-select>
+<ng-container *ngIf="footerTemplate">
+    <ng-container [ngTemplateOutlet]="footerTemplate.template" [ngTemplateOutletContext]="{ $implicit: selectedModel }">
+    </ng-container>
+</ng-container>

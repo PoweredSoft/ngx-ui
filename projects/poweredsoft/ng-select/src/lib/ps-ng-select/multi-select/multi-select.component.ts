@@ -6,6 +6,7 @@ import { map, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 import { NgSelectComponent as SelectComponent } from '@ng-select/ng-select';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SelectOptionTemplateDirective } from '../directives/select-option-template.directive';
+import { SelectFooterTemplateDirective } from '../directives/select-footer-template.directive';
 
 @Component({
   selector: 'ps-ng-multi-select',
@@ -22,6 +23,7 @@ export class MultiSelectComponent implements OnInit,OnDestroy {
   
   @ContentChild(SelectOptionTemplateDirective) optionTemplate: SelectOptionTemplateDirective;
   @ContentChild(SelectLabelTemplateDirective) labelTemplate: SelectLabelTemplateDirective;
+  @ContentChild(SelectFooterTemplateDirective) footerTemplate: SelectFooterTemplateDirective;
 
   @ViewChild(SelectComponent, { static: true }) selectComponent: SelectComponent;
   @Input() dataSource: IDataSource<any>;

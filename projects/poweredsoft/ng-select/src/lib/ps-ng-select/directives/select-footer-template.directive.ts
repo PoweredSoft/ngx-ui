@@ -1,11 +1,10 @@
 import { Directive, TemplateRef } from '@angular/core';
 
+
 @Directive({
-  selector: '[psNgSelectLabel]'
+  selector: '[psNgSelectFooter]'
 })
-export class SelectLabelTemplateDirective {
+export class SelectFooterTemplateDirective {
   constructor(public template: TemplateRef<any>) { }
 
 }
-
-
