@@ -120,7 +120,7 @@ export class NgSelectComponent implements OnInit,OnDestroy {
   }
 
   get selectedModel() {    
-    return this.selectComponent.hasValue ? this.selectComponent.selectedItems[0] : null;
+    return this.selectComponent.hasValue ? this.selectComponent.selectedItems[0].value : null;
   }
 
   refreshDataSource(searchTerm:any = null, page:number = null, pageSize:number = null){
