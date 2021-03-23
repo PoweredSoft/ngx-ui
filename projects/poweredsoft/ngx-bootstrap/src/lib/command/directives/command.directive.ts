@@ -1,5 +1,6 @@
 import { Directive, Input, TemplateRef, HostListener, Output, EventEmitter } from '@angular/core';
 import { IDataSource } from '@poweredsoft/data';
+import { finalize } from 'rxjs/operators';
 import { ConfirmModalService } from '../../confirm-modal/confirm-modal.service';
 
 @Directive({
@@ -25,26 +26,32 @@ export class CommandDirective {
 
   @Output() success: EventEmitter<any> = new EventEmitter<any>();
   @Output() failure: EventEmitter<any> = new EventEmitter<any>();
+  @Output() loading: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   private doCommand() {
     this.dataSource.resolveCommandModelByName({
       command: this.command,
       model: this.model
     }).subscribe(commandModel => {
-      this.dataSource.executeCommandByName(this.command, commandModel).subscribe(
-        commandResult => {
-          if (this.refreshOnSuccess !== false)
-            this.dataSource.refresh();
+      this.loading.emit(true);
+      this.dataSource.executeCommandByName(this.command, commandModel)
+        .pipe(
+          finalize(() => this.loading.emit(false))
+        )
+        .subscribe(
+          commandResult => {
+            if (this.refreshOnSuccess !== false)
+              this.dataSource.refresh();
 
-          this.success.emit(commandResult);
-        },
-        commandError => {
-          this.failure.emit(commandError);
-        }
-      );
-    }, resolveCommandError => {
-      this.failure.emit(resolveCommandError);
-    });
+            this.success.emit(commandResult);
+          },
+          commandError => {
+            this.failure.emit(commandError);
+          }
+        );
+      }, resolveCommandError => {
+        this.failure.emit(resolveCommandError);
+      });
   }
 
 
