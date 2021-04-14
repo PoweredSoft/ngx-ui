@@ -21,6 +21,7 @@ export class CommandModalDirective {
   @Input() cancelText: string;
   @Input() animated: boolean;
   @Input() btnClass:string;
+  @Input() modalSize: string;
 
   @Output() success: EventEmitter<any> = new EventEmitter<any>();
 
@@ -44,6 +45,7 @@ export class CommandModalDirective {
       };
       this.modalService.show(CommandModalComponent, {
         animated: this.animated === undefined ? true : this.animated,
+        class: this.modalSize,
         initialState
       });
 
