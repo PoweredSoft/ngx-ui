@@ -1,6 +1,6 @@
 {
   "name": "@poweredsoft/ngx-bootstrap",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "an internal use libary for handling data souces grid filtering sorting, add commands etc",
   "keywords": [
     "angular",

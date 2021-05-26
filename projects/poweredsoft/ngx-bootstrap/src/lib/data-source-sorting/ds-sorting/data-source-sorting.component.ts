@@ -10,25 +10,38 @@ export class DataSourceSortingComponent implements OnInit {
 
   @Input() dataSource : IDataSource<any>;
   @Input() path:string; 
-  isSorting: boolean =false; 
-  isAscending:boolean = false;  
+  
+  
+  get sort() {
+    return this.dataSource.sorts.find(t => t.path == this.path);
+  }
+
+  get isSorting() {
+    return this.sort ? true : false;
+  }
+
+  get isAscending() {
+    return !this.isSorting ? true : this.sort.ascending;
+  }
+
   constructor() { }
 
   ngOnInit(): void {
   }
   
   sorting(){
-    this.isSorting = true;
-    this.isAscending = !this.isAscending;
-    const existingSort = this.dataSource.sorts.find(t => t.path == this.path);
-    if (existingSort){
-      existingSort.ascending = (this.isAscending)? true : false;
-    }else{
+
+    if (!this.isSorting) {
       this.dataSource.sorts.push({
         path: this.path,
-        ascending: (this.isAscending)? true : false 
-      })
+        ascending: true
+      });
+    } else if(this.isSorting && this.isAscending) {
+      this.sort.ascending = false;
+    } else {
+      this.dataSource.sorts = this.dataSource.sorts.filter(t => t.path != this.path);
     }
+
     this.dataSource.query({
       sorts: this.dataSource.sorts,
       page: 1
