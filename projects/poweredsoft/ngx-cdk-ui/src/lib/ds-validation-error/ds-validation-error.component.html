@@ -1,0 +1,4 @@
+<ng-container *ngFor="let err of latestErrors; let isLast=last">
+    {{ err }}
+    <br *ngIf="!isLast">
+</ng-container>

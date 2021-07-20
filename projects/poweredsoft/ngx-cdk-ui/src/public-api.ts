@@ -23,3 +23,7 @@ export * from './lib/list-view/directives/list-view-seperator.directive';
 
 export * from './lib/ds-search/ds-search.module';
 export * from './lib/ds-search/ds-search.component';
+
+// ds validation
+export * from './lib/ds-validation-error/ds-validation-error.module';
+export * from './lib/ds-validation-error/ds-validation-error.component';

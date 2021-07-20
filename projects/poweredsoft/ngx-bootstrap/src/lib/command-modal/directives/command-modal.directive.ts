@@ -22,6 +22,7 @@ export class CommandModalDirective {
   @Input() animated: boolean;
   @Input() btnClass:string;
   @Input() modalSize: string;
+  @Input() disableValidationSummary: boolean;
 
   @Output() success: EventEmitter<any> = new EventEmitter<any>();
 
@@ -37,6 +38,7 @@ export class CommandModalDirective {
         commandModel: commandModel,
         template: this.template,
         title: this.commandTitle,
+        disableValidationSummary: this.disableValidationSummary === undefined ? false : this.disableValidationSummary,
         refreshOnSuccess: this.refreshOnSuccess === undefined ? true : this.refreshOnSuccess,
         commandText: this.commandText || 'OK',
         cancelText: this.cancelText || 'Cancel',

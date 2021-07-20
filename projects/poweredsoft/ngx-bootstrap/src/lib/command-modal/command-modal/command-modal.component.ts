@@ -23,6 +23,7 @@ export class CommandModalComponent implements OnInit, OnDestroy {
   cancelText: string;
   form:NgForm;
   validationMessage:string ;
+  disableValidationSummary: boolean;
   btnClass:string;
   successEmitter: EventEmitter<any>; 
   hasError: boolean;
