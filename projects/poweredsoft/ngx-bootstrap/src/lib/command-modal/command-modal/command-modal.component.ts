@@ -27,6 +27,7 @@ export class CommandModalComponent implements OnInit, OnDestroy {
   btnClass:string;
   successEmitter: EventEmitter<any>; 
   hasError: boolean;
+  errorMessage: string = '';
 
   private _notifyMessage: Subscription;
   private _validationError: Subscription;
@@ -38,10 +39,14 @@ export class CommandModalComponent implements OnInit, OnDestroy {
     this._validationError.unsubscribe();
   }
 
+  get hasErrorMessage() {
+    return this.errorMessage;
+  }
+
   ngOnInit(): void {
     this._notifyMessage = this.dataSource.notifyMessage$.subscribe(message => {
       if (message.type != 'info')
-        this.validationMessage = message.message;
+        this.errorMessage = message.message;
     });
 
     this._validationError = this.dataSource.validationError$.subscribe(validatorErrors => {      

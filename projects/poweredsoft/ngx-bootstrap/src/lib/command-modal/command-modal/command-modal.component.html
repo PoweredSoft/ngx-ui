@@ -8,6 +8,7 @@
     <ng-container [ngTemplateOutlet]="template"
         [ngTemplateOutletContext]="{ $implicit: commandModel, loading: loading, dataSource: dataSource }"></ng-container>
     <div *ngIf="hasError && !disableValidationSummary" class="alert alert-danger mt-2" style="white-space: pre-wrap">{{validationMessage}}</div>
+    <div *ngIf="hasErrorMessage" class="alert alert-danger mt-2" style="white-space: pre-wrap">{{errorMessage}}</div>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-light" (click)="modalRef.hide()"
