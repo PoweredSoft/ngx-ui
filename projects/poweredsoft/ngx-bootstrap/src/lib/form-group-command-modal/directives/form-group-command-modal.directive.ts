@@ -29,9 +29,13 @@ export class FormGroupCommandModalDirective {
   @Input() refreshOnSuccess: boolean;
   @Input() commandText: string;
   @Input() cancelText: string;
+  @Input() backdrop: boolean;
+  @Input() ignoreBackdropClick: boolean;
+  
   @Output() formCreate: EventEmitter<IModelFormCreateEvent> = new EventEmitter<IModelFormCreateEvent>();
 
   @Output() success: EventEmitter<any> = new EventEmitter<any>();
+
 
   constructor(private modalService: BsModalService) { }
 
@@ -70,7 +74,9 @@ export class FormGroupCommandModalDirective {
       
         this.modalService.show(FormGroupCommandModalComponent, {
           animated: this.animated === undefined ? true : this.animated,
-          initialState
+          initialState,
+          backdrop: this.backdrop === undefined ? true : this.backdrop,
+          ignoreBackdropClick: this.ignoreBackdropClick === undefined ? false : this.ignoreBackdropClick
         });
 
     }, error => {

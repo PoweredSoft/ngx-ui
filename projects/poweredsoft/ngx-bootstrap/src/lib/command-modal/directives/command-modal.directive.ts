@@ -23,6 +23,8 @@ export class CommandModalDirective {
   @Input() btnClass:string;
   @Input() modalSize: string;
   @Input() disableValidationSummary: boolean;
+  @Input() backdrop: boolean;
+  @Input() ignoreBackdropClick: boolean;
 
   @Output() success: EventEmitter<any> = new EventEmitter<any>();
 
@@ -48,7 +50,9 @@ export class CommandModalDirective {
       this.modalService.show(CommandModalComponent, {
         animated: this.animated === undefined ? true : this.animated,
         class: this.modalSize,
-        initialState
+        initialState,
+        backdrop: this.backdrop === undefined ? true : this.backdrop,
+        ignoreBackdropClick: this.ignoreBackdropClick === undefined ? false : this.ignoreBackdropClick
       });
 
     }, error => {
