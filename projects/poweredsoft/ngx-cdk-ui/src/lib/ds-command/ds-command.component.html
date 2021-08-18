@@ -1,0 +1,30 @@
+<ng-container *ngIf="command; else noCommand">
+    <ng-container *ngIf="hasContent" [ngTemplateOutlet]="contentTemplate"
+        [ngTemplateOutletContext]="{ $implicit: command, loading: isLoading }">
+    </ng-container>
+</ng-container>
+
+<ng-container *ngIf="lastValidationResult">
+    <ng-container *ngIf="hasValidationTemplate" [ngTemplateOutlet]="validationTemplate"
+        [ngTemplateOutletContext]="{ $implicit: lastValidationResult }">
+    </ng-container>
+</ng-container>
+
+<ng-container *ngIf="lastErrorMessage && errorContent && errorContent.template">
+    <ng-container [ngTemplateOutlet]="errorContent.template"
+        [ngTemplateOutletContext]="{ $implicit: lastErrorMessage }">
+    </ng-container>
+</ng-container>
+
+<ng-container *ngIf="hasFooterTemplate" [ngTemplateOutlet]="footerTemplate"
+    [ngTemplateOutletContext]="{ $implicit: command, loading: isLoading }">
+</ng-container>
+
+
+
+<ng-template #noCommand>
+    <ng-container *ngIf="noCommandContent && noCommandContent.template">
+        <ng-container [ngTemplateOutlet]="noCommandContent.template">
+        </ng-container>
+    </ng-container>
+</ng-template>

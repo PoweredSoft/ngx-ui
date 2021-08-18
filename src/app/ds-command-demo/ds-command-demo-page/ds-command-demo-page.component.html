@@ -1,0 +1,60 @@
+<ps-view [dataSource]="dataSource">
+    <ng-container *psViewContent="let model">
+        <div class="card">
+            <div class="card-header">
+                {{ model.firstName }} {{ model.lastName }}
+            </div>
+            <div class="card-body">
+                {{ model.number }}
+                <ng-container *ngIf="model.extension">
+                    ,{{model.extension}}
+                </ng-container>
+
+            </div>
+            <div class="card-footer">
+                <button class="btn btn-primary btn-sm" (click)="formActivated = true">Change Phone Number</button>
+
+            </div>
+        </div>
+
+        <div class="card mt-2" *ngIf="formActivated">
+            <div class="card-body">
+                <ps-ds-command [dataSource]="dataSource" name="changePhone" (success)="onSuccess($event)"
+                    [model]="model">
+                    <ng-container *psDsCommandContent="let command; let loading=loading">
+                        <div class="form-group">
+                            <label>Number</label>
+                            <input type="text" class="form-control" [(ngModel)]="command.number" />
+                            <ps-ds-validation-error class="text-danger" [dataSource]="dataSource" field="number">
+                            </ps-ds-validation-error>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Extension</label>
+                            <input type="text" class="form-control" [(ngModel)]="command.extension" />
+                            <ps-ds-validation-error class="text-danger" [dataSource]="dataSource" field="extension">
+                            </ps-ds-validation-error>
+                        </div>
+                    </ng-container>
+
+                    <div class="alert alert-danger mt-2" *psDsCommandValidation="let validationResult">
+                        <ng-container *ngFor="let propertyErrors of validationResult">
+                            <ng-container *ngFor="let err of propertyErrors.errors">
+                                {{ err }}<br>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+
+                    <ng-container *psDsCommandFooter="let command; let loading=loading">
+                        <button class="btn btn-info" [disabled]="loading"
+                            (click)="formActivated = false">Cancel</button>
+                        &nbsp;
+                        <button class="btn btn-primary" [disabled]="loading" psDsCommandSubmit>Save</button>
+
+                    </ng-container>
+
+                </ps-ds-command>
+            </div>
+        </div>
+    </ng-container>
+</ps-view>

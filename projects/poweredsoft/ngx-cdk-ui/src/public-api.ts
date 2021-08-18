@@ -36,3 +36,13 @@ export * from './lib/view/view.component';
 export * from './lib/view/directives/view-content.directive';
 export * from './lib/view/directives/view-loading.directive';
 export * from './lib/view/directives/view-no-records.directive';
+
+// ds-command
+export * from './lib/ds-command/ds-command.module';
+export * from './lib/ds-command/ds-command.component';
+export * from './lib/ds-command/directives/ds-command-content.directive';
+export * from './lib/ds-command/directives/ds-command-submit.directive';
+export * from './lib/ds-command/directives/ds-command-validation.directive';
+export * from './lib/ds-command/directives/ds-command-footer.directive';
+export * from './lib/ds-command/directives/ds-command-no-command.directive';
+export * from './lib/ds-command/directives/ds-command-error.directive';

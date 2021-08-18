@@ -25,7 +25,7 @@
     "@angular/router": "~9.1.4",
     "@ng-select/ng-select": "^4.0.1",
     "@poweredsoft/data": "0.0.30",
-    "@poweredsoft/ngx-data": "0.0.21",
+    "@poweredsoft/ngx-data": "0.0.22",
     "@poweredsoft/ngx-data-apollo": "0.0.10",
     "apollo-angular": "^1.8.0",
     "apollo-angular-link-http": "^1.9.0",
