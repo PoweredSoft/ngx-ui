@@ -36,6 +36,12 @@ export class DsCommandDemoPageComponent implements OnInit {
     number: "514 448 8444"
   };
 
+  myCommand: ChangeContactPhone = {
+    contactId: 1,
+    number: null,
+    extension: null
+  }
+
   formActivated: boolean = false;
   dataSource: IDataSource<Contact>;
 
@@ -49,12 +55,20 @@ export class DsCommandDemoPageComponent implements OnInit {
           return throwError({
             status: 400,
             error: {
-                errors: {
+              errors: {
                 number: ['number is required']
               }
             }
           })
         }
+
+        if (command.extension == "hello")
+          return throwError({
+            status: 500,
+            error: {
+              message: "Error from server..."
+            }
+          })
 
         return of(command);
       }, e => {
