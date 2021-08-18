@@ -1,0 +1,27 @@
+<ng-container *ngIf="loading; else notLoading"> 
+    <ng-container *ngIf="viewLoading">
+        <ng-container [ngTemplateOutlet]="getViewLoadingTemplate()"></ng-container>
+    </ng-container>
+    <ng-container *ngIf="!viewLoading">
+        {{ finalLoadingText }}
+    </ng-container>
+</ng-container>
+
+<ng-template #notLoading>
+    <ng-container *ngIf="!noData else noResultTemplate">
+        <ng-container [ngTemplateOutlet]="getViewContentTemplate()" [ngTemplateOutletContext]="{
+            $implicit: viewModel
+            }">
+        </ng-container>
+    </ng-container>
+</ng-template>
+
+
+<ng-template #noResultTemplate>
+    <ng-container *ngIf="viewNoRecords">
+        <ng-container [ngTemplateOutlet]="getViewNoRecordsTemplate()"></ng-container>
+    </ng-container>
+    <ng-container *ngIf="!viewNoRecords">
+        <div [ngClass]="noRecordClasses">{{noRecords}}</div>
+    </ng-container>
+</ng-template>

@@ -1,0 +1,104 @@
+<h1>Found</h1>
+<ps-view [dataSource]="dataSource">
+    <ng-container *psViewContent="let model">
+        <div class="card">
+            <div class="card-header">
+
+                {{ model.firstName }} {{ model.lastName }}
+            </div>
+            <div class="card-body">
+                Hey, thank you!
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *psViewNoRecords>
+        <div class="alert alert-info text-center">
+            Could not find record that was requested.<br>
+            <svg style="height: 100px; width: 100px;" fill="none" stroke="#000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+    </ng-container>
+    <ng-container *psViewLoading>
+        <div class="text-center mt-3">
+            <svg style="height: 100px; "version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100"
+                enable-background="new 0 0 100 100" xml:space="preserve">
+                <rect fill="#000" width="3" height="100" transform="translate(0) rotate(180 3 50)">
+                    <animate attributeName="height" attributeType="XML" dur="1s" values="30; 100; 30"
+                        repeatCount="indefinite" />
+                </rect>
+                <rect x="17" fill="#000" width="3" height="100" transform="translate(0) rotate(180 20 50)">
+                    <animate attributeName="height" attributeType="XML" dur="1s" values="30; 100; 30"
+                        repeatCount="indefinite" begin="0.1s" />
+                </rect>
+                <rect x="40" fill="#000" width="3" height="100" transform="translate(0) rotate(180 40 50)">
+                    <animate attributeName="height" attributeType="XML" dur="1s" values="30; 100; 30"
+                        repeatCount="indefinite" begin="0.3s" />
+                </rect>
+                <rect x="60" fill="#000" width="3" height="100" transform="translate(0) rotate(180 58 50)">
+                    <animate attributeName="height" attributeType="XML" dur="1s" values="30; 100; 30"
+                        repeatCount="indefinite" begin="0.5s" />
+                </rect>
+                <rect x="80" fill="#000" width="3" height="100" transform="translate(0) rotate(180 76 50)">
+                    <animate attributeName="height" attributeType="XML" dur="1s" values="30; 100; 30"
+                        repeatCount="indefinite" begin="0.1s" />
+                </rect>
+            </svg>
+
+            <h1 class="mt-3">Loading ...</h1>
+        </div>
+
+    </ng-container>
+</ps-view>
+
+<hr>
+<h1>Not found</h1>
+<ps-view [dataSource]="dataSource2">
+    <ng-container *psViewContent="let model">
+        <div class="card">
+            <div class="card-header">
+
+                {{ model.firstName }} {{ model.lastName }}
+            </div>
+            <div class="card-body">
+                Hey, thank you!
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *psViewNoRecords>
+        <div class="alert alert-info text-center">
+            Could not find record that was requested.<br>
+            <svg style="height: 100px; width: 100px;" fill="none" stroke="#000" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+    </ng-container>
+    <ng-container *psViewLoading>
+        <div class="text-center mt-3">
+            <svg style="height: 100px; "version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100"
+                enable-background="new 0 0 100 100" xml:space="preserve">
+                <rect fill="#000" width="3" height="100" transform="translate(0) rotate(180 3 50)">
+                    <animate attributeName="height" attributeType="XML" dur="1s" values="30; 100; 30"
+                        repeatCount="indefinite" />
+                </rect>
+                <rect x="17" fill="#000" width="3" height="100" transform="translate(0) rotate(180 20 50)">
+                    <animate attributeName="height" attributeType="XML" dur="1s" values="30; 100; 30"
+                        repeatCount="indefinite" begin="0.1s" />
+                </rect>
+                <rect x="40" fill="#000" width="3" height="100" transform="translate(0) rotate(180 40 50)">
+                    <animate attributeName="height" attributeType="XML" dur="1s" values="30; 100; 30"
+                        repeatCount="indefinite" begin="0.3s" />
+                </rect>
+                <rect x="60" fill="#000" width="3" height="100" transform="translate(0) rotate(180 58 50)">
+                    <animate attributeName="height" attributeType="XML" dur="1s" values="30; 100; 30"
+                        repeatCount="indefinite" begin="0.5s" />
+                </rect>
+                <rect x="80" fill="#000" width="3" height="100" transform="translate(0) rotate(180 76 50)">
+                    <animate attributeName="height" attributeType="XML" dur="1s" values="30; 100; 30"
+                        repeatCount="indefinite" begin="0.1s" />
+                </rect>
+            </svg>
+
+            <h1 class="mt-3">Loading ...</h1>
+        </div>
+
+    </ng-container>
+</ps-view>

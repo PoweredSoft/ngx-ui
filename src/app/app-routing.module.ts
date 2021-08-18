@@ -13,6 +13,10 @@ const routes: Routes = [
     loadChildren: () => import('./data-grid-demo/data-grid-demo.module').then(m => m.DataGridDemoModule)
   },
   {
+    path: 'view',
+    loadChildren: () => import('./view-demo/view-demo.module').then(m => m.ViewDemoModule)
+  },
+  {
     path: 'list-view',
     loadChildren: () => import('./list-view-demo/list-view-demo.module').then(m => m.ListViewDemoModule)
   },
