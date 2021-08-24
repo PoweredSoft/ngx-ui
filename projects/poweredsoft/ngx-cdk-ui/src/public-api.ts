@@ -46,3 +46,7 @@ export * from './lib/ds-command/directives/ds-command-validation.directive';
 export * from './lib/ds-command/directives/ds-command-footer.directive';
 export * from './lib/ds-command/directives/ds-command-no-command.directive';
 export * from './lib/ds-command/directives/ds-command-error.directive';
+
+// ds-pager
+export * from './lib/ds-pager/ds-pager.module';
+export * from './lib/ds-pager/ds-pager.component';

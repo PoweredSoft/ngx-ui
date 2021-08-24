@@ -40,7 +40,7 @@ export class ListViewDemoHomeComponent implements OnInit {
   ngOnInit(): void {
 
     this.merchantDataSource.query({
-      pageSize: 6
+      pageSize: 2
     })
   }
 

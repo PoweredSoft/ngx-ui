@@ -29,6 +29,9 @@
     </div>
     <div *psListViewFooter class="mt-2">
         <psbx-ds-pagination [dataSource]="merchantDataSource"></psbx-ds-pagination>
+        
+        <ps-ds-pager class="mt-2" [dataSource]="merchantDataSource"></ps-ds-pager>
+        <ps-ds-pager class="mt-2" range="0" [dataSource]="merchantDataSource"></ps-ds-pager>
     </div>
 </ps-list-view>
 

@@ -7,6 +7,7 @@ import { ListViewModule } from '@poweredsoft/ngx-cdk-ui';
 import { FormGroupCommandModalModule, PaginationModule } from '@poweredsoft/ngx-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DsSearchModule } from 'projects/poweredsoft/ngx-cdk-ui/src/lib/ds-search/ds-search.module';
+import { DsPagerModule } from 'projects/poweredsoft/ngx-cdk-ui/src/public-api';
 
 
 
@@ -19,7 +20,8 @@ import { DsSearchModule } from 'projects/poweredsoft/ngx-cdk-ui/src/lib/ds-searc
     PaginationModule,
     ReactiveFormsModule,
     FormGroupCommandModalModule,
-    DsSearchModule
+    DsSearchModule,
+    DsPagerModule
   ]
 })
 export class ListViewDemoModule { }
