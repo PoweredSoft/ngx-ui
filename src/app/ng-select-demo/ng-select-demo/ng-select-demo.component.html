@@ -15,6 +15,32 @@ selected: {{ myValue | json }}
         </div>
     </ps-ng-select>
 </form>
+
+
+selected:  {{ myForm.value | json }}
+
+<h2>Single Select With Form | formGroup | option template (Making sure not breaking change single override path)</h2>
+<form #form [formGroup]="myForm">
+    <ps-ng-select [dataSource]="merchantDataSource2" sortingPath="name" searchPath="name" bindLabel="name" bindValue="id" formControlName="merchantId" [serverFiltering]="true">
+        <div *psNgSelectOption="let item">
+           <span>Merchant:</span>  {{ item.name }} - <span>Address: </span>{{ item.address }}
+        </div>
+    </ps-ng-select>
+</form>
+
+
+selected:  {{ myForm.value | json }}
+
+<h2>Single Select With Form | formGroup | option template (multiple search paths)</h2>
+<form #form [formGroup]="myForm">
+    <ps-ng-select [dataSource]="merchantDataSource2" [sortingPath]="['name', 'address']" [searchPath]="['name', 'address']" bindLabel="name" bindValue="id" formControlName="merchantId" [serverFiltering]="true">
+        <div *psNgSelectOption="let item">
+           <span>Merchant:</span>  {{ item.name }} - <span>Address: </span>{{ item.address }}
+        </div>
+    </ps-ng-select>
+</form>
+
+
 selected:  {{ myForm.value | json }}
 
 <h2>Single Select Demo | label Template</h2>

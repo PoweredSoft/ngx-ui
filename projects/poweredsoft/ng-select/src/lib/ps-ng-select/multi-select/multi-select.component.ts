@@ -1,6 +1,6 @@
 import { Component, OnInit, ContentChild, ViewChild, Input, Output, EventEmitter, ChangeDetectorRef, forwardRef, OnDestroy } from '@angular/core';
 import { SelectLabelTemplateDirective } from '../directives/select-label-template.directive';
-import { IDataSource, ISimpleFilter } from '@poweredsoft/data';
+import { IDataSource, ISimpleFilter, ISort } from '@poweredsoft/data';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { map, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 import { NgSelectComponent as SelectComponent } from '@ng-select/ng-select';
@@ -27,9 +27,9 @@ export class MultiSelectComponent implements OnInit,OnDestroy {
 
   @ViewChild(SelectComponent, { static: true }) selectComponent: SelectComponent;
   @Input() dataSource: IDataSource<any>;
-  @Input() searchPath: string;
+  @Input() searchPath: string | string[];
   @Input() searchType: string;
-  @Input() sortingPath: string;
+  @Input() sortingPath: string | string[];
   @Input() serverFiltering:boolean;
   @Input() bindLabel:string;
   @Input() bindValue: string;
@@ -116,21 +116,52 @@ export class MultiSelectComponent implements OnInit,OnDestroy {
 
   refreshDataSource(searchTerm:any = null, page:number = null, pageSize:number = null){
     let searchfilters:ISimpleFilter[] = null;
-    if(searchTerm){
-      searchfilters = [<ISimpleFilter>{
-        path: this.searchPath || this.bindLabel,      
-        type: this.searchType || 'Contains', // Default: Contains
-        value: searchTerm
-      }]
+    if(searchTerm)
+    {
+      if (this.searchPath) {
+        if (Array.isArray(this.searchPath)) {
+          searchfilters = this.searchPath.map(path => {
+            return <ISimpleFilter>{
+              path: path,
+              type: 'Contains',
+              value: searchTerm,
+              and: false
+            }
+          });
+        } else {
+          searchfilters = [<ISimpleFilter>{
+            path: this.searchPath,      
+            type: 'Contains', // Default: Contains
+            value: searchTerm
+          }]
+        }
+      } else {
+        searchfilters = [<ISimpleFilter>{
+          path: this.bindLabel,      
+          type: 'Contains', // Default: Contains
+          value: searchTerm
+        }]
+      }
+      
     }
+
+    let sorts: ISort[];
+    if (this.sortingPath && Array.isArray(this.sortingPath)) {
+      sorts = this.sortingPath.map(sortPath => (<ISort>{
+        path: sortPath,
+        ascending: true
+      }));
+    } else {
+      sorts = [<ISort>{path: this.sortingPath || this.bindLabel, ascending: true}];
+    }
+
+
     this.dataSource.query({
       page: page,
       pageSize: pageSize,
       filters:searchfilters,
-      sorts:[
-        {path: this.sortingPath || this.bindLabel, ascending: true} 
-      ]
-    })
+      sorts:sorts
+    });
   }
 
   get hasOptionTemplate() {    
