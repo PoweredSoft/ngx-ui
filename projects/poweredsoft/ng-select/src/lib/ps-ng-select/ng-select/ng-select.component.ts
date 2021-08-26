@@ -18,10 +18,10 @@ import { SelectFooterTemplateDirective } from '../directives/select-footer-templ
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => NgSelectComponent),
     multi: true
-}],
+  }],
   styleUrls: ['./ng-select.component.scss']
 })
-export class NgSelectComponent implements OnInit,OnDestroy {
+export class NgSelectComponent implements OnInit, OnDestroy {
 
   @ContentChild(SelectOptionTemplateDirective) optionTemplate: SelectOptionTemplateDirective;
   @ContentChild(SelectLabelTemplateDirective) labelTemplate: SelectLabelTemplateDirective;
@@ -29,43 +29,43 @@ export class NgSelectComponent implements OnInit,OnDestroy {
   @ContentChild(SelectFooterTemplateDirective) footerTemplate: SelectFooterTemplateDirective;
 
 
-  
+
   @ViewChild(SelectComponent, { static: true }) selectComponent: SelectComponent;
   @Input() dataSource: IDataSource<any>;
   @Input() searchPath: string | string[];
   @Input() searchType: string;
   @Input() sortingPath: string | string[];
-  @Input() serverFiltering:boolean;
-  @Input() bindLabel:string;
+  @Input() serverFiltering: boolean;
+  @Input() bindLabel: string;
   @Input() bindValue: string;
   @Input() placeholder: string;
 
   @Output('change') changeEvent = new EventEmitter();
 
   trackFn: (item: any) => any;
-  data$ : Observable<any[]>;
-  isLoading:boolean = false;
+  data$: Observable<any[]>;
+  isLoading: boolean = false;
   searchInput$ = new Subject<string>();
 
-  private _loadingSubscription: Subscription;  
+  private _loadingSubscription: Subscription;
 
-  constructor(private cdr: ChangeDetectorRef) {    
+  constructor(private cdr: ChangeDetectorRef) {
     this.trackFn = this.trackBy.bind(this);
-  
+
   }
 
   ngOnInit(): void {
-    this.dataFetching();    
+    this.dataFetching();
     this.detectLoading();
 
-    if(this.serverFiltering){
+    if (this.serverFiltering) {
       this.searchOnServer();
-    }else{
+    } else {
       this.refreshDataSource();
     }
   }
 
- 
+
   valueChanged(event) {
     this.changeEvent.emit(event);
   }
@@ -93,24 +93,24 @@ export class NgSelectComponent implements OnInit,OnDestroy {
   }
 
 
-  dataFetching(){
+  dataFetching() {
     this.data$ = this.dataSource.data$.pipe(
       map(t => {
-        if (t == null)        
+        if (t == null)
           return [];
         return t.data;
       })
     );
   }
 
-  detectLoading(){
-    this._loadingSubscription = this.dataSource.loading$.subscribe(loading => {      
+  detectLoading() {
+    this._loadingSubscription = this.dataSource.loading$.subscribe(loading => {
       this.isLoading = loading;
       this.cdr.detectChanges();
     });
   }
 
-  searchOnServer(){
+  searchOnServer() {
     this.searchInput$.pipe(
       distinctUntilChanged(), // emit the difference from previous input
       debounceTime(500)  // this is for delaying searching speed
@@ -119,14 +119,16 @@ export class NgSelectComponent implements OnInit,OnDestroy {
     this.refreshDataSource(); //send the query to server to sorting & filtering by default
   }
 
-  get selectedModel() {    
+  get selectedModel() {
     return this.selectComponent.hasValue ? this.selectComponent.selectedItems[0].value : null;
   }
 
-  refreshDataSource(searchTerm:any = null, page:number = null, pageSize:number = null){
-    let searchfilters:ISimpleFilter[] = null;
-    if(searchTerm)
-    {
+  refreshDataSource(searchTerm: any = null, page: number = null, pageSize: number = null) {
+    let searchfilters: ISimpleFilter[] = [];
+    if (searchTerm == "")
+      searchTerm = null;
+
+    if (searchTerm) {
       if (this.searchPath) {
         if (Array.isArray(this.searchPath)) {
           searchfilters = this.searchPath.map(path => {
@@ -139,19 +141,19 @@ export class NgSelectComponent implements OnInit,OnDestroy {
           });
         } else {
           searchfilters = [<ISimpleFilter>{
-            path: this.searchPath,      
+            path: this.searchPath,
             type: 'Contains', // Default: Contains
             value: searchTerm
           }]
         }
       } else {
         searchfilters = [<ISimpleFilter>{
-          path: this.bindLabel,      
+          path: this.bindLabel,
           type: 'Contains', // Default: Contains
           value: searchTerm
         }]
       }
-      
+
     }
 
     let sorts: ISort[];
@@ -161,24 +163,24 @@ export class NgSelectComponent implements OnInit,OnDestroy {
         ascending: true
       }));
     } else {
-      sorts = [<ISort>{path: this.sortingPath || this.bindLabel, ascending: true}];
+      sorts = [<ISort>{ path: this.sortingPath || this.bindLabel, ascending: true }];
     }
 
 
     this.dataSource.query({
       page: page,
       pageSize: pageSize,
-      filters:searchfilters,
-      sorts:sorts
+      filters: searchfilters,
+      sorts: sorts
     });
   }
 
-  get hasOptionTemplate() {    
+  get hasOptionTemplate() {
     return this.optionTemplate ? true : false;
   }
 
-  get selectOptionTemplate(){
-    if (this.optionTemplate)    
+  get selectOptionTemplate() {
+    if (this.optionTemplate)
       return this.optionTemplate.template;
     return null;
   }
@@ -187,8 +189,8 @@ export class NgSelectComponent implements OnInit,OnDestroy {
     return this.labelTemplate ? true : false;
   }
 
-  get selectLabelTemplate(){
-    if (this.labelTemplate)    
+  get selectLabelTemplate() {
+    if (this.labelTemplate)
       return this.labelTemplate.template;
     return null;
   }
@@ -197,8 +199,8 @@ export class NgSelectComponent implements OnInit,OnDestroy {
     return this.notFoundTemplate ? true : false;
   }
 
-  get selectNotFoundTemplate(){
-    if(this.notFoundTemplate)
+  get selectNotFoundTemplate() {
+    if (this.notFoundTemplate)
       return this.notFoundTemplate.template;
     return null;
   }

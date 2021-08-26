@@ -75,7 +75,7 @@ selected: {{ myValue3 | json }}
 selected: {{ myValue2 | json }} 
 
  <h2>Multi-Select Demo</h2>
-<ps-ng-multi-select [dataSource]="merchantDataSource4" bindLabel="name" bindValue="id"  [serverFiltering]="true" [(ngModel)]="myValue4" >
+<ps-ng-multi-select [dataSource]="merchantDataSource4" sortingPath="name" [searchPath]="['name', 'address']" bindLabel="name" bindValue="id"  [serverFiltering]="true" [(ngModel)]="myValue4" >
     <div   *psNgSelectOption="let item">
         <img src="assets/32x32-blue.png"><span>Name: </span>{{ item.name }} - <span> Address: </span>{{item.address }}
     </div>
