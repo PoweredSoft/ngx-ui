@@ -16,7 +16,7 @@ export interface DsCommandPropertyError
 }
 
 @Component({
-  selector: 'ps-ds-command',
+  selector: 'ps-ds-command, [psDsCommand]',
   templateUrl: './ds-command.component.html',
   styleUrls: ['./ds-command.component.scss']
 })
@@ -110,7 +110,7 @@ export class DsCommandComponent implements OnInit, OnDestroy {
       });
 
     this._notifyMessageSubscription = this.dataSource.notifyMessage$.subscribe(message => {
-      if (message.type != 'info')
+      if (message.type != 'info' && message.type != "success")
         this.lastErrorMessage = message.message;
     });
 

@@ -21,7 +21,7 @@
         <div class="card mt-2" *ngIf="formActivated">
            
             <div class="card-body">
-                <ps-ds-command [dataSource]="dataSource" name="changePhone" (success)="onSuccess($event)"
+                <div psDsCommand [dataSource]="dataSource" name="changePhone" (success)="onSuccess($event)"
                     [model]="model">
                     <ng-container *psDsCommandContent="let command; let loading=loading">
                         <div class="form-group">
@@ -65,7 +65,7 @@
 
                     </ng-container>
 
-                </ps-ds-command>
+                </div>
             </div>
         </div>
     </ng-container>
