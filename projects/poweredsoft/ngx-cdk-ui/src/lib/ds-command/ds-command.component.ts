@@ -21,10 +21,19 @@ export interface DsCommandPropertyError
   styleUrls: ['./ds-command.component.scss']
 })
 export class DsCommandComponent implements OnInit, OnDestroy {
+
+  private _refreshOnSuccess: boolean = true;
+
   @Input() dataSource: IDataSource<any>;
   @Input() name: string;
   @Input() model: any;
-  @Input() refreshOnSuccess: boolean;
+  @Input() set refreshOnSuccess(val: boolean) {
+    this._refreshOnSuccess = val;
+  }
+  get refreshOnSuccess() {
+    return this._refreshOnSuccess;
+  }
+
   @Input() resolveCommand: boolean;
 
   @Output() success = new EventEmitter<any>();
