@@ -31,6 +31,7 @@ export class FormGroupCommandModalDirective {
   @Input() cancelText: string;
   @Input() backdrop: boolean;
   @Input() ignoreBackdropClick: boolean;
+  @Input() params: any;
   
   @Output() formCreate: EventEmitter<IModelFormCreateEvent> = new EventEmitter<IModelFormCreateEvent>();
 
@@ -43,7 +44,8 @@ export class FormGroupCommandModalDirective {
   wasClicked() {
     this.dataSource.resolveCommandModelByName({
       command: this.command,
-      model: this.model
+      model: this.model,
+      params: this.params,
     }).subscribe(commandModel => {
       const event = <IModelFormCreateEvent>{
         commandName: this.command,

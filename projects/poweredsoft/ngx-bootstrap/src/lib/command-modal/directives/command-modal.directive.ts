@@ -25,6 +25,7 @@ export class CommandModalDirective {
   @Input() disableValidationSummary: boolean;
   @Input() backdrop: boolean;
   @Input() ignoreBackdropClick: boolean;
+  @Input() params: any;
 
   @Output() success: EventEmitter<any> = new EventEmitter<any>();
 
@@ -32,7 +33,8 @@ export class CommandModalDirective {
   wasClicked() {            
     this.dataSource.resolveCommandModelByName({
       command: this.command,
-      model: this.model
+      model: this.model,
+      params: this.params
     }).subscribe(commandModel => {         
       const initialState = {
         dataSource: this.dataSource,

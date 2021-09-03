@@ -1,12 +1,13 @@
 {
   "name": "@poweredsoft/ngx-bootstrap",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "an internal use libary for handling data souces grid filtering sorting, add commands etc",
   "keywords": [
     "angular",
     "ngx-bootstrap"
   ],
   "peerDependencies": {
+    "@poweredsoft/data": "^0.0.36",
     "@angular/common": "^9.1.9",
     "@angular/core": "^9.1.9",
     "ngx-bootstrap": "^5.6.1"

@@ -24,6 +24,7 @@ export class DsCommandComponent implements OnInit, OnDestroy {
 
   private _refreshOnSuccess: boolean = true;
 
+  @Input() params: any;
   @Input() dataSource: IDataSource<any>;
   @Input() name: string;
   @Input() model: any;
@@ -131,7 +132,8 @@ export class DsCommandComponent implements OnInit, OnDestroy {
   resolveModel() {
     this.dataSource.resolveCommandModelByName({
       model: this.model,
-      command: this.name
+      command: this.name,
+      params: this.params
     }).subscribe(
       commandModel => {
         this.command = commandModel;

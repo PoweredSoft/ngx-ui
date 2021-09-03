@@ -16,6 +16,7 @@ export class CommandDirective {
   @Input() model: any;
   @Input() refreshOnSuccess: boolean;
   @Input() animated: boolean;
+  @Input() params: any;
 
   @Input() confirm: boolean;
   @Input() confirmMessage: string;
@@ -31,7 +32,8 @@ export class CommandDirective {
   private doCommand() {
     this.dataSource.resolveCommandModelByName({
       command: this.command,
-      model: this.model
+      model: this.model,
+      params: this.params
     }).subscribe(commandModel => {
       this.loading.emit(true);
       this.dataSource.executeCommandByName(this.command, commandModel)
