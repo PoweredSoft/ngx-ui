@@ -116,7 +116,7 @@ export class NgSelectComponent implements OnInit, OnDestroy {
       debounceTime(500)  // this is for delaying searching speed
     ).subscribe(searchTerm => this.refreshDataSource(searchTerm, 1, 100)); // page: 1, pageSize: 50
 
-    this.refreshDataSource(); //send the query to server to sorting & filtering by default
+    this.refreshDataSource(null, 1, 100); //send the query to server to sorting & filtering by default
   }
 
   get selectedModel() {
