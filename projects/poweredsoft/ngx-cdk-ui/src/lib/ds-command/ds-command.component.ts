@@ -48,8 +48,8 @@ export class DsCommandComponent implements OnInit, OnDestroy {
   @ContentChild(DsCommandValidationDirective) validationDirective: DsCommandValidationDirective;
   @ContentChildren(DsCommandSubmitDirective) submitDirectives: QueryList<DsCommandSubmitDirective>;
 
-  lastErrorMessage: string;
-  lastValidationResult: DsCommandPropertyError[];
+  lastErrorMessage: string | null;
+  lastValidationResult: DsCommandPropertyError[] | null;
 
   protected _command: any = null;
 
@@ -99,6 +99,14 @@ export class DsCommandComponent implements OnInit, OnDestroy {
 
   constructor() {
 
+  }
+  
+  clearValidationError() {
+    this.lastValidationResult = null;
+  }
+
+  clearLastErrorMessage() {
+    this.lastErrorMessage = null;
   }
 
   ngOnDestroy() {
