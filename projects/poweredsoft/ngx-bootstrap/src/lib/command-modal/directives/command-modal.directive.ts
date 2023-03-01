@@ -20,7 +20,7 @@ export class CommandModalDirective {
   @Input() commandText: string;
   @Input() cancelText: string;
   @Input() animated: boolean;
-  @Input() btnClass:string;
+  @Input() btnClass: string;
   @Input() modalSize: string;
   @Input() disableValidationSummary: boolean;
   @Input() backdrop: boolean;
@@ -30,16 +30,16 @@ export class CommandModalDirective {
   @Output() success: EventEmitter<any> = new EventEmitter<any>();
 
   @HostListener('click')
-  wasClicked() {            
+  wasClicked() {
     this.dataSource.resolveCommandModelByName({
       command: this.command,
       model: this.model,
       params: this.params
-    }).subscribe(commandModel => {         
+    }).subscribe(commandModel => {
       const initialState = {
         dataSource: this.dataSource,
         command: this.command,
-        commandModel: commandModel,
+        commandModel,
         template: this.template,
         title: this.commandTitle,
         disableValidationSummary: this.disableValidationSummary === undefined ? false : this.disableValidationSummary,

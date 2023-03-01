@@ -25,7 +25,7 @@ export class CommandModalComponent implements OnInit, OnDestroy {
   validationMessage:string ;
   disableValidationSummary: boolean;
   btnClass:string;
-  successEmitter: EventEmitter<any>; 
+  successEmitter: EventEmitter<any>;
   hasError: boolean;
   errorMessage: string = '';
 
@@ -45,11 +45,11 @@ export class CommandModalComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._notifyMessage = this.dataSource.notifyMessage$.subscribe(message => {
-      if (message.type != 'info')
+      if (message.type !== 'info' && message.type !== 'success')
         this.errorMessage = message.message;
     });
 
-    this._validationError = this.dataSource.validationError$.subscribe(validatorErrors => {      
+    this._validationError = this.dataSource.validationError$.subscribe(validatorErrors => {
       let validationSummary = '';
       Object.getOwnPropertyNames(validatorErrors.errors).forEach(property => {
         const errors = validatorErrors.errors[property].join('\n');
@@ -82,7 +82,7 @@ export class CommandModalComponent implements OnInit, OnDestroy {
   }
 
   attemptSave() {
-    
+
   }
 
 }
